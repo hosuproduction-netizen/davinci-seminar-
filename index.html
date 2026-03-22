@@ -62,6 +62,25 @@ body::before {
   height: 100vh;
   overflow: hidden;
 }
+.left-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('davinci-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: .38;
+}
+.left-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(12,12,13,0) 0%,
+    rgba(12,12,13,0.3) 35%,
+    rgba(12,12,13,0.85) 68%,
+    rgba(12,12,13,1) 100%
+  );
+}
+.left > *:not(.left-bg) { position: relative; z-index: 1; }
 
 .left-inner {
   display: flex;
@@ -331,6 +350,7 @@ textarea { resize: vertical; min-height: 88px; }
 
   <!-- ── LEFT ── -->
   <div class="left">
+    <div class="left-bg"></div>
     <div class="deco-ring"></div>
     <div class="left-inner">
       <div class="brand">
@@ -338,7 +358,7 @@ textarea { resize: vertical; min-height: 88px; }
         <span class="brand-name">HiPixel Plus</span>
       </div>
 
-      <div class="left-tag">프리미어프로 강사 대상 · 무료 세미나</div>
+      <div class="left-tag">프리미어 강사 대상 · 무료 세미나</div>
 
       <h1 class="left-title">
         다빈치<br>
@@ -347,7 +367,7 @@ textarea { resize: vertical; min-height: 88px; }
       </h1>
 
       <p class="left-desc">
-        프리미어 프로를 가르치는 분이라면<br>
+        프리미어를 가르치는 분이라면<br>
         다빈치 리졸브는 생각보다 훨씬<br>
         빠르게 익힐 수 있습니다.
       </p>
@@ -363,7 +383,7 @@ textarea { resize: vertical; min-height: 88px; }
         </div>
         <div class="meta-row">
           <span class="meta-row-label">장소</span>
-          <span class="meta-row-value">수원미디어센터</span>
+          <span class="meta-row-value">평촌 오비즈타워 410호</span>
         </div>
         <div class="meta-row">
           <span class="meta-row-label">참가비</span>
@@ -377,7 +397,7 @@ textarea { resize: vertical; min-height: 88px; }
     </div>
 
     <div class="left-footer">
-      블랙매직디자인 & 하이픽셀플러스<br>
+      Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
       문의: hipixelplus@naver.com
     </div>
   </div>
@@ -427,9 +447,9 @@ textarea { resize: vertical; min-height: 88px; }
         <select id="f-level">
           <option value="" disabled selected>현재 수준 선택</option>
           <option>전혀 없음</option>
-          <option>조금 써봤음</option>
+          <option>조금 써봤음 (독학)</option>
           <option>기본 편집 가능</option>
-          <option>편집 컬러 가능</option>
+          <option>Color 페이지도 사용해봄</option>
         </select>
       </div>
 
