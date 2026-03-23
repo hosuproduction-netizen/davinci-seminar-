@@ -109,15 +109,17 @@ body::before {
 
 .meta-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(255,255,255,0.1); }
 .meta-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; gap: 16px;
 }
-.meta-row-label { color: rgba(255,255,255,0.55); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
-.meta-row-value { color: #ffffff; font-weight: 500; text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
+.meta-row-label { color: rgba(255,255,255,0.55); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; flex-shrink: 0; padding-top: 2px; }
+.meta-row-value { color: #ffffff; font-weight: 500; text-shadow: 0 1px 8px rgba(0,0,0,0.8); text-align: right; }
 .meta-row-value.accent { color: var(--accent); text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
+.meta-row-value small { display: block; font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 400; margin-top: 3px; }
 
-.left-footer { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.left-footer { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
 .left-footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.left-footer a:hover { color: rgba(255,255,255,0.8); }
 
 .deco-ring {
   position: absolute; right: -120px; bottom: -120px;
@@ -163,6 +165,7 @@ select {
   background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
 }
 select option { background: #1c1c1f; }
+textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 
 .req { color: var(--accent); margin-left: 3px; }
 
@@ -175,8 +178,8 @@ select option { background: #1c1c1f; }
 }
 .agree input[type=checkbox] {
   width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; cursor: pointer;
-  accent-color: var(--accent); padding: 0; border: 1px solid var(--border);
-  background: transparent; appearance: auto; -webkit-appearance: checkbox;
+  accent-color: var(--accent); padding: 0;
+  appearance: auto; -webkit-appearance: checkbox;
 }
 .agree-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
 .agree-text strong { color: var(--text); font-weight: 500; }
@@ -192,7 +195,6 @@ select option { background: #1c1c1f; }
 .submit-btn:hover:not(:disabled) { opacity: .88; transform: translateY(-1px); }
 .submit-btn:active:not(:disabled) { transform: translateY(0); }
 .submit-btn:disabled { opacity: .35; cursor: not-allowed; }
-
 .submit-note { font-size: 12px; color: var(--text3); text-align: center; margin-top: 14px; line-height: 1.6; }
 
 /* ── SUCCESS ── */
@@ -233,6 +235,8 @@ select option { background: #1c1c1f; }
 .field:nth-child(3) { animation-delay: .16s; }
 .field:nth-child(4) { animation-delay: .20s; }
 .field:nth-child(5) { animation-delay: .24s; }
+.field:nth-child(6) { animation-delay: .28s; }
+.field:nth-child(7) { animation-delay: .32s; }
 </style>
 </head>
 <body>
@@ -259,7 +263,7 @@ select option { background: #1c1c1f; }
 
       <p class="left-desc">
         프리미어 프로를 중급이상으로 쓰시는 분이라면<br>
-         누구나 참여하실 수 있습니다.<br>
+        누구나 참여하실 수 있습니다.<br>
         단, <span style="color:var(--accent);font-weight:500">프리미어 프로 강의 경력이 있으신 분은 우선적</span>으로 초청될 수 있습니다.
       </p>
 
@@ -274,7 +278,10 @@ select option { background: #1c1c1f; }
         </div>
         <div class="meta-row">
           <span class="meta-row-label">장소</span>
-          <span class="meta-row-value">수원미디어센터 2층 디지털교육실 2 (주차불가)</span>
+          <span class="meta-row-value">
+            수원미디어센터 2층 디지털교육실 2
+            <small>경기도 수원시 팔달구 창룡대로 64 · 주차불가</small>
+          </span>
         </div>
         <div class="meta-row">
           <span class="meta-row-label">참가비</span>
@@ -289,7 +296,7 @@ select option { background: #1c1c1f; }
 
     <div class="left-footer">
       Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
-      문의: <a href="mailto:hipixelplus@naver.com">hipixelplus@naver.com</a> / 031 - 450 - 3515
+      문의: <a href="mailto:hipixelplus@naver.com">hipixelplus@naver.com</a> / 031-450-3515
     </div>
   </div>
 
@@ -338,11 +345,21 @@ select option { background: #1c1c1f; }
         </select>
       </div>
 
+      <div class="field">
+        <label>강의 경력 (선택 · 강사 우대)</label>
+        <textarea id="f-career" placeholder="예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요."></textarea>
+      </div>
+
+      <div class="field">
+        <label>수업 관련 궁금한 점 (선택)</label>
+        <textarea id="f-question" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요."></textarea>
+      </div>
+
       <div class="agree">
         <input type="checkbox" id="f-agree">
         <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer">
           <strong>유의사항에 동의합니다.</strong><br>
-          당일 취소 또는 원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.
+          원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.
         </label>
       </div>
 
@@ -364,10 +381,7 @@ select option { background: #1c1c1f; }
 </div>
 
 <script>
-  // ─────────────────────────────────────────────
-  // 👇 Apps Script 배포 후 아래 URL을 교체하세요
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec';
-  // ─────────────────────────────────────────────
 
   function formatPhone(el) {
     let v = el.value.replace(/\D/g, '').slice(0, 11);
@@ -378,16 +392,16 @@ select option { background: #1c1c1f; }
 
   async function submitForm() {
     const val = id => document.getElementById(id).value.trim();
-    const name = val('f-name');
-    const phone = val('f-phone');
-    const email = val('f-email');
+    const name     = val('f-name');
+    const phone    = val('f-phone');
+    const email    = val('f-email');
     const platform = val('f-platform');
-    const level = val('f-level');
-    const agreed = document.getElementById('f-agree').checked;
+    const level    = val('f-level');
+    const career   = val('f-career');
+    const question = val('f-question');
+    const agreed   = document.getElementById('f-agree').checked;
 
-    if (!name || !phone || !email || !platform) {
-      shake(); return;
-    }
+    if (!name || !phone || !email || !platform) { shake(); return; }
     if (!agreed) {
       document.querySelector('.agree').style.borderColor = 'rgba(240,80,64,0.5)';
       setTimeout(() => document.querySelector('.agree').style.borderColor = '', 1500);
@@ -405,7 +419,7 @@ select option { background: #1c1c1f; }
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'submit', name, phone, email,
-          platform, level,
+          platform, level, career, question,
           timestamp: new Date().toLocaleString('ko-KR')
         })
       });
@@ -420,10 +434,11 @@ select option { background: #1c1c1f; }
 
   function shake() {
     const form = document.getElementById('form-body');
+    form.style.transition = 'transform .08s';
     form.style.transform = 'translateX(-6px)';
     setTimeout(() => { form.style.transform = 'translateX(6px)'; }, 80);
     setTimeout(() => { form.style.transform = 'translateX(-4px)'; }, 160);
-    setTimeout(() => { form.style.transform = 'none'; form.style.transition = '.2s'; }, 240);
+    setTimeout(() => { form.style.transform = 'none'; }, 240);
   }
 </script>
 </body>
