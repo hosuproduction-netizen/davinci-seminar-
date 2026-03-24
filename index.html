@@ -197,6 +197,24 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 .submit-btn:disabled { opacity: .35; cursor: not-allowed; }
 .submit-note { font-size: 12px; color: var(--text3); text-align: center; margin-top: 14px; line-height: 1.6; }
 
+/* ── NOTICE ── */
+.notice {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 16px 18px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(232,240,64,0.15);
+  border-radius: 3px;
+  margin-bottom: 28px;
+}
+.notice-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.55;
+}
+.notice-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0; margin-top: 6px;
+}
+
 /* ── SUCCESS ── */
 .success { display: none; text-align: center; padding: 60px 24px; }
 .success.show { display: block; }
@@ -296,7 +314,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 
     <div class="left-footer">
       Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
-      문의: <a href="mailto:hipixelplus@naver.com">hipixelplus@naver.com</a> / 031-450-3515
+      문의: <a href="/cdn-cgi/l/email-protection#1c74756c756479706c70696f5c727d6a796e327f7371"><span class="__cf_email__" data-cfemail="2c44455c455449405c40595f6c424d5a495e024f4341">[email&#160;protected]</span></a> / 031-450-3515
     </div>
   </div>
 
@@ -307,6 +325,17 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
       <div class="form-header">
         <h2>참가 신청</h2>
         <p>프리미어 프로 경험자 대상 세미나입니다. 아래 정보를 입력하시면 확인 후 개별 연락드립니다.</p>
+      </div>
+
+      <div class="notice">
+        <div class="notice-item">
+          <div class="notice-dot"></div>
+          <span>본 세미나는 <strong style="color:var(--accent)">Mac 환경</strong>으로 진행됩니다.</span>
+        </div>
+        <div class="notice-item">
+          <div class="notice-dot"></div>
+          <span>편집 실습이 포함되어 있으니 <strong style="color:var(--accent)">개인 이어폰</strong>을 꼭 지참해주세요.</span>
+        </div>
       </div>
 
       <div class="field-row">
@@ -380,7 +409,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec';
 
   function formatPhone(el) {
@@ -435,11 +464,4 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   function shake() {
     const form = document.getElementById('form-body');
     form.style.transition = 'transform .08s';
-    form.style.transform = 'translateX(-6px)';
-    setTimeout(() => { form.style.transform = 'translateX(6px)'; }, 80);
-    setTimeout(() => { form.style.transform = 'translateX(-4px)'; }, 160);
-    setTimeout(() => { form.style.transform = 'none'; }, 240);
-  }
-</script>
-</body>
-</html>
+    form.style.transform = 'translateX(-6
