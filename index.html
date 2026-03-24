@@ -317,7 +317,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 
     <div class="left-footer">
       Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
-      문의: <a href="/cdn-cgi/l/email-protection#1c74756c756479706c70696f5c727d6a796e327f7371"><span class="__cf_email__" data-cfemail="2c44455c455449405c40595f6c424d5a495e024f4341">[email&#160;protected]</span></a> / 031-450-3515
+      문의: <a href="mailto:hipixelplus@naver.com">hipixelplus@naver.com</a> / 031-450-3515
     </div>
   </div>
 
@@ -408,7 +408,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec';
 
   function formatPhone(el) {
@@ -463,4 +463,11 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   function shake() {
     const form = document.getElementById('form-body');
     form.style.transition = 'transform .08s';
-    form.style.transform = 'translateX(-6
+    form.style.transform = 'translateX(-6px)';
+    setTimeout(() => { form.style.transform = 'translateX(6px)'; }, 80);
+    setTimeout(() => { form.style.transform = 'translateX(-4px)'; }, 160);
+    setTimeout(() => { form.style.transform = 'none'; }, 240);
+  }
+</script>
+</body>
+</html>
