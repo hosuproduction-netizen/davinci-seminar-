@@ -175,11 +175,15 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   padding: 16px; background: var(--surface);
   border: 1px solid var(--border); border-radius: 3px;
   margin-bottom: 24px; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .agree input[type=checkbox] {
-  width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; cursor: pointer;
+  width: 20px; height: 20px; min-width: 20px; flex-shrink: 0;
+  margin-top: 1px; cursor: pointer;
   accent-color: var(--accent); padding: 0;
   appearance: auto; -webkit-appearance: checkbox;
+  opacity: 1; position: relative; z-index: 2;
 }
 .agree-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
 .agree-text strong { color: var(--text); font-weight: 500; }
@@ -288,7 +292,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
       <div class="meta-list">
         <div class="meta-row">
           <span class="meta-row-label">일시</span>
-          <span class="meta-row-value">2026년 4월 16일 (목)</span>
+          <span class="meta-row-value">2026년 4월 2일 (목)</span>
         </div>
         <div class="meta-row">
           <span class="meta-row-label">시간</span>
@@ -317,7 +321,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 
     <div class="left-footer">
       Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
-      문의: <a href="mailto:hipixelplus@naver.com">hipixelplus@naver.com</a> / 031-450-3515
+      문의: <a href="/cdn-cgi/l/email-protection#e981809980918c8599859c9aa987889f8c9bc78a8684"><span class="__cf_email__" data-cfemail="026a6b726b7a676e726e7771426c637467702c616d6f">[email&#160;protected]</span></a> / 031-450-3515
     </div>
   </div>
 
@@ -333,7 +337,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
       <div class="notice">
         <div class="notice-item">
           <div class="notice-dot"></div>
-          <span>편집 실습이 포함되어 있으니 <strong style="color:var(--accent)">개인 이어폰</strong>을 지참해주세요.</span>
+          <span>편집 실습이 포함되어 있으니 <strong style="color:var(--accent)">개인 이어폰</strong>을 꼭 지참해주세요.</span>
         </div>
       </div>
 
@@ -379,17 +383,17 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
       </div>
 
       <div class="field">
-        <label>수업을 통해 배우고싶은 점 (선택)</label>
-        <textarea id="f-question" placeholder="사전에 배우고싶은 부분이 있으시면 자유롭게 적어주세요."></textarea>
+        <label>수업 관련 궁금한 점 (선택)</label>
+        <textarea id="f-question" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요."></textarea>
       </div>
 
-      <div class="agree">
+      <label class="agree" for="f-agree">
         <input type="checkbox" id="f-agree">
-        <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer">
+        <span class="agree-text">
           <strong>유의사항에 동의합니다.</strong><br>
           원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.
-        </label>
-      </div>
+        </span>
+      </label>
 
       <button class="submit-btn" id="submit-btn" onclick="submitForm()">
         신청 완료하기
@@ -408,7 +412,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec';
 
   function formatPhone(el) {
@@ -463,11 +467,4 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   function shake() {
     const form = document.getElementById('form-body');
     form.style.transition = 'transform .08s';
-    form.style.transform = 'translateX(-6px)';
-    setTimeout(() => { form.style.transform = 'translateX(6px)'; }, 80);
-    setTimeout(() => { form.style.transform = 'translateX(-4px)'; }, 160);
-    setTimeout(() => { form.style.transform = 'none'; }, 240);
-  }
-</script>
-</body>
-</html>
+    form.style.transform = 'translateX(-
