@@ -295,7 +295,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
       <div class="meta-list">
         <div class="meta-row">
           <span class="meta-row-label">일시</span>
-          <span class="meta-row-value">2026년 4월 16일 (목)</span>
+          <span class="meta-row-value">2026년 4월 2일 (목)</span>
         </div>
         <div class="meta-row">
           <span class="meta-row-label">시간</span>
@@ -324,7 +324,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 
     <div class="left-footer">
       Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
-      문의: <a href="mailto:hipixelplus@naver.com">hipixelplus@naver.com</a> / 031-450-3515
+      문의: <a href="/cdn-cgi/l/email-protection#bed6d7ced7c6dbd2ced2cbcdfed0dfc8dbcc90ddd1d3"><span class="__cf_email__" data-cfemail="157d7c657c6d707965796066557b746370673b767a78">[email&#160;protected]</span></a> / 031-450-3515
     </div>
   </div>
 
@@ -340,7 +340,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
       <div class="notice">
         <div class="notice-item">
           <div class="notice-dot"></div>
-          <span>편집 실습이 포함되어 있으니 <strong style="color:var(--accent)">개인 이어폰</strong>을 지참해주세요.</span>
+          <span>편집 실습이 포함되어 있으니 <strong style="color:var(--accent)">개인 이어폰</strong>을 꼭 지참해주세요.</span>
         </div>
         <div class="notice-item">
           <div class="notice-dot"></div>
@@ -355,7 +355,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
         </div>
         <div class="field">
           <label>연락처 <span class="req">*</span></label>
-          <input type="tel" id="f-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13">
+          <input type="tel" id="f-phone" placeholder="010-0000-0000" autocomplete="tel" maxlength="13" inputmode="numeric">
         </div>
       </div>
 
@@ -402,7 +402,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
         </label>
       </div>
 
-      <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+      <button class="submit-btn" id="submit-btn" type="button">
         신청 완료하기
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -418,7 +418,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec';
 
   function formatPhone(el) {
@@ -427,6 +427,10 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
     else if (v.length < 8) el.value = v.slice(0,3) + '-' + v.slice(3);
     else                   el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
   }
+
+  document.getElementById('f-phone').addEventListener('input', function() {
+    formatPhone(this);
+  });
 
   async function submitForm() {
     var val      = function(id) { return document.getElementById(id).value.trim(); };
@@ -482,6 +486,19 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
     setTimeout(function() { form.style.transform = 'translateX(-4px)'; }, 160);
     setTimeout(function() { form.style.transform = 'translateX(0)';    }, 240);
   }
+
+  // 버튼 이벤트 — click + touchend 모두 연결
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('submit-btn');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      submitForm();
+    });
+    btn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      submitForm();
+    });
+  });
 </script>
 </body>
 </html>
