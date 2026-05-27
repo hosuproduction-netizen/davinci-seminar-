@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>세미나 신청 — 하이픽셀플러스</title>
+<title>다빈치 리졸브 교육세미나 신청 — 하이픽셀플러스</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -13,13 +13,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");}
 .page{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
 .left{background:var(--surface);padding:60px 56px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;}
-.left-bg{position:absolute;inset:0;z-index:0;background-image:url('https://images.blackmagicdesign.com/images/products/davinciresolve/landing/header/resolve-header-md.jpg');background-size:120%;background-repeat:no-repeat;background-position:50% 40%;opacity:0.38;}
+.left-bg{position:absolute;inset:0;z-index:0;background-image:url('https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg');background-size:205%;background-repeat:no-repeat;background-position:50% 0%;opacity:0.81;}
 .left-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,14,22,0) 0%,rgba(10,14,22,0.5) 50%,rgba(10,14,22,0.95) 80%,rgba(10,14,22,1) 100%);}
 .left>*:not(.left-bg):not(.deco-ring){position:relative;z-index:1;}
 .left-inner{display:flex;flex-direction:column;gap:0;}
 .left-tag{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#f39200;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
 .left-tag::before{content:'';width:24px;height:1px;background:#f39200;}
-.left-eyebrow{font-size:25px;letter-spacing:0;color:rgba(255,255,255,0.35);margin-bottom:3px;font-weight:400;}
+.left-eyebrow{font-size:25px;letter-spacing:0;color:#ff9b0f;margin-bottom:3px;font-weight:400;}
 .left-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(64px,6.5vw,96px);line-height:.88;letter-spacing:1px;color:var(--text);margin-bottom:6px;}
 .left-title .sub{font-family:'Noto Sans KR',sans-serif;font-size:clamp(13px,1.3vw,17px);color:#f39200;display:block;letter-spacing:0;margin-top:14px;line-height:1.5;font-weight:400;}
 .left-title-models{font-family:'Barlow Condensed',sans-serif;font-size:clamp(64px,6.5vw,96px);color:#fff;display:inline;letter-spacing:3px;font-weight:700;margin-left:6px;}
@@ -36,13 +36,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .deco-ring::after{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(243,146,0,0.04);}
 .right{background:var(--bg);padding:60px 56px;display:flex;flex-direction:column;justify-content:flex-start;overflow-y:auto;}
 .form-header{margin-bottom:32px;}
-.form-header h2{font-size:26px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px;color:#f5f4f2;}
-.form-header p{font-size:16px;color:#888785;line-height:1.65;}
+.form-header h2{font-size:25px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px;color:#ffffff;}
+.form-header p{font-size:14px;color:#ffffff;line-height:1.65;}
 .field{margin-bottom:20px;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-label{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;transition:color .2s;}
+label{display:block;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#ffffff;margin-bottom:8px;transition:color .2s;}
 .field:focus-within>label{color:rgba(255,255,255,0.8);}
-input[type=text],input[type=tel],input[type=email],input[type=number],select{width:100%;background:var(--surface);border:1px solid var(--border);color:#f5f4f2;padding:14px 16px;font-size:15px;font-family:inherit;font-weight:400;outline:none;border-radius:3px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none;}
+input[type=text],input[type=tel],input[type=email],input[type=number],select{width:100%;background:var(--surface);border:1px solid var(--border);color:#ffffff;padding:14px 16px;font-size:14px;font-family:inherit;font-weight:400;outline:none;border-radius:3px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none;}
 input:focus,select:focus{border-color:var(--border-focus);background:var(--surface2);}
 input::placeholder{color:var(--text3);}
 select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
@@ -51,8 +51,8 @@ select option{background:#1c1c1f;}
 .time-options{display:grid;gap:10px;}
 .time-option{position:relative;}
 .time-option input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
-.time-option label{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:15px;font-weight:500;color:var(--text);}
-.time-label-title{font-size:15px;font-weight:600;color:var(--text);}
+.time-option label{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:var(--text);}
+.time-label-title{font-size:14px;font-weight:600;color:var(--text);}
 .time-label-sub{font-size:12px;color:var(--text2);font-weight:400;letter-spacing:0;}
 .time-option input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-dim);}
 .time-option input[type=radio]:checked+label .time-label-title{color:var(--accent);}
@@ -65,10 +65,10 @@ select option{background:#1c1c1f;}
 .consent-option input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
 .agree{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;margin-bottom:24px;position:relative;z-index:2;}
 .agree input[type=checkbox]{width:22px;height:22px;flex-shrink:0;margin-top:1px;accent-color:var(--accent);appearance:auto;-webkit-appearance:checkbox;cursor:pointer;position:relative;z-index:3;}
-.agree-text{font-size:15px;color:#888785;line-height:1.6;cursor:pointer;}
+.agree-text{font-size:15px;color:#c9c9c9;line-height:1.6;cursor:pointer;}
 .agree-text strong{color:var(--text);font-weight:500;}
 .notice{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--accent-dim);border:1px solid rgba(243,146,0,0.15);border-radius:3px;margin-bottom:28px;}
-.notice-item{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.6;}
+.notice-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;}
 .notice-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px;}
 .notice-link{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
 .submit-btn{width:100%;padding:17px;background:var(--accent);color:#0c0c0d;border:none;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;border-radius:3px;letter-spacing:.5px;transition:opacity .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
@@ -133,10 +133,10 @@ select option{background:#1c1c1f;}
       <div class="left-eyebrow">Blackmagic Design</div>
       <h1 class="left-title">
         DaVinci<br>Resolve<br>교육 <span class="left-title-models"></span>
-        <span class="sub">편집 & 컬러 그레이딩</span>
+        <span class="sub">편집 & 컬러그레이딩</span>
       </h1>
-      <p class="left-desc">프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.<br>단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 초청될 수 있습니다.<br><br>★ Blackmagic Design 공인 트레이너가 직접 교육합니다</p>
-      <div class="meta-list"><div class="meta-row"><span class="meta-row-label">일시</span><span class="meta-row-value">2026년 4월 16일 (목)</span></div><div class="meta-row"><span class="meta-row-label">시간</span><span class="meta-row-value">오후 2:00 — 6:00<small>편집 3시간 · 컬러 1시간</small></span></div><div class="meta-row"><span class="meta-row-label">장소</span><span class="meta-row-value">미디액트 디지털교육실(PC)<small>서울시 마포구 서강로9길 52 동복이세빌딩 3층</small><small>🚗 자차이용 시 기계식 주차장 (중소형 유료) · 근처 공영주차장 이용 추천</small></span></div><div class="meta-row"><span class="meta-row-label">참가비</span><span class="meta-row-value accent">무료</span></div><div class="meta-row"><span class="meta-row-label">정원</span><span class="meta-row-value">15명 한정</span></div></div>
+      <p class="left-desc">프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.<br>단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 <br>초청될 수 있습니다.<br><br>다빈치 리졸브 공인 트레이너가 직접 교육합니다.</p>
+      <div class="meta-list"><div class="meta-row"><span class="meta-row-label">일시</span><span class="meta-row-value">2026년 6월 11일 (목)</span></div><div class="meta-row"><span class="meta-row-label">시간</span><span class="meta-row-value">오후 10:00 — 17:00 (점심시간 1시간)<small>편집 4시간 · 컬러 2시간</small></span></div><div class="meta-row"><span class="meta-row-label">장소</span><span class="meta-row-value">수원미디어센터 디지털교육실2 (Mac)<small>경기도 수원시 팔달구 창룡대로 64</small><small>🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다.</small></span></div><div class="meta-row"><span class="meta-row-label">장비</span><span class="meta-row-value">DaVinci Resolve Speed Editor 8대<br>DaVinci Resolve Micro Panel 1대<br>DaVinci Resolve Micro Color Panel 7대<br><small></small></span></div><div class="meta-row"><span class="meta-row-label">참가비</span><span class="meta-row-value accent">무료</span></div><div class="meta-row"><span class="meta-row-label">정원</span><span class="meta-row-value">15명 한정</span></div></div>
     </div>
     <div class="left-footer">Blackmagic Design 공식 총판 · 하이픽셀플러스<br>문의: hipixelplus@naver.com / 031-450-3515</div>
   </div>
@@ -158,9 +158,9 @@ select option{background:#1c1c1f;}
         <div id="apply-form">
           <div class="form-header">
             <h2>참가 신청</h2>
-            <p>프리미어 프로 경험자 대상 세미나입니다. 아래 정보를 입력하시면 확인 후 개별 연락드립니다.</p>
+            <p>프리미어 프로 경험자 대상 세미나입니다.</p>
           </div>
-          <div class="notice"><div class="notice-item"><div class="notice-dot"></div><span>편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.</span></div><div class="notice-item"><div class="notice-dot"></div><span>당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.</span></div></div>
+          <div class="notice"><div class="notice-item"><div class="notice-dot"></div><span>예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.</span></div><div class="notice-item"><div class="notice-dot"></div><span>편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.</span></div><div class="notice-item"><div class="notice-dot"></div><span>당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.</span></div><div class="notice-item"><div class="notice-dot"></div><span>현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다.</span></div></div>
           
           <div class="field-row">
             <div class="field"><label>이름 <span class="req">*</span></label><input type="text" id="f-name" placeholder="홍길동" autocomplete="name"></div>
@@ -182,7 +182,7 @@ select option{background:#1c1c1f;}
           </div>
           <div class="agree">
             <input type="checkbox" id="f-agree">
-            <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer"><strong>개인정보 수집 및 이용에 동의합니다.</strong><br>원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.</label>
+            <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer"><strong>개인정보 수집 및 이용에 동의합니다.</strong><br>원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. </label>
           </div>
           <button class="submit-btn" id="submit-btn" type="button">신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <p class="submit-note">수집된 정보는 세미나 운영 목적으로만 사용됩니다</p>
@@ -406,6 +406,6 @@ document.addEventListener('DOMContentLoaded',function(){
   if(cb){cb.addEventListener('touchend',function(e){e.preventDefault();confirmCancel();});}
 });
 </script>
-<!-- EDITOR_DATA:{"scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://images.blackmagicdesign.com/images/products/davinciresolve/landing/header/resolve-header-md.jpg","bgOpacity":38,"bgSize":120,"bgPosX":50,"bgPosY":40,"closed":false,"closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":15,"tagColor":"#f39200","subColor":"#f39200","eyebrowColor":"rgba(255,255,255,0.35)","eyebrowSize":25,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":26,"formTitleColor":"#f5f4f2","formSubtitleSize":16,"formSubtitleColor":"#888785","fieldLabelSize":11,"fieldLabelColor":"rgba(255,255,255,0.5)","fieldInputSize":15,"fieldInputColor":"#f5f4f2","noticeSize":15,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#888785","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러 그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 초청될 수 있습니다.\n\n★ Blackmagic Design 공인 트레이너가 직접 교육합니다","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 4월 16일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 2:00 — 6:00","smalls":["편집 3시간 · 컬러 1시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"미디액트 디지털교육실(PC)","smalls":["서울시 마포구 서강로9길 52 동복이세빌딩 3층","🚗 자차이용 시 기계식 주차장 (중소형 유료) · 근처 공영주차장 이용 추천"],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다. 아래 정보를 입력하시면 확인 후 개별 연락드립니다.","noticeItems":["편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다."],"benefits":[],"sessions":[{"id":1,"label":"4월 16일 (목) 오후","time":"14:00 – 18:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!"} -->
+<!-- EDITOR_DATA:{"scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg","bgOpacity":81,"bgSize":205,"bgPosX":50,"bgPosY":0,"closed":false,"closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":15,"tagColor":"#f39200","subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":25,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 \n초청될 수 있습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 6월 11일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 10:00 — 17:00 (점심시간 1시간)","smalls":["편집 4시간 · 컬러 2시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"수원미디어센터 디지털교육실2 (Mac)","smalls":["경기도 수원시 팔달구 창룡대로 64","🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다."],"accent":false},{"id":21,"label":"장비","type":"text","main":"DaVinci Resolve Speed Editor 8대\nDaVinci Resolve Micro Panel 1대\nDaVinci Resolve Micro Color Panel 7대\n","smalls":[""],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다.","noticeItems":["예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.","편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다."],"benefits":[],"sessions":[{"id":1,"label":"4월 16일 (목) 오후","time":"14:00 – 18:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!"} -->
 </body>
 </html>
