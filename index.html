@@ -3,512 +3,1054 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>다빈치 리졸브 교육 신청 — 하이픽셀플러스</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>다빈치 리졸브 교육 세미나 — 하이픽셀플러스</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #0c0c0d;
-  --surface: #141416;
-  --surface2: #1c1c1f;
-  --border: rgba(255,255,255,0.07);
-  --border-focus: rgba(255,255,255,0.22);
-  --text: #f5f4f2;
-  --text2: #888785;
-  --text3: #444342;
-  --accent: #f39200;
-  --accent-dim: rgba(243,146,0,0.08);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Noto Sans KR', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-}
-
-.page {
-  position: relative; z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-}
-
-/* ── LEFT PANEL ── */
-.left {
-  background: var(--surface);
-  padding: 60px 56px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-right: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-.left-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background-image: url('davinci-bg.jpg');
-  background-size: cover;
-  background-position: center -400px;
-  opacity: .38;
-}
-.left-bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(12,12,13,0) 0%,
-    rgba(12,12,13,0.3) 35%,
-    rgba(12,12,13,0.85) 68%,
-    rgba(12,12,13,1) 100%
-  );
-}
-.left > *:not(.left-bg) { position: relative; z-index: 1; }
-.left-inner { display: flex; flex-direction: column; gap: 0; }
-
-.brand { display: flex; align-items: center; gap: 10px; margin-bottom: 72px; }
-.brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-.brand-name { font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); }
-
-.left-tag {
-  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 20px;
-  display: flex; align-items: center; gap: 10px;
-}
-.left-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
-
-.left-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(52px, 5.5vw, 80px);
-  line-height: .95; letter-spacing: 1px;
-  color: var(--text); margin-bottom: 32px;
-}
-.left-title span { color: var(--accent); display: block; }
-
-.left-desc {
-  font-size: 15px; color: rgba(255,255,255,0.65);
-  line-height: 1.75; font-weight: 300;
-  max-width: 340px; margin-bottom: 48px;
-}
-
-.meta-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(255,255,255,0.1); }
-.meta-row {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; gap: 16px;
-}
-.meta-row-label { color: rgba(255,255,255,0.55); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; flex-shrink: 0; padding-top: 2px; }
-.meta-row-value { color: #ffffff; font-weight: 500; text-shadow: 0 1px 8px rgba(0,0,0,0.8); text-align: right; }
-.meta-row-value.accent { color: var(--accent); text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
-.meta-row-value small { display: block; font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 400; margin-top: 3px; }
-
-.left-footer { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
-.left-footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
-.left-footer a:hover { color: rgba(255,255,255,0.8); }
-
-.deco-ring {
-  position: absolute; right: -120px; bottom: -120px;
-  width: 400px; height: 400px; border-radius: 50%;
-  border: 1px solid rgba(243,146,0,0.06); pointer-events: none;
-}
-.deco-ring::after {
-  content: ''; position: absolute; inset: 40px;
-  border-radius: 50%; border: 1px solid rgba(243,146,0,0.04);
-}
-
-/* ── RIGHT PANEL ── */
-.right {
-  background: var(--bg);
-  padding: 60px 56px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow-y: auto;
-}
-
-.form-header { margin-bottom: 32px; }
-.form-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.3px; }
-.form-header p { font-size: 14px; color: var(--text2); line-height: 1.65; }
-
-/* ── FIELDS ── */
-.field { margin-bottom: 20px; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-label {
-  display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.5); margin-bottom: 8px; transition: color .2s;
-}
-.field:focus-within > label { color: rgba(255,255,255,0.8); }
-
-input[type=text], input[type=tel], input[type=email], select, textarea {
-  width: 100%; background: var(--surface); border: 1px solid var(--border);
-  color: var(--text); padding: 14px 16px; font-size: 15px;
-  font-family: inherit; font-weight: 400; outline: none; border-radius: 3px;
-  transition: border-color .2s, background .2s; appearance: none; -webkit-appearance: none;
-}
-input[type=text]:focus, input[type=tel]:focus, input[type=email]:focus, select:focus, textarea:focus {
-  border-color: var(--border-focus); background: var(--surface2);
-}
-input::placeholder, textarea::placeholder { color: var(--text3); }
-select {
-  cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
-}
-select option { background: #1c1c1f; }
-textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
-
-.req { color: var(--accent); margin-left: 3px; }
-
-/* ── NOTICE ── */
-.notice {
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 16px 18px; background: var(--accent-dim);
-  border: 1px solid rgba(243,146,0,0.15); border-radius: 3px; margin-bottom: 28px;
-}
-.notice-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6;
-}
-.notice-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--accent); flex-shrink: 0; margin-top: 6px;
-}
-
-/* ── AGREE ── */
-.agree {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 16px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: 3px;
-  margin-bottom: 24px;
-  position: relative; z-index: 2;
-}
-.agree input[type=checkbox] {
-  width: 22px; height: 22px; min-width: 22px; flex-shrink: 0;
-  margin-top: 1px; cursor: pointer;
-  accent-color: var(--accent); padding: 0;
-  appearance: auto; -webkit-appearance: checkbox;
-  position: relative; z-index: 3;
-}
-.agree-text { font-size: 13px; color: var(--text2); line-height: 1.6; cursor: pointer; }
-.agree-text strong { color: var(--text); font-weight: 500; }
-
-/* ── SUBMIT ── */
-.submit-btn {
-  width: 100%; padding: 17px; background: var(--accent); color: #0c0c0d;
-  border: none; font-size: 15px; font-weight: 700; font-family: inherit;
-  cursor: pointer; border-radius: 3px; letter-spacing: .5px;
-  transition: opacity .2s, transform .15s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  position: relative; z-index: 2;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-.submit-btn:hover:not(:disabled) { opacity: .88; transform: translateY(-1px); }
-.submit-btn:active:not(:disabled) { transform: translateY(0); opacity: .75; }
-.submit-btn:disabled { opacity: .35; cursor: not-allowed; }
-.submit-note { font-size: 12px; color: var(--text3); text-align: center; margin-top: 14px; line-height: 1.6; }
-
-/* ── SUCCESS ── */
-.success { display: none; text-align: center; padding: 60px 24px; }
-.success.show { display: block; }
-.success-icon {
-  width: 56px; height: 56px; background: var(--accent-dim);
-  border: 1px solid rgba(243,146,0,0.2); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 28px; font-size: 22px;
-}
-.success h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-.success p { font-size: 15px; color: var(--text2); line-height: 1.7; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 820px) {
-  .page { grid-template-columns: 1fr; }
-  .left { position: static; height: auto; padding: 48px 32px 40px; }
-  .left-title { font-size: 56px; }
-  .deco-ring { display: none; }
-  .right { padding: 48px 32px; }
-  .field-row { grid-template-columns: 1fr; gap: 0; }
-  .field-row .field:first-child { margin-bottom: 20px; }
-}
-@media (max-width: 480px) {
-  .left { padding: 36px 24px 32px; }
-  .right { padding: 36px 24px; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.form-header { animation: fadeUp .5s ease both; }
-.field { animation: fadeUp .5s ease both; }
-.field:nth-child(1) { animation-delay: .08s; }
-.field:nth-child(2) { animation-delay: .12s; }
-.field:nth-child(3) { animation-delay: .16s; }
-.field:nth-child(4) { animation-delay: .20s; }
-.field:nth-child(5) { animation-delay: .24s; }
-.field:nth-child(6) { animation-delay: .28s; }
-.field:nth-child(7) { animation-delay: .32s; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;}
+#root{height:100vh;display:flex;flex-direction:column;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
+button{cursor:pointer;font-family:inherit;}
+input,textarea,select{font-family:inherit;outline:none;}
 </style>
 </head>
 <body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState } = React;
 
+const IS = { width:'100%', padding:'7px 10px', border:'1px solid #d1d5db', borderRadius:'6px', fontSize:'13px', background:'#fff', color:'#111827' };
+const TS = { ...IS, resize:'vertical', minHeight:'60px', lineHeight:'1.5' };
+const LS = { display:'block', fontSize:'11px', fontWeight:'600', color:'#6b7280', marginBottom:'4px', textTransform:'uppercase', letterSpacing:'0.5px' };
+const FG = { marginBottom:'10px' };
+const SEC = { background:'#fff', border:'1px solid #e5e7eb', borderRadius:'10px', padding:'16px', marginBottom:'10px' };
+const SECTITLE = { fontSize:'12px', fontWeight:'700', color:'#374151', marginBottom:'12px' };
+
+let _id = 20;
+const uid = () => ++_id;
+
+const DEFAULT = {
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec',
+  bgImage: 'https://images.blackmagicdesign.com/images/products/davinciresolve/landing/header/resolve-header-md.jpg',
+  bgOpacity: 38,
+  bgSize: 120,
+  bgPosX: 50,
+  bgPosY: 40,
+  closed: true,
+  closedMsg: '성원에 힘입어 마감되었습니다. 감사합니다! 🙏',
+  maxPerSlot: 15,
+  tagColor: '#f39200',
+  subColor: '#f39200',
+  eyebrowColor: 'rgba(255,255,255,0.35)', eyebrowSize: 25,
+  metaLabelColor: 'rgba(255,255,255,0.45)', metaLabelSize: 12,
+  metaValueColor: '#ffffff', metaValueSize: 15,
+  metaSmallColor: 'rgba(255,255,255,0.4)', metaSmallSize: 12,
+  descColor: '#ffffff', descSize: 16,
+  footerColor: 'rgba(255,255,255,0.4)', footerSize: 15,
+  formTitleSize: 26, formTitleColor: '#f5f4f2',
+  formSubtitleSize: 16, formSubtitleColor: '#888785',
+  fieldLabelSize: 11, fieldLabelColor: 'rgba(255,255,255,0.5)',
+  fieldInputSize: 15, fieldInputColor: '#f5f4f2',
+  noticeSize: 15, noticeColor: 'rgba(255,255,255,0.7)',
+  agreeLabelSize: 15, agreeLabelColor: '#888785',
+  tag: '프리미어 프로 중급 이상 유저 대상 · 무료 세미나',
+  eyebrow: 'Blackmagic Design',
+  titleMain: 'DaVinci\nResolve\n교육',
+  titleModels: '',
+  titleSub: '편집 & 컬러 그레이딩',
+  desc: '프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 초청될 수 있습니다.\n\n★ Blackmagic Design 공인 트레이너가 직접 교육합니다',
+  metaRows: [
+    { id:1, label:'일시',   type:'text', main:'2026년 4월 16일 (목)', smalls:[], accent:false },
+    { id:2, label:'시간',   type:'text', main:'오후 2:00 — 6:00', smalls:['편집 3시간 · 컬러 1시간'], accent:false },
+    { id:3, label:'장소',   type:'text', main:'미디액트 디지털교육실(PC)', smalls:['서울시 마포구 서강로9길 52 동복이세빌딩 3층', '🚗 자차이용 시 기계식 주차장 (중소형 유료) · 근처 공영주차장 이용 추천'], accent:false },
+    { id:4, label:'참가비', type:'text', main:'무료', smalls:[], accent:true },
+    { id:5, label:'정원',   type:'text', main:'15명 한정', smalls:[], accent:false },
+  ],
+  footerContact: 'hipixelplus@naver.com / 031-450-3515',
+  formTitle: '참가 신청',
+  formSubtitle: '프리미어 프로 경험자 대상 세미나입니다. 아래 정보를 입력하시면 확인 후 개별 연락드립니다.',
+  noticeItems: [
+    '편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.',
+    '당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.',
+  ],
+  benefits: [],
+  sessions: [
+    { id:1, label:'4월 16일 (목) 오후', time:'14:00 – 18:00' },
+  ],
+  fixedFields: [
+    { id:'name',    label:'이름',          placeholder:'홍길동' },
+    { id:'phone',   label:'전화번호',       placeholder:'010-0000-0000' },
+    { id:'email',   label:'이메일',         placeholder:'이메일 주소' },
+    { id:'company', label:'직장 또는 소속', placeholder:'직장 또는 소속' },
+  ],
+  customFields: [
+    { id:21, type:'select',   label:'프리미어 프로 레벨',           placeholder:'해당되는 숙련도 수준을 선택해주세요.', required:true,  options:['중급 (다양한 기능 활용 가능)', '고급 (심화 기능 및 강의 가능)'] },
+    { id:22, type:'select',   label:'다빈치 리졸브 레벨',           placeholder:'해당되는 숙련도 수준을 선택해주세요.', required:false, options:['전혀 없음', '초급', '중급', '고급'] },
+    { id:23, type:'textarea', label:'강의 경력 (선택 · 강사 우대)', placeholder:'예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.', required:false, options:[] },
+    { id:24, type:'textarea', label:'수업 관련 궁금한 점 (선택)',   placeholder:'사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.', required:false, options:[] },
+  ],
+  agreeText: '원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.',
+  successTitle: '신청이 완료되었습니다',
+  successMsg: '입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!',
+};
+
+// ── HTML 빌더 ──
+function buildHTML(d) {
+  const metaHTML = d.metaRows.map(row => {
+    let valueHTML = '';
+    if (row.type === 'time') {
+      const showAm = row.showAm !== false;
+      const showPm = row.showPm !== false;
+      const parts = [];
+      if (showAm) parts.push(`<span class="session-badge">오전</span> ${row.amTime}`);
+      if (showPm) parts.push(`<span class="session-badge">오후</span> ${row.pmTime}`);
+      valueHTML = parts.join('<br>');
+    } else {
+      valueHTML = (row.main || '').replace(/\n/g, '<br>');
+    }
+    const smallsHTML = (row.smalls||[]).map(s=>`<small>${s}</small>`).join('');
+    return `<div class="meta-row"><span class="meta-row-label">${row.label}</span><span class="meta-row-value${row.accent?' accent':''}">${valueHTML}${smallsHTML}</span></div>`;
+  }).join('');
+
+  const noticeHTML = d.noticeItems.length > 0
+    ? `<div class="notice">${d.noticeItems.map(i=>`<div class="notice-item"><div class="notice-dot"></div><span>${i}</span></div>`).join('')}</div>`
+    : '';
+
+  const benefitsHTML = d.benefits.length > 0
+    ? `<div class="benefit-box"><div class="benefit-title">당일 한정 특별 혜택</div>${d.benefits.map(b=>`<div class="benefit-item"><div class="benefit-icon">▶</div><div><div class="benefit-name">${b.name}</div><div class="benefit-sub">${b.sub}</div></div></div>`).join('')}</div>`
+    : '';
+
+  const sessionCols = d.sessions.length === 1 ? '1fr' : '1fr 1fr';
+  const sessionsHTML = d.sessions.map(s=>`<div class="time-option"><input type="radio" name="session" id="session-${s.id}" value="${s.label} ${s.time}"><label for="session-${s.id}"><span class="time-label-title">${s.label}</span><span class="time-label-sub">${s.time}</span><span class="slot-avail-badge" id="slot-avail-${s.id}"></span></label></div>`).join('');
+
+  const titleMainHTML = (d.titleMain||'').replace(/\n/g, '<br>');
+  const descHTML = (d.desc||'').replace(/\n/g, '<br>');
+
+  const submitBtn = d.closed
+    ? `<button class="submit-btn" id="submit-btn" type="button" disabled>접수가 마감되었습니다</button>`
+    : `<button class="submit-btn" id="submit-btn" type="button">신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+
+  const customFieldsHTML = d.customFields.map(f => {
+    if (f.type === 'select') {
+      const opts = f.options.map(o=>`<option value="${o}">${o}</option>`).join('');
+      return `<div class="field"><label>${f.label}${f.required?' <span class="req">*</span>':''}</label><select id="cf-${f.id}"><option value="" disabled selected>${f.placeholder||'선택해주세요'}</option>${opts}</select></div>`;
+    }
+    if (f.type === 'textarea') {
+      return `<div class="field"><label>${f.label}${f.required?' <span class="req">*</span>':''}</label><textarea id="cf-${f.id}" placeholder="${f.placeholder||''}" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;border-radius:3px;resize:vertical;min-height:88px;line-height:1.6;"></textarea></div>`;
+    }
+    return `<div class="field"><label>${f.label}${f.required?' <span class="req">*</span>':''}</label><input type="${f.type==='number'?'number':'text'}" id="cf-${f.id}" placeholder="${f.placeholder||''}"></div>`;
+  }).join('');
+
+  const customFieldsVars    = d.customFields.map(f => `var cf_${f.id}=document.getElementById('cf-${f.id}')?(document.getElementById('cf-${f.id}').value||''):'';`).join('');
+  const customFieldsPayload = d.customFields.map(f => `"${f.label}":cf_${f.id}`).join(',');
+  const customFieldsRequired = d.customFields.filter(f=>f.required).map(f=>`!cf_${f.id}`).join('||');
+
+  const bgUrl     = d.bgImage ? d.bgImage : 'pyxis-bg.jpg';
+  const bgOpacity = (d.bgOpacity ?? 45) / 100;
+  const bgSize    = (d.bgSize ?? 100) + '%';
+  const bgPos     = `${d.bgPosX ?? 50}% ${d.bgPosY ?? 50}%`;
+
+  const maxPerSlot  = d.maxPerSlot ?? 15;
+  const sessionsJson = JSON.stringify(d.sessions.map(s=>({id:s.id, key:s.label+' '+s.time})));
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세미나 신청 — 하이픽셀플러스</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0c0c0d;--surface:#141416;--surface2:#1c1c1f;--border:rgba(255,255,255,0.07);--border-focus:rgba(255,255,255,0.22);--text:#f5f4f2;--text2:#888785;--text3:#444342;--accent:${d.tagColor};--accent-dim:rgba(243,146,0,0.08);}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");}
+.page{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
+.left{background:var(--surface);padding:60px 56px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;}
+.left-bg{position:absolute;inset:0;z-index:0;background-image:url('${bgUrl}');background-size:${bgSize};background-repeat:no-repeat;background-position:${bgPos};opacity:${bgOpacity};}
+.left-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,14,22,0) 0%,rgba(10,14,22,0.5) 50%,rgba(10,14,22,0.95) 80%,rgba(10,14,22,1) 100%);}
+.left>*:not(.left-bg):not(.deco-ring){position:relative;z-index:1;}
+.left-inner{display:flex;flex-direction:column;gap:0;}
+.left-tag{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:${d.tagColor};margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.left-tag::before{content:'';width:24px;height:1px;background:${d.tagColor};}
+.left-eyebrow{font-size:${d.eyebrowSize??25}px;letter-spacing:0;color:${d.eyebrowColor??'rgba(255,255,255,0.35)'};margin-bottom:3px;font-weight:400;}
+.left-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(64px,6.5vw,96px);line-height:.88;letter-spacing:1px;color:var(--text);margin-bottom:6px;}
+.left-title .sub{font-family:'Noto Sans KR',sans-serif;font-size:clamp(13px,1.3vw,17px);color:${d.subColor};display:block;letter-spacing:0;margin-top:14px;line-height:1.5;font-weight:400;}
+.left-title-models{font-family:'Barlow Condensed',sans-serif;font-size:clamp(64px,6.5vw,96px);color:#fff;display:inline;letter-spacing:3px;font-weight:700;margin-left:6px;}
+.left-desc{font-size:${d.descSize??16}px;color:${d.descColor??'#fff'};line-height:1.8;font-weight:300;max-width:380px;margin-bottom:40px;margin-top:24px;}
+.meta-list{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.1);}
+.meta-row{display:flex;justify-content:space-between;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:${d.metaValueSize??15}px;gap:16px;}
+.meta-row-label{color:${d.metaLabelColor??'rgba(255,255,255,0.45)'};font-size:${d.metaLabelSize??12}px;letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0;padding-top:2px;}
+.meta-row-value{color:${d.metaValueColor??'#fff'};font-weight:500;text-align:right;}
+.meta-row-value.accent{color:${d.tagColor};}
+.meta-row-value small{display:block;font-size:${d.metaSmallSize??12}px;color:${d.metaSmallColor??'rgba(255,255,255,0.4)'};font-weight:400;margin-top:2px;}
+.meta-row-value .session-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:2px 8px;border:1px solid rgba(243,146,0,0.25);border-radius:2px;background:rgba(243,146,0,0.06);color:${d.tagColor};font-weight:500;margin-bottom:4px;}
+.left-footer{font-size:${d.footerSize??15}px;color:${d.footerColor??'rgba(255,255,255,0.4)'};line-height:1.6;}
+.deco-ring{position:absolute;right:-120px;bottom:-120px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(243,146,0,0.06);pointer-events:none;z-index:0;}
+.deco-ring::after{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(243,146,0,0.04);}
+.right{background:var(--bg);padding:60px 56px;display:flex;flex-direction:column;justify-content:flex-start;overflow-y:auto;}
+.form-header{margin-bottom:32px;}
+.form-header h2{font-size:${d.formTitleSize??26}px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px;color:${d.formTitleColor??'#f5f4f2'};}
+.form-header p{font-size:${d.formSubtitleSize??16}px;color:${d.formSubtitleColor??'#888785'};line-height:1.65;}
+.field{margin-bottom:20px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+label{display:block;font-size:${d.fieldLabelSize??11}px;letter-spacing:1.5px;text-transform:uppercase;color:${d.fieldLabelColor??'rgba(255,255,255,0.5)'};margin-bottom:8px;transition:color .2s;}
+.field:focus-within>label{color:rgba(255,255,255,0.8);}
+input[type=text],input[type=tel],input[type=email],input[type=number],select{width:100%;background:var(--surface);border:1px solid var(--border);color:${d.fieldInputColor??'#f5f4f2'};padding:14px 16px;font-size:${d.fieldInputSize??15}px;font-family:inherit;font-weight:400;outline:none;border-radius:3px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--border-focus);background:var(--surface2);}
+input::placeholder{color:var(--text3);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
+select option{background:#1c1c1f;}
+.req{color:var(--accent);margin-left:3px;}
+.time-options{display:grid;gap:10px;}
+.time-option{position:relative;}
+.time-option input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
+.time-option label{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:${d.fieldInputSize??15}px;font-weight:500;color:var(--text);}
+.time-label-title{font-size:${d.fieldInputSize??15}px;font-weight:600;color:var(--text);}
+.time-label-sub{font-size:12px;color:var(--text2);font-weight:400;letter-spacing:0;}
+.time-option input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-dim);}
+.time-option input[type=radio]:checked+label .time-label-title{color:var(--accent);}
+.time-option label:hover:not(.is-full){border-color:rgba(255,255,255,0.15);}
+.time-option input[type=radio]:disabled+label{opacity:.4;cursor:not-allowed;pointer-events:none;}
+.consent-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.consent-option{position:relative;}
+.consent-option input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
+.consent-option label{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:var(--text2);}
+.consent-option input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
+.agree{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;margin-bottom:24px;position:relative;z-index:2;}
+.agree input[type=checkbox]{width:22px;height:22px;flex-shrink:0;margin-top:1px;accent-color:var(--accent);appearance:auto;-webkit-appearance:checkbox;cursor:pointer;position:relative;z-index:3;}
+.agree-text{font-size:${d.agreeLabelSize??15}px;color:${d.agreeLabelColor??'#888785'};line-height:1.6;cursor:pointer;}
+.agree-text strong{color:var(--text);font-weight:500;}
+.notice{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--accent-dim);border:1px solid rgba(243,146,0,0.15);border-radius:3px;margin-bottom:28px;}
+.notice-item{display:flex;align-items:flex-start;gap:10px;font-size:${d.noticeSize??15}px;color:${d.noticeColor??'rgba(255,255,255,0.7)'};line-height:1.6;}
+.notice-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px;}
+.notice-link{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
+.submit-btn{width:100%;padding:17px;background:var(--accent);color:#0c0c0d;border:none;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;border-radius:3px;letter-spacing:.5px;transition:opacity .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.submit-btn:disabled{opacity:.35;cursor:not-allowed;}
+.submit-note{font-size:14px;color:var(--text3);text-align:center;margin-top:14px;line-height:1.6;}
+.benefit-box{background:var(--surface);border:1px solid rgba(243,146,0,0.18);border-radius:3px;padding:16px 18px;margin-bottom:28px;}
+.benefit-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:500;}
+.benefit-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.benefit-item:last-child{border-bottom:none;padding-bottom:2px;}
+.benefit-icon{color:var(--accent);font-size:11px;flex-shrink:0;padding-top:3px;}
+.benefit-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:3px;}
+.benefit-sub{font-size:13px;color:var(--text2);line-height:1.5;}
+.success{display:none;text-align:center;padding:60px 24px;}
+.success.show{display:block;}
+.success-icon{width:56px;height:56px;background:var(--accent-dim);border:1px solid rgba(243,146,0,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:22px;}
+.success h3{font-size:22px;font-weight:700;margin-bottom:12px;}
+.success p{font-size:15px;color:var(--text2);line-height:1.7;}
+.tab-bar{display:flex;gap:4px;margin-bottom:28px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:4px;}
+.tab-btn{flex:1;padding:10px;background:transparent;border:none;border-radius:2px;color:var(--text2);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .15s,color .15s;letter-spacing:.3px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.tab-btn.active{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+.apply-panel.hide{display:none;}
+.cancel-panel{display:none;}
+.cancel-panel.show{display:block;}
+.cancel-step{display:none;}
+.cancel-step.show{display:block;}
+.reservation-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:20px 22px;margin-bottom:20px;}
+.reservation-card-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:14px;}
+.reservation-card-name{font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.reservation-card-session{font-size:14px;color:var(--accent);font-weight:500;display:flex;align-items:center;gap:6px;}
+.cancel-btn{width:100%;padding:15px;background:transparent;border:1px solid rgba(240,80,64,0.35);color:rgba(240,80,64,0.8);font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;border-radius:3px;transition:background .15s,color .15s,border-color .15s;margin-bottom:10px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.cancel-btn:hover:not(:disabled){background:rgba(240,80,64,0.08);color:rgb(240,80,64);border-color:rgba(240,80,64,0.6);}
+.cancel-btn:disabled{opacity:.4;cursor:not-allowed;}
+.cancel-back-btn{width:100%;padding:13px;background:transparent;border:1px solid var(--border);color:var(--text2);font-size:14px;font-family:inherit;cursor:pointer;border-radius:3px;transition:border-color .15s,color .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.cancel-back-btn:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
+.cancel-success{text-align:center;padding:48px 0;}
+.cancel-success-icon{width:52px;height:52px;background:rgba(100,200,120,0.08);border:1px solid rgba(100,200,120,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px;}
+.cancel-success h3{font-size:20px;font-weight:700;margin-bottom:10px;}
+.cancel-success p{font-size:14px;color:var(--text2);line-height:1.7;}
+.c-error{font-size:14px;color:rgba(240,80,64,0.8);text-align:center;margin-top:12px;display:none;line-height:1.6;}
+.closed-box{text-align:center;padding:60px 24px;}
+.closed-icon{font-size:40px;margin-bottom:20px;}
+.closed-box h3{font-size:22px;font-weight:700;margin-bottom:12px;}
+.closed-box p{font-size:15px;color:var(--text2);line-height:1.8;}
+.closed-badge{display:inline-block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,80,64,0.7);border:1px solid rgba(240,80,64,0.2);border-radius:2px;padding:4px 10px;margin-bottom:20px;}
+.slot-avail-badge{font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;margin-top:3px;min-height:16px;}
+.slot-avail-badge.ok{color:var(--accent);}
+.slot-avail-badge.few{color:#f5a623;}
+.slot-avail-badge.full{color:rgba(255,255,255,0.25);}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media(max-width:820px){.page{grid-template-columns:1fr;}.left{position:static;height:auto;padding:40px 24px;overflow:visible;}.left-desc{display:none;}.left-footer{display:none;}.left-title{font-size:13vw;line-height:.88;}.left-title-models{font-size:13vw;}.left-eyebrow{font-size:5vw;}.deco-ring{display:none;}.right{padding:40px 24px;}.field-row{grid-template-columns:1fr;gap:0;}.field-row .field:first-child{margin-bottom:20px;}}
+@media(max-width:480px){.left{padding:24px 20px;}.right{padding:32px 20px;}.consent-options{grid-template-columns:1fr !important;}}
+</style>
+</head>
+<body>
 <div class="page">
-
-  <!-- ── LEFT ── -->
   <div class="left">
     <div class="left-bg"></div>
     <div class="deco-ring"></div>
     <div class="left-inner">
-      <div class="brand">
-        <div class="brand-dot"></div>
-        <span class="brand-name">하이픽셀플러스</span>
-      </div>
-
-      <div class="left-tag">프리미어 프로 중급 이상 유저 대상 · 무료 세미나</div>
-
+      <div class="left-tag">${d.tag}</div>
+      <div class="left-eyebrow">${d.eyebrow}</div>
       <h1 class="left-title">
-        DaVinci<br>
-        Resolve<br>
-        <span>편집&컬러 교육</span>
+        ${titleMainHTML} <span class="left-title-models">${d.titleModels}</span>
+        <span class="sub">${d.titleSub}</span>
       </h1>
-
-      <p class="left-desc">
-        프리미어 프로를 <span style="color:var(--accent);font-weight:500">중급이상</span>으로 쓰시는 분이라면<br>
-        누구나 참여하실 수 있습니다.<br>
-        단, <span style="color:var(--accent);font-weight:500">프리미어 프로 강의 경력이 있으신 분은 우선적</span>으로 초청될 수 있습니다.
-      </p>
-
-      <p style="font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:32px; display:flex; align-items:center; gap:8px;">
-        <span style="color:var(--accent)">★</span>
-        Blackmagic Design 공인 트레이너가 직접 교육합니다
-      </p>
-
-      <div class="meta-list">
-        <div class="meta-row">
-          <span class="meta-row-label">일시</span>
-          <span class="meta-row-value">2026년 4월 16일 (목)</span>
-        </div>
-        <div class="meta-row">
-          <span class="meta-row-label">시간</span>
-          <span class="meta-row-value">오후 2:00 — 6:00
-            <small>편집 3시간 · 컬러 1시간</small>
-          </span>
-        </div>
-        <div class="meta-row">
-          <span class="meta-row-label">장소</span>
-          <span class="meta-row-value">
-            미디액트 디지털교육실(PC)
-            <small>서울시 마포구 서강로9일 52 동복이세빌딩 3층</small>
-            <small>🚗 자차이용 시 기계식 주차장 (중소형 유료) · 근처 공영주차장 이용 추천</small>
-          </span>
-        </div>
-        <div class="meta-row">
-          <span class="meta-row-label">참가비</span>
-          <span class="meta-row-value accent">무료</span>
-        </div>
-        <div class="meta-row">
-          <span class="meta-row-label">정원</span>
-          <span class="meta-row-value">15명 한정</span>
-        </div>
-      </div>
+      <p class="left-desc">${descHTML}</p>
+      <div class="meta-list">${metaHTML}</div>
     </div>
-
-    <div class="left-footer">
-      Blackmagic Design 공식 총판 · 하이픽셀플러스<br>
-      문의: <a href="/cdn-cgi/l/email-protection#bed6d7ced7c6dbd2ced2cbcdfed0dfc8dbcc90ddd1d3"><span class="__cf_email__" data-cfemail="157d7c657c6d707965796066557b746370673b767a78">[email&#160;protected]</span></a> / 031-450-3515
-    </div>
+    <div class="left-footer">Blackmagic Design 공식 총판 · 하이픽셀플러스<br>문의: ${d.footerContact}</div>
   </div>
-
-  <!-- ── RIGHT ── -->
   <div class="right">
-
     <div id="form-body">
-      <div class="form-header">
-        <h2>참가 신청</h2>
-        <p>프리미어 프로 경험자 대상 세미나입니다. 아래 정보를 입력하시면 확인 후 개별 연락드립니다.</p>
-
-
-        <p style="margin-top:12px; color:var(--accent); font-weight:500;">
-        성원에 힘입어 마감되었습니다. 감사합니다! 🙏
-        </p>
+      <div class="tab-bar">
+        <button class="tab-btn active" id="tab-apply" onclick="switchTab('apply')" type="button">참가 신청</button>
+        <button class="tab-btn" id="tab-cancel" onclick="switchTab('cancel')" type="button">예약 취소</button>
       </div>
 
-      <div class="notice">
-        <div class="notice-item">
-          <div class="notice-dot"></div>
-          <span>편집 실습이 포함되어 있으니 <strong style="color:var(--accent)">개인 이어폰</strong>을 지참해주세요.</span>
+      <!-- ══ 신청 패널 ══ -->
+      <div class="apply-panel" id="apply-panel">
+        <div class="closed-box" id="closed-box" style="display:none;">
+          <div class="closed-icon">🙏</div>
+          <div class="closed-badge">접수 마감</div>
+          <h3>신청 접수가 마감되었습니다</h3>
+          <p>${d.closedMsg}</p>
         </div>
-        <div class="notice-item">
-          <div class="notice-dot"></div>
-          <span>당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.</span>
+        <div id="apply-form">
+          <div class="form-header">
+            <h2>${d.formTitle}</h2>
+            <p>${d.formSubtitle}</p>
+          </div>
+          ${noticeHTML}
+          ${benefitsHTML}
+          <div class="field-row">
+            <div class="field"><label>${(d.fixedFields?.find(f=>f.id==='name')?.label)||'이름'} <span class="req">*</span></label><input type="text" id="f-name" placeholder="${(d.fixedFields?.find(f=>f.id==='name')?.placeholder)||'홍길동'}" autocomplete="name"></div>
+            <div class="field"><label>${(d.fixedFields?.find(f=>f.id==='phone')?.label)||'전화번호'} <span class="req">*</span></label><input type="tel" id="f-phone" placeholder="${(d.fixedFields?.find(f=>f.id==='phone')?.placeholder)||'010-0000-0000'}" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
+          </div>
+          <div class="field"><label>${(d.fixedFields?.find(f=>f.id==='email')?.label)||'이메일'} <span class="req">*</span></label><input type="email" id="f-email" placeholder="${(d.fixedFields?.find(f=>f.id==='email')?.placeholder)||'이메일 주소'}" autocomplete="email"></div>
+          <div class="field"><label>${(d.fixedFields?.find(f=>f.id==='company')?.label)||'직장 또는 소속'} <span class="req">*</span></label><input type="text" id="f-company" placeholder="${(d.fixedFields?.find(f=>f.id==='company')?.placeholder)||'직장 또는 소속'}"></div>
+          ${customFieldsHTML}
+          <div class="field">
+            <label>참가 일시 <span class="req">*</span></label>
+            <div class="time-options" style="grid-template-columns:${sessionCols};">${sessionsHTML}</div>
+          </div>
+          <div class="field">
+            <label>이메일 수신 동의 <span style="color:var(--text3);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:400">(선택)</span></label>
+            <div class="consent-options">
+              <div class="consent-option"><input type="radio" name="email-consent" id="consent-yes" value="동의"><label for="consent-yes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>예, 동의합니다</label></div>
+              <div class="consent-option"><input type="radio" name="email-consent" id="consent-no" value="미동의"><label for="consent-no">아니요</label></div>
+            </div>
+          </div>
+          <div class="agree">
+            <input type="checkbox" id="f-agree">
+            <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer"><strong>개인정보 수집 및 이용에 동의합니다.</strong><br>${d.agreeText}</label>
+          </div>
+          ${submitBtn}
+          <p class="submit-note">수집된 정보는 세미나 운영 목적으로만 사용됩니다</p>
         </div>
       </div>
 
-      <div class="field-row">
-        <div class="field">
-          <label>이름 <span class="req">*</span></label>
-          <input type="text" id="f-name" placeholder="홍길동" autocomplete="name">
+      <!-- ══ 취소 패널 ══ -->
+      <div class="cancel-panel" id="cancel-panel">
+        <div class="cancel-step show" id="cancel-step1">
+          <div class="form-header">
+            <h2>예약 취소</h2>
+            <p>신청 시 입력하신 전화번호로 예약을 조회합니다.</p>
+          </div>
+          <div class="field">
+            <label>전화번호 <span class="req">*</span></label>
+            <input type="tel" id="c-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13">
+          </div>
+          <button class="submit-btn" id="lookup-btn" type="button" onclick="lookupReservation()">
+            예약 조회하기
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="c-error" id="c-lookup-error"></p>
         </div>
-        <div class="field">
-          <label>연락처 <span class="req">*</span></label>
-          <input type="tel" id="f-phone" placeholder="010-0000-0000" autocomplete="tel" maxlength="13" inputmode="numeric">
+        <div class="cancel-step" id="cancel-step2">
+          <div class="form-header">
+            <h2>예약 확인</h2>
+            <p>아래 예약 정보를 확인 후 취소해 주세요.</p>
+          </div>
+          <div class="reservation-card">
+            <div class="reservation-card-label">예약 정보</div>
+            <div class="reservation-card-name" id="c-res-name"></div>
+            <div class="reservation-card-session">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 6h12M4.5 1v2M9.5 1v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              <span id="c-res-session-text"></span>
+            </div>
+          </div>
+          <button class="cancel-btn" id="confirm-cancel-btn" type="button" onclick="confirmCancel()">이 예약을 취소합니다</button>
+          <button class="cancel-back-btn" type="button" onclick="resetCancel()">돌아가기</button>
+        </div>
+        <div class="cancel-step" id="cancel-step3">
+          <div class="cancel-success">
+            <div class="cancel-success-icon">✓</div>
+            <h3>취소가 완료되었습니다</h3>
+            <p>예약이 정상적으로 취소되었습니다.<br>다시 신청하시려면 신청 탭으로 이동해 주세요.</p>
+            <button class="submit-btn" type="button" onclick="switchTab('apply')" style="margin-top:28px;">다시 신청하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
         </div>
       </div>
-
-      <div class="field">
-        <label>이메일 <span class="req">*</span></label>
-        <input type="email" id="f-email" placeholder="email@example.com" autocomplete="email">
-      </div>
-
-      <div class="field">
-        <label>프리미어 프로 레벨 <span class="req">*</span></label>
-        <select id="f-platform">
-          <option value="" disabled selected>해당되는 숙련도 수준을 선택해주시기 바랍니다.</option>
-          <option>중급 (다양한 기능 활용 가능)</option>
-          <option>고급 (심화 기능 및 강의 가능)</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>다빈치 리졸브 레벨</label>
-        <select id="f-level">
-          <option value="" disabled selected>해당되는 숙련도 수준을 선택해주시기 바랍니다.</option>
-          <option>전혀 없음</option>
-          <option>초급</option>
-          <option>중급</option>
-          <option>고급</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>강의 경력 (선택 · 강사 우대)</label>
-        <textarea id="f-career" placeholder="예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요."></textarea>
-      </div>
-
-      <div class="field">
-        <label>수업 관련 궁금한 점 (선택)</label>
-        <textarea id="f-question" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요."></textarea>
-      </div>
-
-      <div class="agree">
-        <input type="checkbox" id="f-agree">
-        <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer">
-          <strong>유의사항에 동의합니다.</strong><br>
-          원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.
-        </label>
-      </div>
-
-      <button class="submit-btn" id="disabled" type="disabled">
-        접수가 마감되었습니다
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <p class="submit-note">수집된 정보는 세미나 운영 목적으로만 사용됩니다</p>
     </div>
 
     <div class="success" id="msg-success">
       <div class="success-icon">✓</div>
-      <h3>신청이 완료되었습니다</h3>
-      <p>입력하신 연락처로<br>확인 메시지를 드릴 예정입니다.<br><br>교육 당일 뵙겠습니다!</p>
+      <h3>${d.successTitle}</h3>
+      <p>${(d.successMsg||'').replace(/\n/g,'<br>')}</p>
     </div>
-
   </div>
 </div>
+<script>
+var SCRIPT_URL='${d.scriptUrl}';
+var MAX_PER_SLOT=${maxPerSlot};
+var IS_CLOSED=${d.closed ? 'true' : 'false'};
+var SESSIONS=${sessionsJson};
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjN5qb2Tfn1OW_NW17jxNff5aPuzSfc3xahbqS4X4kebAteld2ArwjYrqlKm71B0Cg/exec';
+function formatPhone(el){var v=el.value.replace(/\\D/g,'').slice(0,11);if(v.length<4)el.value=v;else if(v.length<8)el.value=v.slice(0,3)+'-'+v.slice(3);else el.value=v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7);}
+function getRadioValue(name){var c=document.querySelector('input[name="'+name+'"]:checked');return c?c.value:'';}
 
-  function formatPhone(el) {
-    var v = el.value.replace(/\D/g, '').slice(0, 11);
-    if (v.length < 4)      el.value = v;
-    else if (v.length < 8) el.value = v.slice(0,3) + '-' + v.slice(3);
-    else                   el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+function applyClosedState(){
+  var applyForm=document.getElementById('apply-form');
+  var closedBox=document.getElementById('closed-box');
+  var tabApply=document.getElementById('tab-apply');
+  if(applyForm)applyForm.style.display='none';
+  if(closedBox)closedBox.style.display='block';
+  if(tabApply)tabApply.style.opacity='0.5';
+}
+
+function switchTab(tab){
+  var applyPanel=document.getElementById('apply-panel');
+  var cancelPanel=document.getElementById('cancel-panel');
+  var tabApply=document.getElementById('tab-apply');
+  var tabCancel=document.getElementById('tab-cancel');
+  if(tab==='apply'){
+    applyPanel.classList.remove('hide');
+    cancelPanel.classList.remove('show');
+    tabApply.classList.add('active');
+    tabCancel.classList.remove('active');
+  }else{
+    applyPanel.classList.add('hide');
+    cancelPanel.classList.add('show');
+    tabApply.classList.remove('active');
+    tabCancel.classList.add('active');
+    resetCancel();
   }
+}
 
-  document.getElementById('f-phone').addEventListener('input', function() {
-    formatPhone(this);
+var foundPhone='';
+function resetCancel(){
+  ['cancel-step1','cancel-step2','cancel-step3'].forEach(function(id){document.getElementById(id).classList.remove('show');});
+  document.getElementById('cancel-step1').classList.add('show');
+  var cp=document.getElementById('c-phone');if(cp)cp.value='';
+  var errEl=document.getElementById('c-lookup-error');if(errEl)errEl.style.display='none';
+  var lb=document.getElementById('lookup-btn');
+  if(lb){lb.disabled=false;lb.innerHTML='예약 조회하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
+  foundPhone='';
+}
+
+async function lookupReservation(){
+  var phone=document.getElementById('c-phone').value.trim();
+  var errEl=document.getElementById('c-lookup-error');
+  var lb=document.getElementById('lookup-btn');
+  errEl.style.display='none';
+  if(!phone)return;
+  lb.disabled=true;
+  lb.innerHTML='<span style="opacity:.6">조회 중...</span>';
+  try{
+    var r=await fetch(SCRIPT_URL+'?action=getReservation&phone='+encodeURIComponent(phone));
+    var data=await r.json();
+    if(data.found){
+      foundPhone=phone;
+      document.getElementById('c-res-name').textContent=data.name+' 님';
+      document.getElementById('c-res-session-text').textContent=data.session;
+      document.getElementById('cancel-step1').classList.remove('show');
+      document.getElementById('cancel-step2').classList.add('show');
+    }else{
+      errEl.textContent='해당 전화번호로 등록된 예약을 찾을 수 없습니다.';
+      errEl.style.display='block';
+      lb.disabled=false;
+      lb.innerHTML='예약 조회하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+  }catch(e){
+    errEl.textContent='조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    errEl.style.display='block';
+    lb.disabled=false;
+    lb.innerHTML='예약 조회하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+}
+
+async function confirmCancel(){
+  if(!foundPhone)return;
+  var cb=document.getElementById('confirm-cancel-btn');
+  cb.disabled=true;cb.textContent='취소 처리 중...';
+  try{
+    await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'cancelReservation',phone:foundPhone})});
+    document.getElementById('cancel-step2').classList.remove('show');
+    document.getElementById('cancel-step3').classList.add('show');
+  }catch(e){
+    alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    cb.disabled=false;cb.textContent='이 예약을 취소합니다';
+  }
+}
+
+function loadSlots(){
+  var loadingEl=document.getElementById('slots-loading');
+  if(loadingEl)loadingEl.style.display='flex';
+  fetch(SCRIPT_URL+'?action=getSlots')
+    .then(function(r){return r.json();})
+    .then(function(counts){updateSlotBadges(counts);if(loadingEl)loadingEl.style.display='none';})
+    .catch(function(){updateSlotBadges({});if(loadingEl)loadingEl.style.display='none';});
+}
+
+function updateSlotBadges(counts){
+  SESSIONS.forEach(function(s){
+    var badge=document.getElementById('slot-avail-'+s.id);
+    var inp=document.querySelector('input[value="'+s.key+'"]');
+    if(!badge)return;
+    var count=counts[s.key]||0;
+    var avail=MAX_PER_SLOT-count;
+    if(avail<=0){
+      badge.textContent='마감';
+      badge.className='slot-avail-badge full';
+      if(inp){
+        inp.disabled=true;
+        var lbl=inp.nextElementSibling;
+        if(lbl){lbl.style.opacity='.4';lbl.style.cursor='not-allowed';lbl.style.pointerEvents='none';}
+      }
+    }else if(avail<=3){
+      badge.textContent=avail+'석 남음';
+      badge.className='slot-avail-badge few';
+    }else{
+      badge.textContent=avail+'석 남음';
+      badge.className='slot-avail-badge ok';
+    }
+  });
+}
+
+async function submitForm(){
+  var name=document.getElementById('f-name').value.trim();
+  var phone=document.getElementById('f-phone').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var company=document.getElementById('f-company').value.trim();
+  ${customFieldsVars}
+  var session=getRadioValue('session');
+  var consent=getRadioValue('email-consent')||'미응답';
+  var agreed=document.getElementById('f-agree').checked;
+  if(!name||!phone||!email||!company${customFieldsRequired?'||'+customFieldsRequired:''}){shake();return;}
+  if(!session){var tf=document.querySelector('.time-options');tf.style.outline='1px solid rgba(240,80,64,0.5)';tf.style.borderRadius='3px';setTimeout(function(){tf.style.outline='';},1500);return;}
+  if(!agreed){var ae=document.querySelector('.agree');ae.style.borderColor='rgba(240,80,64,0.5)';setTimeout(function(){ae.style.borderColor='';},1500);return;}
+  var btn=document.getElementById('submit-btn');btn.disabled=true;btn.innerHTML='<span style="opacity:.6">제출 중...</span>';
+  try{
+    await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'submit',name:name,phone:phone,email:email,company:company,${customFieldsPayload?customFieldsPayload+',':''}session:session,emailConsent:consent,timestamp:new Date().toLocaleString('ko-KR')})});
+    document.getElementById('form-body').style.display='none';
+    document.getElementById('msg-success').classList.add('show');
+  }catch(e){
+    alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    btn.disabled=false;btn.innerHTML='신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+}
+
+function shake(){var f=document.getElementById('apply-panel');f.style.transition='transform .08s';f.style.transform='translateX(-6px)';setTimeout(function(){f.style.transform='translateX(5px)';},80);setTimeout(function(){f.style.transform='translateX(-4px)';},160);setTimeout(function(){f.style.transform='translateX(0)';},240);}
+
+document.addEventListener('DOMContentLoaded',function(){
+  if(IS_CLOSED){applyClosedState();}
+  else{loadSlots();}
+  var btn=document.getElementById('submit-btn');
+  if(btn&&!btn.disabled){
+    btn.addEventListener('click',function(e){e.preventDefault();submitForm();});
+    btn.addEventListener('touchend',function(e){e.preventDefault();submitForm();});
+  }
+  var lb=document.getElementById('lookup-btn');
+  if(lb){lb.addEventListener('touchend',function(e){e.preventDefault();lookupReservation();});}
+  var cb=document.getElementById('confirm-cancel-btn');
+  if(cb){cb.addEventListener('touchend',function(e){e.preventDefault();confirmCancel();});}
+});
+<\/script>
+<!-- EDITOR_DATA:${JSON.stringify(d)} -->
+</body>
+</html>`;
+}
+
+// ── 공통 이동 버튼 ──
+const MoveBtn = ({ onClick, label, disabled }) => (
+  <button onClick={onClick} disabled={disabled} style={{ fontSize:'12px', padding:'3px 7px', background:'#fff', border:'1px solid #d1d5db', borderRadius:'4px', color: disabled ? '#d1d5db' : '#374151', cursor: disabled ? 'default' : 'pointer' }}>{label}</button>
+);
+
+// ── 메타 행 에디터 ──
+function MetaRowEditor({ row, idx, total, onUpdate, onDelete, onMove, onAddSmall, onUpdateSmall, onDeleteSmall }) {
+  return (
+    <div style={{ background:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'12px', marginBottom:'8px' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+          <span style={{ fontSize:'11px', background:'#f39200', color:'#fff', padding:'2px 7px', borderRadius:'4px', fontWeight:'700' }}>{row.label||'항목'}</span>
+          <label style={{ display:'flex', alignItems:'center', gap:'4px', cursor:'pointer', margin:0 }}>
+            <input type="checkbox" checked={row.accent} onChange={e=>onUpdate('accent',e.target.checked)} style={{ width:'13px', height:'13px', accentColor:'#f39200' }} />
+            <span style={{ fontSize:'10px', color:'#f39200', fontWeight:'600' }}>강조색</span>
+          </label>
+        </div>
+        <div style={{ display:'flex', gap:'4px' }}>
+          <MoveBtn label="↑" onClick={()=>onMove(-1)} disabled={idx===0} />
+          <MoveBtn label="↓" onClick={()=>onMove(1)} disabled={idx===total-1} />
+          <button onClick={onDelete} style={{ padding:'2px 8px', background:'#fff', border:'1px solid #fca5a5', borderRadius:'4px', color:'#ef4444', fontSize:'11px' }}>삭제</button>
+        </div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap:'8px', marginBottom:'8px' }}>
+        <div><label style={LS}>라벨</label><input style={IS} value={row.label} onChange={e=>onUpdate('label',e.target.value)} /></div>
+        <div><label style={LS}>유형</label>
+          <select style={IS} value={row.type} onChange={e=>onUpdate('type',e.target.value)}>
+            <option value="text">일반 텍스트</option>
+            <option value="time">시간 (오전/오후 배지)</option>
+          </select>
+        </div>
+      </div>
+      {row.type === 'text' && <div style={FG}><label style={LS}>내용 (줄바꿈=엔터)</label><textarea style={{ ...TS, minHeight:'50px' }} value={row.main||''} onChange={e=>onUpdate('main',e.target.value)} /></div>}
+      {row.type === 'time' && (
+        <div>
+          <div style={{ display:'flex', gap:'16px', marginBottom:'8px' }}>
+            <label style={{ display:'flex', alignItems:'center', gap:'5px', cursor:'pointer', margin:0, fontSize:'13px', color:'#374151' }}>
+              <input type="checkbox" checked={row.showAm !== false} onChange={e=>onUpdate('showAm',e.target.checked)} style={{ width:'15px', height:'15px', accentColor:'#f39200' }} />
+              <span>오전 표시</span>
+            </label>
+            <label style={{ display:'flex', alignItems:'center', gap:'5px', cursor:'pointer', margin:0, fontSize:'13px', color:'#374151' }}>
+              <input type="checkbox" checked={row.showPm !== false} onChange={e=>onUpdate('showPm',e.target.checked)} style={{ width:'15px', height:'15px', accentColor:'#f39200' }} />
+              <span>오후 표시</span>
+            </label>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px', marginBottom:'8px' }}>
+            {row.showAm !== false && <div><label style={LS}>오전 시간</label><input style={IS} value={row.amTime||''} onChange={e=>onUpdate('amTime',e.target.value)} placeholder="10:00 – 13:00" /></div>}
+            {row.showPm !== false && <div><label style={LS}>오후 시간</label><input style={IS} value={row.pmTime||''} onChange={e=>onUpdate('pmTime',e.target.value)} placeholder="14:00 – 17:00" /></div>}
+          </div>
+        </div>
+      )}
+      <div>
+        <label style={{ ...LS, marginBottom:'6px' }}>소형 텍스트</label>
+        {(row.smalls||[]).map((s,i) => (
+          <div key={i} style={{ display:'flex', gap:'5px', marginBottom:'5px' }}>
+            <input style={{ ...IS, flex:1, fontSize:'12px' }} value={s} onChange={e=>onUpdateSmall(i,e.target.value)} />
+            <button onClick={()=>onDeleteSmall(i)} style={{ padding:'4px 8px', background:'#fff', border:'1px solid #fca5a5', borderRadius:'4px', color:'#ef4444', fontSize:'11px', flexShrink:0 }}>✕</button>
+          </div>
+        ))}
+        <button onClick={onAddSmall} style={{ width:'100%', padding:'5px', borderRadius:'5px', border:'1px dashed #d1d5db', background:'#fff', color:'#9ca3af', fontSize:'11px' }}>+ 소형 텍스트 추가</button>
+      </div>
+    </div>
+  );
+}
+
+// ── 추가 필드 에디터 ──
+function CustomFieldEditor({ f, idx, total, onChange, onDelete, onMove }) {
+  const typeLabels = { text:'텍스트', textarea:'장문 텍스트', select:'드롭다운 선택', number:'숫자' };
+  return (
+    <div style={{ background:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'12px', marginBottom:'8px' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+          <span style={{ fontSize:'11px', background:'#6366f1', color:'#fff', padding:'2px 7px', borderRadius:'4px', fontWeight:'700' }}>{typeLabels[f.type]||f.type}</span>
+          <label style={{ display:'flex', alignItems:'center', gap:'4px', cursor:'pointer', margin:0 }}>
+            <input type="checkbox" checked={f.required} onChange={e=>onChange('required',e.target.checked)} style={{ width:'13px', height:'13px', accentColor:'#f39200' }} />
+            <span style={{ fontSize:'10px', color:'#f39200', fontWeight:'600' }}>필수</span>
+          </label>
+        </div>
+        <div style={{ display:'flex', gap:'4px' }}>
+          <MoveBtn label="↑" onClick={()=>onMove(-1)} disabled={idx===0} />
+          <MoveBtn label="↓" onClick={()=>onMove(1)} disabled={idx===total-1} />
+          <button onClick={onDelete} style={{ padding:'2px 8px', background:'#fff', border:'1px solid #fca5a5', borderRadius:'4px', color:'#ef4444', fontSize:'11px' }}>삭제</button>
+        </div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px', marginBottom:'8px' }}>
+        <div><label style={LS}>유형</label>
+          <select style={IS} value={f.type} onChange={e=>onChange('type',e.target.value)}>
+            <option value="text">텍스트</option>
+            <option value="textarea">장문 텍스트</option>
+            <option value="select">드롭다운 선택</option>
+            <option value="number">숫자</option>
+          </select>
+        </div>
+        <div><label style={LS}>라벨 (구글시트 컬럼명)</label><input style={IS} value={f.label} onChange={e=>onChange('label',e.target.value)} placeholder="예: 직책" /></div>
+      </div>
+      <div style={FG}><label style={LS}>플레이스홀더</label><input style={IS} value={f.placeholder||''} onChange={e=>onChange('placeholder',e.target.value)} placeholder="예: 직책을 입력해주세요" /></div>
+      {f.type === 'select' && (
+        <div>
+          <label style={LS}>선택지 (한 줄에 하나씩)</label>
+          <textarea style={{ ...TS, minHeight:'80px', fontSize:'12px' }}
+            value={(f.options||[]).join('\n')}
+            onChange={e=>onChange('options', e.target.value.split('\n'))}
+            placeholder={'선택지 1\n선택지 2\n선택지 3'} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── 메인 앱 ──
+function App() {
+  const [d, setD] = useState(DEFAULT);
+  const [toast, setToast] = useState('');
+
+  const upd = (key, val) => setD(prev => ({ ...prev, [key]: val }));
+
+  const moveItem = (key, idx, dir) => setD(prev => {
+    const arr = [...prev[key]];
+    const ni = idx + dir;
+    if (ni < 0 || ni >= arr.length) return prev;
+    [arr[idx], arr[ni]] = [arr[ni], arr[idx]];
+    return { ...prev, [key]: arr };
   });
 
-  async function submitForm() {
-    var val      = function(id) { return document.getElementById(id).value.trim(); };
-    var name     = val('f-name');
-    var phone    = val('f-phone');
-    var email    = val('f-email');
-    var platform = val('f-platform');
-    var level    = val('f-level');
-    var career   = val('f-career');
-    var question = val('f-question');
-    var agreed   = document.getElementById('f-agree').checked;
+  const updMetaRow    = (id, key, val) => setD(prev => ({ ...prev, metaRows: prev.metaRows.map(r => r.id===id ? {...r,[key]:val} : r) }));
+  const updMetaSmall  = (id, i, val)   => setD(prev => ({ ...prev, metaRows: prev.metaRows.map(r => { if(r.id!==id)return r; const s=[...(r.smalls||[])]; s[i]=val; return {...r,smalls:s}; }) }));
+  const addMetaSmall  = (id)           => setD(prev => ({ ...prev, metaRows: prev.metaRows.map(r => r.id===id ? {...r,smalls:[...(r.smalls||[]),'']} : r) }));
+  const delMetaSmall  = (id, i)        => setD(prev => ({ ...prev, metaRows: prev.metaRows.map(r => r.id===id ? {...r,smalls:(r.smalls||[]).filter((_,j)=>j!==i)} : r) }));
+  const delMetaRow    = (id)           => setD(prev => ({ ...prev, metaRows: prev.metaRows.filter(r => r.id!==id) }));
+  const addMetaRow    = ()             => setD(prev => ({ ...prev, metaRows: [...prev.metaRows, {id:uid(),label:'새 항목',type:'text',main:'',smalls:[],accent:false}] }));
 
-    if (!name || !phone || !email || !platform) { shake(); return; }
+  const updBenefit = (i, key, val) => setD(prev => { const b=[...prev.benefits]; b[i]={...b[i],[key]:val}; return {...prev,benefits:b}; });
+  const addBenefit = ()            => setD(prev => ({ ...prev, benefits:[...prev.benefits,{id:uid(),name:'새 혜택',sub:''}] }));
+  const delBenefit = (i)           => setD(prev => ({ ...prev, benefits:prev.benefits.filter((_,j)=>j!==i) }));
 
-    if (!agreed) {
-      var agreeEl = document.querySelector('.agree');
-      agreeEl.style.borderColor = 'rgba(240,80,64,0.5)';
-      setTimeout(function() { agreeEl.style.borderColor = ''; }, 1500);
-      return;
-    }
+  const updNotice = (i, val) => setD(prev => { const n=[...prev.noticeItems]; n[i]=val; return {...prev,noticeItems:n}; });
+  const addNotice = ()       => setD(prev => ({ ...prev, noticeItems:[...prev.noticeItems,'새 안내 문구'] }));
+  const delNotice = (i)      => setD(prev => ({ ...prev, noticeItems:prev.noticeItems.filter((_,j)=>j!==i) }));
 
-    var btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.innerHTML = '<span style="opacity:.6">제출 중...</span>';
+  const updSession = (i, key, val) => setD(prev => { const s=[...prev.sessions]; s[i]={...s[i],[key]:val}; return {...prev,sessions:s}; });
+  const addSession = ()            => setD(prev => ({ ...prev, sessions:[...prev.sessions,{id:uid(),label:'날짜 오전/오후',time:'00:00 – 00:00'}] }));
+  const delSession = (i)           => setD(prev => ({ ...prev, sessions:prev.sessions.filter((_,j)=>j!==i) }));
 
-    try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'submit',
-          name: name, phone: phone, email: email,
-          platform: platform, level: level,
-          career: career, question: question,
-          timestamp: new Date().toLocaleString('ko-KR')
-        })
-      });
-      document.getElementById('form-body').style.display = 'none';
-      document.getElementById('msg-success').classList.add('show');
-    } catch(e) {
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-      btn.disabled = false;
-      btn.innerHTML = '신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    }
-  }
+  const updFixedField  = (id, key, val) => setD(prev => ({ ...prev, fixedFields: (prev.fixedFields||[]).map(f => f.id===id ? {...f,[key]:val} : f) }));
+  // ✅ 수정: updCustomField 함수 추가 (기존 코드에 누락되어 있었음)
+  const updCustomField = (i, key, val)  => setD(prev => { const cf=[...prev.customFields]; cf[i]={...cf[i],[key]:val}; return {...prev,customFields:cf}; });
+  const addCustomField = ()             => setD(prev => ({ ...prev, customFields:[...prev.customFields,{id:uid(),type:'text',label:'새 필드',placeholder:'',required:false,options:[]}] }));
+  const delCustomField = (i)            => setD(prev => ({ ...prev, customFields:prev.customFields.filter((_,j)=>j!==i) }));
 
-  function shake() {
-    var form = document.getElementById('form-body');
-    form.style.transition = 'transform .08s';
-    form.style.transform = 'translateX(-6px)';
-    setTimeout(function() { form.style.transform = 'translateX(5px)';  }, 80);
-    setTimeout(function() { form.style.transform = 'translateX(-4px)'; }, 160);
-    setTimeout(function() { form.style.transform = 'translateX(0)';    }, 240);
-  }
+  const showToast = (msg) => { setToast(msg); setTimeout(()=>setToast(''),2500); };
 
-  // 버튼 이벤트 — click + touchend 모두 연결
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('submit-btn');
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      submitForm();
-    });
-    btn.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      submitForm();
-    });
-  });
+  const exportHTML = () => {
+    const html = buildHTML(d);
+    const blob = new Blob([html],{type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download='seminar-form.html'; a.click();
+    URL.revokeObjectURL(url);
+    showToast('📥 모집폼 HTML이 저장됐습니다!');
+  };
+
+  const importHTML = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const text = ev.target.result;
+      const match = text.match(/<!--\s*EDITOR_DATA:([\s\S]*?)-->/);
+      if (match) {
+        try {
+          const data = JSON.parse(match[1].trim());
+          setD(data);
+          showToast('✅ 파일을 성공적으로 불러왔습니다!');
+        } catch(err) {
+          showToast('❌ 데이터 파싱 오류. 에디터로 저장한 파일인지 확인해주세요.');
+        }
+      } else {
+        showToast('❌ 에디터 데이터를 찾을 수 없습니다. 이 에디터로 내보낸 파일만 불러올 수 있습니다.');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
+  const ColorRow = ({ label, valKey }) => (
+    <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'8px' }}>
+      <label style={{ ...LS, margin:0, minWidth:'80px' }}>{label}</label>
+      <input type="color" value={d[valKey]} onChange={e=>upd(valKey,e.target.value)}
+        style={{ width:'36px', height:'28px', border:'1px solid #d1d5db', borderRadius:'4px', padding:'1px', cursor:'pointer' }} />
+      <input style={{ ...IS, width:'90px', fontFamily:'monospace', fontSize:'12px' }} value={d[valKey]} onChange={e=>upd(valKey,e.target.value)} />
+    </div>
+  );
+
+  return (
+    <div style={{ display:'flex', flexDirection:'column', height:'100vh' }}>
+      {/* 툴바 */}
+      <div style={{ background:'#0c0c0d', borderBottom:'1px solid rgba(255,255,255,0.08)', padding:'0 20px', height:'52px', display:'flex', alignItems:'center', justifyContent:'space-between', flexShrink:0 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'12px' }}>
+          <span style={{ color:'#f39200', fontWeight:'700', fontSize:'14px' }}>PYXIS</span>
+          <span style={{ color:'rgba(255,255,255,0.3)' }}>|</span>
+          <span style={{ color:'rgba(255,255,255,0.7)', fontSize:'13px' }}>세미나 모집폼 에디터</span>
+        </div>
+        <div style={{ display:'flex', gap:'8px', alignItems:'center' }}>
+          <label style={{ display:'flex', alignItems:'center', gap:'6px', cursor:'pointer', color:d.closed?'#f39200':'rgba(255,255,255,0.5)', fontSize:'13px', fontWeight:'600' }}>
+            <input type="checkbox" checked={d.closed} onChange={e=>upd('closed',e.target.checked)} style={{ width:'16px', height:'16px', accentColor:'#f39200' }} />
+            접수 마감
+          </label>
+          <label style={{ padding:'8px 16px', background:'rgba(255,255,255,0.08)', color:'rgba(255,255,255,0.8)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:'6px', fontSize:'13px', fontWeight:'600', cursor:'pointer', display:'flex', alignItems:'center', gap:'6px' }}>
+            📂 불러오기
+            <input type="file" accept=".html" onChange={importHTML} style={{ display:'none' }} />
+          </label>
+          <button onClick={exportHTML} style={{ padding:'8px 20px', background:'#f39200', color:'#0c0c0d', border:'none', borderRadius:'6px', fontSize:'13px', fontWeight:'700' }}>📥 HTML 다운로드</button>
+        </div>
+      </div>
+
+      <div style={{ display:'flex', flex:1, overflow:'hidden' }}>
+        {/* 에디터 패널 */}
+        <div style={{ width:'480px', flexShrink:0, background:'#f8fafc', borderRight:'1px solid #e2e8f0', overflowY:'auto', padding:'16px' }}>
+
+          {/* 기본 설정 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>⚙️ 기본 설정</div>
+            <div style={FG}><label style={LS}>Google Apps Script URL</label>
+              <input style={{ ...IS, fontFamily:'monospace', fontSize:'11px', border:'1px solid #fcd34d', background:'#fffbeb' }} value={d.scriptUrl} onChange={e=>upd('scriptUrl',e.target.value)} /></div>
+            <div style={FG}><label style={LS}>배경 이미지 URL</label>
+              <input style={IS} value={d.bgImage} onChange={e=>upd('bgImage',e.target.value)} placeholder="https://... (비워두면 pyxis-bg.jpg)" /></div>
+            <div style={{ background:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'12px', marginBottom:'10px' }}>
+              <div style={{ fontSize:'11px', fontWeight:'700', color:'#6b7280', marginBottom:'10px' }}>🖼️ 이미지 조절</div>
+              {[
+                { label:`투명도  ${d.bgOpacity}%`, key:'bgOpacity', min:0, max:100, step:1 },
+                { label:`크기 (줌)  ${d.bgSize}%`, key:'bgSize', min:100, max:300, step:5 },
+                { label:`위치 X  ${d.bgPosX}%`, key:'bgPosX', min:0, max:100, step:1 },
+                { label:`위치 Y  ${d.bgPosY}%`, key:'bgPosY', min:0, max:100, step:1 },
+              ].map(sl => (
+                <div key={sl.key} style={{ marginBottom:'8px' }}>
+                  <div style={{ display:'flex', justifyContent:'space-between', fontSize:'11px', color:'#6b7280', marginBottom:'3px' }}>
+                    <span style={{ fontWeight:'600' }}>{sl.label}</span>
+                  </div>
+                  <input type="range" min={sl.min} max={sl.max} step={sl.step} value={d[sl.key]}
+                    onChange={e=>upd(sl.key, Number(e.target.value))}
+                    style={{ width:'100%', accentColor:'#f39200', cursor:'pointer' }} />
+                </div>
+              ))}
+            </div>
+            <div style={FG}><label style={LS}>마감 안내 문구</label>
+              <input style={IS} value={d.closedMsg} onChange={e=>upd('closedMsg',e.target.value)} /></div>
+          </div>
+
+          {/* 색상 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>🎨 색상</div>
+            <ColorRow label="태그 / 강조" valKey="tagColor" />
+            <ColorRow label="부제 색상" valKey="subColor" />
+          </div>
+
+          {/* 타이포그래피 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>🔤 텍스트 크기 & 색상</div>
+            <div style={{ fontSize:'11px', fontWeight:'700', color:'#f39200', marginBottom:'8px', textTransform:'uppercase', letterSpacing:'0.5px' }}>— 왼쪽 패널</div>
+            {[
+              { label:'눈썹 텍스트', colorKey:'eyebrowColor', sizeKey:'eyebrowSize', minSize:12, maxSize:60 },
+              { label:'설명 텍스트', colorKey:'descColor', sizeKey:'descSize', minSize:10, maxSize:28 },
+              { label:'라벨 (일자·장소 등)', colorKey:'metaLabelColor', sizeKey:'metaLabelSize', minSize:8, maxSize:20 },
+              { label:'값 (날짜·내용 등)', colorKey:'metaValueColor', sizeKey:'metaValueSize', minSize:10, maxSize:24 },
+              { label:'소형 텍스트 (주소 등)', colorKey:'metaSmallColor', sizeKey:'metaSmallSize', minSize:8, maxSize:20 },
+              { label:'하단 연락처', colorKey:'footerColor', sizeKey:'footerSize', minSize:10, maxSize:22 },
+            ].map(row => (
+              <div key={row.sizeKey} style={{ display:'grid', gridTemplateColumns:'1fr auto auto auto', gap:'6px', alignItems:'center', marginBottom:'8px' }}>
+                <label style={{ ...LS, margin:0, fontSize:'10px' }}>{row.label}</label>
+                <input type="color" value={d[row.colorKey]||'#ffffff'} onChange={e=>upd(row.colorKey,e.target.value)}
+                  style={{ width:'32px', height:'26px', border:'1px solid #d1d5db', borderRadius:'4px', padding:'1px', cursor:'pointer', flexShrink:0 }} />
+                <input style={{ ...IS, width:'68px', fontFamily:'monospace', fontSize:'11px', padding:'4px 6px' }}
+                  value={d[row.colorKey]||''} onChange={e=>upd(row.colorKey,e.target.value)} />
+                <div style={{ display:'flex', alignItems:'center', gap:'4px' }}>
+                  <input type="range" min={row.minSize} max={row.maxSize} value={d[row.sizeKey]??14}
+                    onChange={e=>upd(row.sizeKey,Number(e.target.value))}
+                    style={{ width:'60px', accentColor:'#f39200', cursor:'pointer' }} />
+                  <span style={{ fontSize:'11px', color:'#6b7280', minWidth:'24px' }}>{d[row.sizeKey]}</span>
+                </div>
+              </div>
+            ))}
+            <div style={{ fontSize:'11px', fontWeight:'700', color:'#6366f1', margin:'12px 0 8px', textTransform:'uppercase', letterSpacing:'0.5px' }}>— 오른쪽 폼</div>
+            {[
+              { label:'폼 제목', colorKey:'formTitleColor', sizeKey:'formTitleSize', minSize:16, maxSize:40 },
+              { label:'폼 부제목', colorKey:'formSubtitleColor', sizeKey:'formSubtitleSize', minSize:12, maxSize:24 },
+              { label:'필드 라벨 (이름·전화번호 등)', colorKey:'fieldLabelColor', sizeKey:'fieldLabelSize', minSize:8, maxSize:18 },
+              { label:'입력 텍스트', colorKey:'fieldInputColor', sizeKey:'fieldInputSize', minSize:12, maxSize:22 },
+              { label:'안내 문구', colorKey:'noticeColor', sizeKey:'noticeSize', minSize:10, maxSize:22 },
+              { label:'동의 문구', colorKey:'agreeLabelColor', sizeKey:'agreeLabelSize', minSize:10, maxSize:22 },
+            ].map(row => (
+              <div key={row.sizeKey} style={{ display:'grid', gridTemplateColumns:'1fr auto auto auto', gap:'6px', alignItems:'center', marginBottom:'8px' }}>
+                <label style={{ ...LS, margin:0, fontSize:'10px' }}>{row.label}</label>
+                <input type="color" value={d[row.colorKey]||'#ffffff'} onChange={e=>upd(row.colorKey,e.target.value)}
+                  style={{ width:'32px', height:'26px', border:'1px solid #d1d5db', borderRadius:'4px', padding:'1px', cursor:'pointer', flexShrink:0 }} />
+                <input style={{ ...IS, width:'68px', fontFamily:'monospace', fontSize:'11px', padding:'4px 6px' }}
+                  value={d[row.colorKey]||''} onChange={e=>upd(row.colorKey,e.target.value)} />
+                <div style={{ display:'flex', alignItems:'center', gap:'4px' }}>
+                  <input type="range" min={row.minSize} max={row.maxSize} value={d[row.sizeKey]??14}
+                    onChange={e=>upd(row.sizeKey,Number(e.target.value))}
+                    style={{ width:'60px', accentColor:'#6366f1', cursor:'pointer' }} />
+                  <span style={{ fontSize:'11px', color:'#6b7280', minWidth:'24px' }}>{d[row.sizeKey]}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 왼쪽 패널 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>🎬 왼쪽 패널</div>
+            <div style={FG}><label style={LS}>상단 태그</label><input style={IS} value={d.tag} onChange={e=>upd('tag',e.target.value)} /></div>
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px', marginBottom:'10px' }}>
+              <div><label style={LS}>눈썹 텍스트</label><input style={IS} value={d.eyebrow} onChange={e=>upd('eyebrow',e.target.value)} /></div>
+              <div><label style={LS}>모델명</label><input style={IS} value={d.titleModels} onChange={e=>upd('titleModels',e.target.value)} /></div>
+            </div>
+            <div style={FG}>
+              <label style={LS}>메인 타이틀 <span style={{ color:'#22c55e', fontWeight:'400' }}>(엔터로 줄바꿈 가능)</span></label>
+              <textarea style={{ ...TS, minHeight:'60px' }} value={d.titleMain} onChange={e=>upd('titleMain',e.target.value)} />
+            </div>
+            <div style={FG}><label style={LS}>부제</label><input style={IS} value={d.titleSub} onChange={e=>upd('titleSub',e.target.value)} /></div>
+            <div style={FG}><label style={LS}>설명 (엔터=줄바꿈)</label><textarea style={TS} value={d.desc} onChange={e=>upd('desc',e.target.value)} /></div>
+            <div style={FG}><label style={LS}>문의 연락처</label><input style={IS} value={d.footerContact} onChange={e=>upd('footerContact',e.target.value)} /></div>
+          </div>
+
+          {/* 세미나 정보 탭 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>📋 세미나 정보 탭 <span style={{ fontWeight:400, color:'#9ca3af' }}>(추가/삭제 가능)</span></div>
+            {d.metaRows.map((row, idx) => (
+              <MetaRowEditor key={row.id} row={row} idx={idx} total={d.metaRows.length}
+                onUpdate={(key,val)=>updMetaRow(row.id,key,val)}
+                onDelete={()=>delMetaRow(row.id)}
+                onMove={(dir)=>moveItem('metaRows',idx,dir)}
+                onAddSmall={()=>addMetaSmall(row.id)}
+                onUpdateSmall={(i,val)=>updMetaSmall(row.id,i,val)}
+                onDeleteSmall={(i)=>delMetaSmall(row.id,i)} />
+            ))}
+            <button onClick={addMetaRow} style={{ width:'100%', padding:'8px', borderRadius:'6px', border:'1px dashed #f39200', background:'rgba(243,146,0,0.04)', color:'#f39200', fontSize:'13px', fontWeight:'600' }}>+ 탭 추가</button>
+          </div>
+
+          {/* 안내 문구 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>📢 안내 문구 {d.noticeItems.length === 0 && <span style={{ fontWeight:400, color:'#9ca3af' }}>(비어있으면 숨김)</span>}</div>
+            {d.noticeItems.map((item,i) => (
+              <div key={i} style={{ display:'flex', gap:'6px', marginBottom:'8px' }}>
+                <textarea style={{ ...TS, flex:1, minHeight:'52px', fontSize:'12px' }} value={item} onChange={e=>updNotice(i,e.target.value)} />
+                <div style={{ display:'flex', flexDirection:'column', gap:'3px', flexShrink:0 }}>
+                  <MoveBtn label="↑" onClick={()=>moveItem('noticeItems',i,-1)} disabled={i===0} />
+                  <MoveBtn label="↓" onClick={()=>moveItem('noticeItems',i,1)} disabled={i===d.noticeItems.length-1} />
+                  <button onClick={()=>delNotice(i)} style={{ padding:'4px 7px', background:'#fff', border:'1px solid #fca5a5', borderRadius:'4px', color:'#ef4444', fontSize:'11px' }}>✕</button>
+                </div>
+              </div>
+            ))}
+            <button onClick={addNotice} style={{ width:'100%', padding:'7px', borderRadius:'6px', border:'1px dashed #d1d5db', background:'#f9fafb', color:'#6b7280', fontSize:'13px' }}>+ 안내 추가</button>
+          </div>
+
+          {/* 혜택 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>🎁 혜택 목록 {d.benefits.length === 0 && <span style={{ fontWeight:400, color:'#9ca3af' }}>(비어있으면 숨김)</span>}</div>
+            {d.benefits.map((b,i) => (
+              <div key={b.id} style={{ background:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'12px', marginBottom:'8px' }}>
+                <div style={{ display:'flex', justifyContent:'space-between', marginBottom:'8px' }}>
+                  <span style={{ fontSize:'11px', color:'#6b7280', fontWeight:'600' }}>혜택 {i+1}</span>
+                  <div style={{ display:'flex', gap:'4px' }}>
+                    <MoveBtn label="↑" onClick={()=>moveItem('benefits',i,-1)} disabled={i===0} />
+                    <MoveBtn label="↓" onClick={()=>moveItem('benefits',i,1)} disabled={i===d.benefits.length-1} />
+                    <button onClick={()=>delBenefit(i)} style={{ padding:'2px 8px', background:'#fff', border:'1px solid #fca5a5', borderRadius:'4px', color:'#ef4444', fontSize:'11px' }}>삭제</button>
+                  </div>
+                </div>
+                <div style={FG}><label style={LS}>이름</label><input style={IS} value={b.name} onChange={e=>updBenefit(i,'name',e.target.value)} /></div>
+                <div style={{ marginBottom:0 }}><label style={LS}>설명</label><input style={IS} value={b.sub} onChange={e=>updBenefit(i,'sub',e.target.value)} /></div>
+              </div>
+            ))}
+            <button onClick={addBenefit} style={{ width:'100%', padding:'8px', borderRadius:'6px', border:'1px dashed #f39200', background:'rgba(243,146,0,0.04)', color:'#f39200', fontSize:'13px', fontWeight:'600' }}>+ 혜택 추가</button>
+          </div>
+
+          {/* 기본 필드 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>🔒 기본 필드 <span style={{ fontWeight:400, color:'#9ca3af' }}>(필수 고정 · 삭제 불가)</span></div>
+            <div style={{ fontSize:'11px', color:'#6b7280', marginBottom:'10px', padding:'8px 10px', background:'#f0fdf4', border:'1px solid #bbf7d0', borderRadius:'6px', lineHeight:'1.6' }}>
+              구글시트 컬럼 순서: <strong>A. 타임스탬프 → B. 이름 → C. 전화번호 → D. 이메일 → E. 소속</strong><br/>
+              이후 추가 필드(F~)가 순서대로 이어집니다.
+            </div>
+            {(d.fixedFields||[
+              {id:'name',label:'이름',placeholder:'홍길동'},
+              {id:'phone',label:'전화번호',placeholder:'010-0000-0000'},
+              {id:'email',label:'이메일',placeholder:'이메일 주소'},
+              {id:'company',label:'직장 또는 소속',placeholder:'직장 또는 소속'},
+            ]).map((f, i) => (
+              <div key={f.id} style={{ background:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'12px', marginBottom:'8px' }}>
+                <div style={{ display:'flex', alignItems:'center', gap:'6px', marginBottom:'8px' }}>
+                  <span style={{ fontSize:'11px', background:'#6b7280', color:'#fff', padding:'2px 7px', borderRadius:'4px', fontWeight:'700' }}>
+                    {['B','C','D','E'][i]}열
+                  </span>
+                  <span style={{ fontSize:'11px', background:'#dcfce7', color:'#166534', padding:'2px 7px', borderRadius:'4px', fontWeight:'600' }}>필수</span>
+                  <span style={{ fontSize:'11px', color:'#9ca3af' }}>고정</span>
+                </div>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px' }}>
+                  <div>
+                    <label style={LS}>라벨 (폼 표시 / 구글시트 컬럼명)</label>
+                    <input style={IS} value={f.label} onChange={e=>updFixedField(f.id,'label',e.target.value)} />
+                  </div>
+                  <div>
+                    <label style={LS}>플레이스홀더</label>
+                    <input style={IS} value={f.placeholder||''} onChange={e=>updFixedField(f.id,'placeholder',e.target.value)} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 추가 필드 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>➕ 추가 필드 <span style={{ fontWeight:400, color:'#9ca3af' }}>(소속 입력 후, 참가일시 전에 삽입)</span></div>
+            {d.customFields.map((f,i) => (
+              <CustomFieldEditor key={f.id} f={f} idx={i} total={d.customFields.length}
+                onChange={(key,val)=>updCustomField(i,key,val)}
+                onDelete={()=>delCustomField(i)}
+                onMove={(dir)=>moveItem('customFields',i,dir)} />
+            ))}
+            <button onClick={addCustomField} style={{ width:'100%', padding:'8px', borderRadius:'6px', border:'1px dashed #6366f1', background:'rgba(99,102,241,0.04)', color:'#6366f1', fontSize:'13px', fontWeight:'600' }}>+ 필드 추가</button>
+          </div>
+
+          {/* 세션 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>🕐 참가 일시 선택지 <span style={{ fontWeight:400, color:'#9ca3af' }}>(1개면 전체폭 자동)</span></div>
+            <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'12px', padding:'10px 12px', background:'rgba(243,146,0,0.06)', border:'1px solid rgba(243,146,0,0.18)', borderRadius:'6px' }}>
+              <label style={{ ...LS, margin:0, minWidth:'80px' }}>세션당 정원</label>
+              <input type="number" min="1" max="999" style={{ ...IS, width:'80px', textAlign:'center' }}
+                value={d.maxPerSlot ?? 15} onChange={e=>upd('maxPerSlot', Number(e.target.value))} />
+              <span style={{ fontSize:'12px', color:'#9ca3af' }}>명 (잔여석 실시간 표시)</span>
+            </div>
+            {d.sessions.map((s,i) => (
+              <div key={s.id} style={{ background:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'12px', marginBottom:'8px' }}>
+                <div style={{ display:'flex', justifyContent:'space-between', marginBottom:'8px' }}>
+                  <span style={{ fontSize:'11px', color:'#6b7280', fontWeight:'600' }}>세션 {i+1}</span>
+                  <div style={{ display:'flex', gap:'4px' }}>
+                    <MoveBtn label="↑" onClick={()=>moveItem('sessions',i,-1)} disabled={i===0} />
+                    <MoveBtn label="↓" onClick={()=>moveItem('sessions',i,1)} disabled={i===d.sessions.length-1} />
+                    <button onClick={()=>delSession(i)} style={{ padding:'2px 8px', background:'#fff', border:'1px solid #fca5a5', borderRadius:'4px', color:'#ef4444', fontSize:'11px' }}>삭제</button>
+                  </div>
+                </div>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px' }}>
+                  <div><label style={LS}>라벨</label><input style={IS} value={s.label} onChange={e=>updSession(i,'label',e.target.value)} /></div>
+                  <div><label style={LS}>시간</label><input style={IS} value={s.time} onChange={e=>updSession(i,'time',e.target.value)} /></div>
+                </div>
+              </div>
+            ))}
+            <button onClick={addSession} style={{ width:'100%', padding:'8px', borderRadius:'6px', border:'1px dashed #f39200', background:'rgba(243,146,0,0.04)', color:'#f39200', fontSize:'13px', fontWeight:'600' }}>+ 세션 추가</button>
+          </div>
+
+          {/* 폼 텍스트 */}
+          <div style={SEC}>
+            <div style={SECTITLE}>📝 폼 텍스트</div>
+            <div style={FG}><label style={LS}>폼 제목</label><input style={IS} value={d.formTitle} onChange={e=>upd('formTitle',e.target.value)} /></div>
+            <div style={FG}><label style={LS}>폼 부제목</label><input style={IS} value={d.formSubtitle} onChange={e=>upd('formSubtitle',e.target.value)} /></div>
+            <div style={FG}><label style={LS}>동의 문구</label><textarea style={TS} value={d.agreeText} onChange={e=>upd('agreeText',e.target.value)} /></div>
+            <div style={FG}><label style={LS}>완료 제목</label><input style={IS} value={d.successTitle} onChange={e=>upd('successTitle',e.target.value)} /></div>
+            <div><label style={LS}>완료 메시지</label><textarea style={TS} value={d.successMsg} onChange={e=>upd('successMsg',e.target.value)} /></div>
+          </div>
+
+        </div>
+
+        {/* 미리보기 */}
+        <div style={{ flex:1, overflow:'hidden', display:'flex', flexDirection:'column' }}>
+          <div style={{ padding:'10px 16px', background:'#fff', borderBottom:'1px solid #e2e8f0', fontSize:'12px', color:'#6b7280', display:'flex', alignItems:'center', gap:'6px' }}>
+            <span style={{ width:'8px', height:'8px', borderRadius:'50%', background:'#22c55e', display:'inline-block' }}></span>
+            실시간 미리보기
+            {d.closed && <span style={{ marginLeft:'8px', fontSize:'11px', background:'#fef3c7', color:'#92400e', padding:'2px 8px', borderRadius:'4px', fontWeight:'600' }}>⚠️ 마감 상태</span>}
+            <span style={{ marginLeft:'auto', fontSize:'11px', color:'#94a3b8' }}>※ 잔여석은 미리보기에서 미반영</span>
+          </div>
+          <iframe srcDoc={buildHTML(d)} style={{ flex:1, border:'none', background:'#0c0c0d' }} title="preview" />
+        </div>
+      </div>
+
+      {toast && (
+        <div style={{ position:'fixed', bottom:'24px', left:'50%', transform:'translateX(-50%)', background:'#1e293b', color:'#fff', padding:'10px 20px', borderRadius:'8px', fontSize:'13px', fontWeight:'500', zIndex:9999, boxShadow:'0 4px 20px rgba(0,0,0,0.3)' }}>
+          {toast}
+        </div>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 </body>
 </html>
