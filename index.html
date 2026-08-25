@@ -112,6 +112,17 @@ select option{background:#1c1c1f;}
 .cancel-success h3{font-size:20px;font-weight:700;margin-bottom:10px;}
 .cancel-success p{font-size:14px;color:var(--text2);line-height:1.7;}
 .c-error{font-size:14px;color:rgba(240,80,64,0.8);text-align:center;margin-top:12px;display:none;line-height:1.6;}
+.attendance-panel{display:none;}
+.attendance-panel.show{display:block;}
+.attendance-step{display:none;}
+.attendance-step.show{display:block;}
+.attendance-current{font-size:13px;color:var(--text2);margin-top:10px;line-height:1.6;}
+.attendance-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.attendance-choice{width:100%;padding:16px;border-radius:3px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:opacity .15s,transform .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.attendance-choice:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.attendance-choice:disabled{opacity:.4;cursor:not-allowed;}
+.attendance-choice.yes{background:#4ade80;border:1px solid #4ade80;color:#07150c;}
+.attendance-choice.no{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.5);color:#fca5a5;}
 .closed-box{text-align:center;padding:60px 24px;}
 .closed-icon{font-size:40px;margin-bottom:20px;}
 .closed-box h3{font-size:22px;font-weight:700;margin-bottom:12px;}
@@ -245,6 +256,48 @@ select option{background:#1c1c1f;}
           </div>
         </div>
       </div>
+
+      <!-- 주소에 ?attendance=1이 있을 때만 표시되는 사전 참석 확인 패널 -->
+      <div class="attendance-panel" id="attendance-panel">
+        <div class="attendance-step show" id="attendance-step1">
+          <div class="form-header">
+            <h2>사전 참석 확인</h2>
+            <p>선정 안내를 받으신 분은 신청 시 입력한 이름과 전화번호로 참석 여부를 알려주세요.</p>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>이름 <span class="req">*</span></label><input type="text" id="a-name" placeholder="신청자 이름" autocomplete="name"></div>
+            <div class="field"><label>전화번호 <span class="req">*</span></label><input type="tel" id="a-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
+          </div>
+          <button class="submit-btn" id="attendance-lookup-btn" type="button" onclick="lookupAttendance()">선정 여부 확인하기</button>
+          <p class="c-error" id="attendance-error"></p>
+        </div>
+        <div class="attendance-step" id="attendance-step2">
+          <div class="form-header">
+            <h2>참석 여부를 선택해주세요</h2>
+            <p>선택 내용은 다시 접속해 변경할 수 있습니다.</p>
+          </div>
+          <div class="reservation-card">
+            <div class="reservation-card-label">선정된 예약 정보</div>
+            <div class="reservation-card-name" id="a-res-name"></div>
+            <div class="reservation-card-session"><span id="a-res-session"></span></div>
+            <div class="attendance-current" id="a-current-response"></div>
+          </div>
+          <div class="attendance-actions">
+            <button class="attendance-choice yes" type="button" onclick="saveAttendance('참석')">참석합니다</button>
+            <button class="attendance-choice no" type="button" onclick="saveAttendance('불참')">불참합니다</button>
+          </div>
+          <p class="c-error" id="attendance-save-error"></p>
+          <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:10px;">정보 다시 입력하기</button>
+        </div>
+        <div class="attendance-step" id="attendance-step3">
+          <div class="cancel-success">
+            <div class="cancel-success-icon">✓</div>
+            <h3 id="attendance-result-title">응답이 저장되었습니다</h3>
+            <p>참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.</p>
+            <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:24px;">응답 변경하기</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="success" id="msg-success">
@@ -288,6 +341,75 @@ function switchTab(tab){
     tabApply.classList.remove('active');
     tabCancel.classList.add('active');
     resetCancel();
+  }
+}
+
+function isAttendanceMode(){return new URLSearchParams(window.location.search).get('attendance')==='1';}
+function showAttendanceStep(step){
+  ['attendance-step1','attendance-step2','attendance-step3'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('show');});
+  var target=document.getElementById('attendance-step'+step);if(target)target.classList.add('show');
+}
+function openAttendanceMode(){
+  var tabBar=document.querySelector('.tab-bar');if(tabBar)tabBar.style.display='none';
+  var applyPanel=document.getElementById('apply-panel');if(applyPanel)applyPanel.classList.add('hide');
+  var cancelPanel=document.getElementById('cancel-panel');if(cancelPanel)cancelPanel.classList.remove('show');
+  var attendancePanel=document.getElementById('attendance-panel');if(attendancePanel)attendancePanel.classList.add('show');
+  showAttendanceStep(1);
+}
+
+var attendanceName='';
+var attendancePhone='';
+function resetAttendance(){
+  attendanceName='';attendancePhone='';
+  var name=document.getElementById('a-name');if(name)name.value='';
+  var phone=document.getElementById('a-phone');if(phone)phone.value='';
+  var error=document.getElementById('attendance-error');if(error)error.style.display='none';
+  var saveError=document.getElementById('attendance-save-error');if(saveError)saveError.style.display='none';
+  var button=document.getElementById('attendance-lookup-btn');if(button){button.disabled=false;button.textContent='선정 여부 확인하기';}
+  showAttendanceStep(1);
+}
+
+async function lookupAttendance(){
+  var name=document.getElementById('a-name').value.trim();
+  var phone=document.getElementById('a-phone').value.trim();
+  var error=document.getElementById('attendance-error');
+  var button=document.getElementById('attendance-lookup-btn');
+  error.style.display='none';
+  if(!name||!phone){error.textContent='이름과 전화번호를 모두 입력해주세요.';error.style.display='block';return;}
+  button.disabled=true;button.textContent='확인 중...';
+  try{
+    var url=SCRIPT_URL+'?action=getAttendanceEligibility&name='+encodeURIComponent(name)+'&phone='+encodeURIComponent(phone);
+    var response=await fetch(url);
+    var data=await response.json();
+    if(!data.eligible){
+      error.textContent=data.message||'현재 사전 참석 확인 대상이 아닙니다.';
+      error.style.display='block';button.disabled=false;button.textContent='선정 여부 확인하기';return;
+    }
+    attendanceName=name;attendancePhone=phone;
+    document.getElementById('a-res-name').textContent=(data.name||name)+' 님';
+    document.getElementById('a-res-session').textContent=data.session||'';
+    document.getElementById('a-current-response').textContent=data.attendance?'현재 응답: '+data.attendance:'현재 응답: 미응답';
+    showAttendanceStep(2);
+  }catch(e){
+    error.textContent='확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    error.style.display='block';button.disabled=false;button.textContent='선정 여부 확인하기';
+  }
+}
+
+async function saveAttendance(value){
+  if(!attendanceName||!attendancePhone)return;
+  var buttons=document.querySelectorAll('.attendance-choice');
+  var error=document.getElementById('attendance-save-error');
+  buttons.forEach(function(button){button.disabled=true;});error.style.display='none';
+  try{
+    var response=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'updateAttendance',name:attendanceName,phone:attendancePhone,attendance:value})});
+    var data=await response.json();
+    if(data.result!=='ok')throw new Error(data.message||'응답을 저장하지 못했습니다.');
+    document.getElementById('attendance-result-title').textContent=value==='참석'?'참석으로 응답했습니다':'불참으로 응답했습니다';
+    showAttendanceStep(3);
+  }catch(e){
+    error.textContent=e.message||'저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    error.style.display='block';buttons.forEach(function(button){button.disabled=false;});
   }
 }
 
@@ -414,6 +536,7 @@ async function submitForm(){
 function shake(){var f=document.getElementById('apply-panel');f.style.transition='transform .08s';f.style.transform='translateX(-6px)';setTimeout(function(){f.style.transform='translateX(5px)';},80);setTimeout(function(){f.style.transform='translateX(-4px)';},160);setTimeout(function(){f.style.transform='translateX(0)';},240);}
 
 document.addEventListener('DOMContentLoaded',function(){
+  if(isAttendanceMode()){openAttendanceMode();return;}
   if(REGISTRATION_STATUS!=='open'){applyRegistrationState();}
   else{loadSlots();}
   var btn=document.getElementById('submit-btn');
@@ -427,6 +550,6 @@ document.addEventListener('DOMContentLoaded',function(){
   if(cb){cb.addEventListener('touchend',function(e){e.preventDefault();confirmCancel();});}
 });
 </script>
-<!-- EDITOR_DATA:{"publishTarget":"davinci","scriptUrl":"https://script.google.com/macros/s/AKfycbybQX0HiEpBhR8NtvtHszUZWT9qKZcpA4DEBrzChw-v_GRUo4uxXhTALN6DXgEsnJRn/exec","bgImage":"https://images.blackmagicdesign.com/images/products/davinciresolve/photo/hardware/hardware-md.jpg?_v=1775692984","bgOpacity":40,"bgSize":190,"bgPosX":37,"bgPosY":0,"registrationStatus":"open","closed":false,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":999,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"rgba(255,255,255,0.35)","eyebrowSize":25,"titleColor":"#f5f4f2","titleSize":87,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":14,"descColor":"#ffffff","descSize":13,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#f5f4f2","formSubtitleSize":16,"formSubtitleColor":"#ffffff","fieldLabelSize":11,"fieldLabelColor":"rgba(255,255,255,0.5)","fieldInputSize":15,"fieldInputColor":"#f5f4f2","noticeSize":15,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#888785","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"소니 카메라 유저와 함께 하는 DaVinci Resolve 포토 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve 21\n포토 페이지","titleModels":"","titleSub":"","desc":"소니 카메라로 촬영한 사진, 이제 DaVinci Resolve에서 보정해 보세요.\n\n영상 편집과 색보정의 강자 Blackmagic Design이 새롭게 발표한 DaVinci Resolve 21에 사진 편집 기능이 통합되었습니다.\n스틸 사진 관리부터 마이크로 컬러 패널을 이용한 직관적인 색보정, 그리고 스튜디오 테더링 촬영까지. \n\n직접 만져보고 경험할 수 있는 사용자 참여형 세미나에 \n여러분을 초대합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 8월 26일(수)\n8월 27일(목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"26일(수) 오후 : 13:00 ~ 15:00\n오후 : 15:30 ~ 17:30\n\n27일(목) 오전 : 10:00 ~ 12:00\n오후 : 14:00 ~ 16:00","smalls":[""],"accent":false},{"id":3,"label":"장소","type":"text","main":"앙트레블","smalls":["서울 강남구 강남대로102길 45 지하 1층","신논현역, 강남역 도보 5분 거리","주차장이 없습니다. 근처 공용주차장 이용 바랍니다."],"accent":false},{"id":25,"label":"장비","type":"text","main":"SONY ILCE-7M5\nDaVinci Resolve Micro Color Panel","smalls":[],"accent":false},{"id":101,"label":"세미나 커리큘럼 ","type":"text","main":"프로젝트 셋팅 \n유선 테더링 촬영 \nAI 피부리터칭\n필름룩크리에이터 \n사진/영상 통합워크플로우 \n룩 일괄적용  \n다빈치리졸브 컬러\n무선 모니터링","smalls":[],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"모집은 현황에 따라 조기 마감 될 수 있으며, 인원이 많을 시에는 선착순으로 선정될 예정입니다.","noticeItems":["2026년 8월 24일 (월) 모집종료 후 개별연락 으로 안내해드릴 예정입니다.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다."],"benefits":[{"id":24,"name":"특별 할인 현장 프로모션 <br><br> DaVinci Resolve Studio <br>DaVinci Resolve Speed Editor <br> DaVinci Resolve Micro Color Panel ","sub":""},{"id":23,"name":"베스트 리뷰 이벤트 ( 소미클 회원 대상 ) <br><br>세미나 후기를 소미클 카페 자유게시판에 키워드를 포함하여 작성해주신 분 중 선정해 상품을 드립니다 <br><br>  제목 키워드 : #다빈치리졸브세미나<br><br> 1위 리마스터슬림 1개 (1명) <br>  2위 HOMAN UHS-I SD Card V30 64GB (1명) <br> 3위 치킨 쿠폰 (1명)","sub":""}],"sessions":[{"id":1,"label":"8월 26일 (수) 오후","time":"13:00 – 15:00","closed":true},{"id":21,"label":"8월 27일 (목) 오전","time":"10:00 – 13:00","closed":false},{"id":22,"label":"8월 26일 (수) 오후","time":"15:30 – 17:30","closed":false},{"id":23,"label":"8월 27일 (목) 오후","time":"14:00 – 16:00","closed":false}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":24,"type":"textarea","label":"세미나 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.","successTitle":"신청이 완료되었습니다.","successMsg":"선정되시면 입력하신 연락처로 세미나 확정문자를 드릴 예정입니다.\n세미나 당일 뵙겠습니다!"} -->
+<!-- EDITOR_DATA:{"publishTarget":"davinci","scriptUrl":"https://script.google.com/macros/s/AKfycbybQX0HiEpBhR8NtvtHszUZWT9qKZcpA4DEBrzChw-v_GRUo4uxXhTALN6DXgEsnJRn/exec","bgImage":"https://images.blackmagicdesign.com/images/products/davinciresolve/photo/hardware/hardware-md.jpg?_v=1775692984","bgOpacity":40,"bgSize":190,"bgPosX":37,"bgPosY":0,"registrationStatus":"open","closed":false,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":999,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"rgba(255,255,255,0.35)","eyebrowSize":25,"titleColor":"#f5f4f2","titleSize":87,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":14,"descColor":"#ffffff","descSize":13,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#f5f4f2","formSubtitleSize":16,"formSubtitleColor":"#ffffff","fieldLabelSize":11,"fieldLabelColor":"rgba(255,255,255,0.5)","fieldInputSize":15,"fieldInputColor":"#f5f4f2","noticeSize":15,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#888785","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"소니 카메라 유저와 함께 하는 DaVinci Resolve 포토 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve 21\n포토 페이지","titleModels":"","titleSub":"","desc":"소니 카메라로 촬영한 사진, 이제 DaVinci Resolve에서 보정해 보세요.\n\n영상 편집과 색보정의 강자 Blackmagic Design이 새롭게 발표한 DaVinci Resolve 21에 사진 편집 기능이 통합되었습니다.\n스틸 사진 관리부터 마이크로 컬러 패널을 이용한 직관적인 색보정, 그리고 스튜디오 테더링 촬영까지. \n\n직접 만져보고 경험할 수 있는 사용자 참여형 세미나에 \n여러분을 초대합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 8월 26일(수)\n8월 27일(목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"26일(수) 오후 : 13:00 ~ 15:00\n오후 : 15:30 ~ 17:30\n\n27일(목) 오전 : 10:00 ~ 12:00\n오후 : 14:00 ~ 16:00","smalls":[""],"accent":false},{"id":3,"label":"장소","type":"text","main":"앙트레블","smalls":["서울 강남구 강남대로102길 45 지하 1층","신논현역, 강남역 도보 5분 거리","주차장이 없습니다. 근처 공용주차장 이용 바랍니다."],"accent":false},{"id":25,"label":"장비","type":"text","main":"SONY ILCE-7M5\nDaVinci Resolve Micro Color Panel","smalls":[],"accent":false},{"id":101,"label":"세미나 커리큘럼 ","type":"text","main":"프로젝트 셋팅 \n유선 테더링 촬영 \nAI 피부리터칭\n필름룩크리에이터 \n사진/영상 통합워크플로우 \n룩 일괄적용  \n다빈치리졸브 컬러\n무선 모니터링","smalls":[],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"모집은 현황에 따라 조기 마감 될 수 있으며, 인원이 많을 시에는 선착순으로 선정될 예정입니다.","noticeItems":["2026년 8월 24일 (월) 모집종료 후 개별연락 으로 안내해드릴 예정입니다.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다."],"benefits":[{"id":24,"name":"특별 할인 현장 프로모션 <br><br> DaVinci Resolve Studio <br>DaVinci Resolve Speed Editor <br> DaVinci Resolve Micro Color Panel ","sub":""},{"id":23,"name":"베스트 리뷰 이벤트 ( 소미클 회원 대상 ) <br><br>세미나 후기를 소미클 카페 자유게시판에 키워드를 포함하여 작성해주신 분 중 선정해 상품을 드립니다 <br><br>  제목 키워드 : #다빈치리졸브세미나<br><br> 1위 리마스터슬림 1개 (1명) <br>  2위 HOMAN UHS-I SD Card V30 64GB (1명) <br> 3위 치킨 쿠폰 (1명)","sub":""}],"sessions":[{"id":1,"label":"8월 26일 (수) 오후","time":"13:00 – 15:00","closed":true},{"id":21,"label":"8월 27일 (목) 오전","time":"10:00 – 13:00","closed":false},{"id":22,"label":"8월 26일 (수) 오후","time":"15:30 – 17:30","closed":false},{"id":23,"label":"8월 27일 (목) 오후","time":"14:00 – 16:00","closed":false}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":24,"type":"textarea","label":"세미나 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다.","successTitle":"신청이 완료되었습니다.","successMsg":"선정되시면 입력하신 연락처로 세미나 확정문자를 드릴 예정입니다.\n세미나 당일 뵙겠습니다!","attendanceTitle":"사전 참석 확인","attendanceText":"선정 안내를 받으신 분은 신청 시 입력한 이름과 전화번호로 참석 여부를 알려주세요.","attendanceSuccessText":"참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다."} -->
 </body>
 </html>
