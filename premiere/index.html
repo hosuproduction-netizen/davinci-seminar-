@@ -20,9 +20,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .left-tag{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#f39200;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
 .left-tag::before{content:'';width:24px;height:1px;background:#f39200;}
 .left-eyebrow{font-size:21px;letter-spacing:0;color:#ff9b0f;margin-bottom:3px;font-weight:400;}
-.left-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(64px,6.5vw,96px);line-height:.88;letter-spacing:1px;color:var(--text);margin-bottom:6px;}
-.left-title .sub{font-family:'Noto Sans KR',sans-serif;font-size:clamp(13px,1.3vw,17px);color:#f39200;display:block;letter-spacing:0;margin-top:14px;line-height:1.5;font-weight:400;}
-.left-title-models{font-family:'Barlow Condensed',sans-serif;font-size:clamp(64px,6.5vw,96px);color:#fff;display:inline;letter-spacing:3px;font-weight:700;margin-left:6px;}
+.left-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6.5vw,96px);line-height:.88;letter-spacing:1px;color:#f5f4f2;margin-bottom:6px;}
+.left-title .sub{font-family:'Noto Sans KR',sans-serif;font-size:17px;color:#f39200;display:block;letter-spacing:0;margin-top:14px;line-height:1.5;font-weight:400;}
+.left-title-models{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6.5vw,96px);color:#ffffff;display:inline;letter-spacing:3px;font-weight:700;margin-left:6px;}
 .left-desc{font-size:16px;color:#ffffff;line-height:1.8;font-weight:300;max-width:380px;margin-bottom:40px;margin-top:24px;}
 .meta-list{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.1);}
 .meta-row{display:flex;justify-content:space-between;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:15px;gap:16px;}
@@ -42,7 +42,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 label{display:block;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#ffffff;margin-bottom:8px;transition:color .2s;}
 .field:focus-within>label{color:rgba(255,255,255,0.8);}
-input[type=text],input[type=tel],input[type=email],input[type=number],select{width:100%;background:var(--surface);border:1px solid var(--border);color:#ffffff;padding:14px 16px;font-size:14px;font-family:inherit;font-weight:400;outline:none;border-radius:3px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none;}
+input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{width:100%;background:var(--surface);border:1px solid var(--border);color:#ffffff;padding:14px 16px;font-size:14px;font-family:inherit;font-weight:400;outline:none;border-radius:3px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none;}
 input:focus,select:focus{border-color:var(--border-focus);background:var(--surface2);}
 input::placeholder{color:var(--text3);}
 select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
@@ -52,8 +52,8 @@ select option{background:#1c1c1f;}
 .time-option{position:relative;}
 .time-option input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
 .time-option label{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:var(--text);}
-.time-label-title{font-size:14px;font-weight:600;color:var(--text);}
-.time-label-sub{font-size:12px;color:var(--text2);font-weight:400;letter-spacing:0;}
+.time-label-title{font-size:15px;font-weight:600;color:#f5f4f2;}
+.time-label-sub{font-size:12px;color:#888785;font-weight:400;letter-spacing:0;}
 .time-option input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-dim);}
 .time-option input[type=radio]:checked+label .time-label-title{color:var(--accent);}
 .time-option label:hover:not(.is-full){border-color:rgba(255,255,255,0.15);}
@@ -61,8 +61,11 @@ select option{background:#1c1c1f;}
 .consent-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .consent-option{position:relative;}
 .consent-option input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
-.consent-option label{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:var(--text2);}
+.consent-option label{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin:0;transition:border-color .2s,background .2s;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:#888785;}
 .consent-option input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
+.photo-consent-box{border:1px solid var(--border);border-radius:3px;background:rgba(255,255,255,.025);padding:16px;margin:0;}
+.photo-consent-heading{display:block;padding:0 4px;color:#ffffff;font-size:14px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;}
+.photo-consent-copy{font-size:13px;color:#b8b7b4;line-height:1.75;margin:4px 0 14px;word-break:keep-all;}
 .agree{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;margin-bottom:24px;position:relative;z-index:2;}
 .agree input[type=checkbox]{width:22px;height:22px;flex-shrink:0;margin-top:1px;accent-color:var(--accent);appearance:auto;-webkit-appearance:checkbox;cursor:pointer;position:relative;z-index:3;}
 .agree-text{font-size:15px;color:#c9c9c9;line-height:1.6;cursor:pointer;}
@@ -74,22 +77,22 @@ select option{background:#1c1c1f;}
 .submit-btn{width:100%;padding:17px;background:var(--accent);color:#0c0c0d;border:none;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;border-radius:3px;letter-spacing:.5px;transition:opacity .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
 .submit-btn:disabled{opacity:.35;cursor:not-allowed;}
-.submit-note{font-size:14px;color:var(--text3);text-align:center;margin-top:14px;line-height:1.6;}
+.submit-note{font-size:14px;color:#444342;text-align:center;margin-top:14px;line-height:1.6;}
 .benefit-box{background:var(--surface);border:1px solid rgba(243,146,0,0.18);border-radius:3px;padding:16px 18px;margin-bottom:28px;}
-.benefit-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:500;}
+.benefit-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#f39200;margin-bottom:14px;font-weight:500;}
 .benefit-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
 .benefit-item:last-child{border-bottom:none;padding-bottom:2px;}
 .benefit-icon{color:var(--accent);font-size:11px;flex-shrink:0;padding-top:3px;}
-.benefit-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:3px;}
-.benefit-sub{font-size:13px;color:var(--text2);line-height:1.5;}
+.benefit-name{font-size:15px;font-weight:500;color:#f5f4f2;margin-bottom:3px;}
+.benefit-sub{font-size:13px;color:#888785;line-height:1.5;}
 .success{display:none;text-align:center;padding:60px 24px;}
 .success.show{display:block;}
 .success-icon{width:56px;height:56px;background:var(--accent-dim);border:1px solid rgba(243,146,0,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:22px;}
 .success h3{font-size:22px;font-weight:700;margin-bottom:12px;}
 .success p{font-size:15px;color:var(--text2);line-height:1.7;}
 .tab-bar{display:flex;gap:4px;margin-bottom:28px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:4px;}
-.tab-btn{flex:1;padding:10px;background:transparent;border:none;border-radius:2px;color:var(--text2);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .15s,color .15s;letter-spacing:.3px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
-.tab-btn.active{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+.tab-btn{flex:1;padding:10px;background:transparent;border:none;border-radius:2px;color:#f5f4f2;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .15s,color .15s;letter-spacing:.3px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;opacity:.65;}
+.tab-btn.active{background:var(--surface2);color:#f5f4f2;border:1px solid var(--border);opacity:1;}
 .apply-panel.hide{display:none;}
 .cancel-panel{display:none;}
 .cancel-panel.show{display:block;}
@@ -109,11 +112,26 @@ select option{background:#1c1c1f;}
 .cancel-success h3{font-size:20px;font-weight:700;margin-bottom:10px;}
 .cancel-success p{font-size:14px;color:var(--text2);line-height:1.7;}
 .c-error{font-size:14px;color:rgba(240,80,64,0.8);text-align:center;margin-top:12px;display:none;line-height:1.6;}
+.attendance-panel{display:none;}
+.attendance-panel.show{display:block;}
+.attendance-step{display:none;}
+.attendance-step.show{display:block;}
+.attendance-current{font-size:13px;color:var(--text2);margin-top:10px;line-height:1.6;}
+.attendance-name-note{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(245,196,81,.25);background:rgba(245,196,81,.07);color:#f5c451;font-size:12px;line-height:1.65;border-radius:3px;}
+.attendance-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.attendance-choice{width:100%;padding:16px;border-radius:3px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:opacity .15s,transform .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.attendance-choice:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.attendance-choice:disabled{opacity:.4;cursor:not-allowed;}
+.attendance-choice.yes{background:#4ade80;border:1px solid #4ade80;color:#07150c;}
+.attendance-choice.no{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.5);color:#fca5a5;}
+.attendance-contact{margin-top:24px;padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:3px;text-align:center;font-size:13px;color:var(--text2);line-height:1.7;}
+.attendance-contact a{display:inline-block;margin-top:7px;color:var(--accent);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(243,146,0,.45);}
 .closed-box{text-align:center;padding:60px 24px;}
 .closed-icon{font-size:40px;margin-bottom:20px;}
 .closed-box h3{font-size:22px;font-weight:700;margin-bottom:12px;}
 .closed-box p{font-size:15px;color:var(--text2);line-height:1.8;}
 .closed-badge{display:inline-block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,80,64,0.7);border:1px solid rgba(240,80,64,0.2);border-radius:2px;padding:4px 10px;margin-bottom:20px;}
+.closed-badge.scheduled{color:#f5c451;border-color:rgba(245,196,81,0.28);background:rgba(245,196,81,0.06);}
 .slot-avail-badge{font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;margin-top:3px;min-height:16px;}
 .slot-avail-badge.ok{color:var(--accent);}
 .slot-avail-badge.few{color:#f5a623;}
@@ -136,7 +154,7 @@ select option{background:#1c1c1f;}
         <span class="sub">편집 & 컬러그레이딩</span>
       </h1>
       <p class="left-desc">프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.<br>단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 <br>초청될 수 있습니다.<br><br>다빈치 리졸브 공인 트레이너가 직접 교육합니다.</p>
-      <div class="meta-list"><div class="meta-row"><span class="meta-row-label">일시</span><span class="meta-row-value">2026년 6월 11일 (목)</span></div><div class="meta-row"><span class="meta-row-label">시간</span><span class="meta-row-value">오전 10:00 — 오후 17:00 (점심시간 1시간)<small>편집 4시간 · 컬러 2시간</small></span></div><div class="meta-row"><span class="meta-row-label">장소</span><span class="meta-row-value">수원미디어센터 디지털교육실2 (Mac)<small>경기도 수원시 팔달구 창룡대로 64</small><small>🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다.</small></span></div><div class="meta-row"><span class="meta-row-label">장비</span><span class="meta-row-value">DaVinci Resolve Speed Editor 8대<br>DaVinci Resolve Micro Panel 1대<br>DaVinci Resolve Micro Color Panel 7대<br><small></small></span></div><div class="meta-row"><span class="meta-row-label">참가비</span><span class="meta-row-value accent">무료</span></div><div class="meta-row"><span class="meta-row-label">정원</span><span class="meta-row-value">15명 한정</span></div></div>
+      <div class="meta-list"><div class="meta-row"><span class="meta-row-label">일시</span><span class="meta-row-value">2026년 9월 30일 (목)</span></div><div class="meta-row"><span class="meta-row-label">시간</span><span class="meta-row-value">오후 10:00 — 17:00 (점심시간 1시간)<small>편집 4시간 · 컬러 2시간</small></span></div><div class="meta-row"><span class="meta-row-label">장소</span><span class="meta-row-value">수원미디어센터 디지털교육실2 (Mac)<small>경기도 수원시 팔달구 창룡대로 64</small><small>🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다.</small></span></div><div class="meta-row"><span class="meta-row-label">장비</span><span class="meta-row-value">DaVinci Resolve Speed Editor 8대<br>DaVinci Resolve Micro Panel 1대<br>DaVinci Resolve Micro Color Panel 7대<br><small></small></span></div><div class="meta-row"><span class="meta-row-label">참가비</span><span class="meta-row-value accent">무료</span></div><div class="meta-row"><span class="meta-row-label">정원</span><span class="meta-row-value">15명 한정</span></div></div>
     </div>
     <div class="left-footer">Blackmagic Design 공식 총판 · 하이픽셀플러스<br>문의: hipixelplus@naver.com / 031-450-3515</div>
   </div>
@@ -144,12 +162,12 @@ select option{background:#1c1c1f;}
     <div id="form-body">
       <div class="tab-bar">
         <button class="tab-btn active" id="tab-apply" onclick="switchTab('apply')" type="button">참가 신청</button>
-        <button class="tab-btn" id="tab-cancel" onclick="switchTab('cancel')" type="button">예약 취소</button>
+        <button class="tab-btn" id="tab-cancel" onclick="switchTab('cancel')" type="button">신청 취소</button>
       </div>
 
       <!-- ══ 신청 패널 ══ -->
       <div class="apply-panel" id="apply-panel">
-        <div class="closed-box" id="closed-box" style="display:none;">
+        <div class="closed-box" id="registration-unavailable-box" style="display:none;">
           <div class="closed-icon">🙏</div>
           <div class="closed-badge">접수 마감</div>
           <h3>신청 접수가 마감되었습니다</h3>
@@ -168,10 +186,10 @@ select option{background:#1c1c1f;}
           </div>
           <div class="field"><label>이메일 <span class="req">*</span></label><input type="email" id="f-email" placeholder="이메일 주소" autocomplete="email"></div>
           <div class="field"><label>직장 또는 소속 <span class="req">*</span></label><input type="text" id="f-company" placeholder="직장 또는 소속"></div>
-          <div class="field"><label>프리미어 프로 레벨 <span class="req">*</span></label><select id="cf-21"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="중급 (다양한 기능 활용 가능)">중급 (다양한 기능 활용 가능)</option><option value="고급 (심화 기능 및 강의 가능)">고급 (심화 기능 및 강의 가능)</option></select></div><div class="field"><label>다빈치 리졸브 레벨</label><select id="cf-22"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="전혀 없음">전혀 없음</option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select></div><div class="field"><label>강의 경력 (선택 · 강사 우대)</label><textarea id="cf-23" placeholder="예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요." style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;border-radius:3px;resize:vertical;min-height:88px;line-height:1.6;"></textarea></div><div class="field"><label>수업 관련 궁금한 점 (선택)</label><textarea id="cf-24" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요." style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;border-radius:3px;resize:vertical;min-height:88px;line-height:1.6;"></textarea></div>
+          <div class="field"><label>프리미어 프로 레벨 <span class="req">*</span></label><select id="cf-21"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="중급 (다양한 기능 활용 가능)">중급 (다양한 기능 활용 가능)</option><option value="고급 (심화 기능 및 강의 가능)">고급 (심화 기능 및 강의 가능)</option></select></div><div class="field"><label>다빈치 리졸브 레벨</label><select id="cf-22"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="전혀 없음">전혀 없음</option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select></div><div class="field"><label>강의 경력 (선택 · 강사 우대)</label><textarea id="cf-23" placeholder="예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요." style="width:100%;background:var(--surface);border:1px solid var(--border);color:#ffffff;padding:14px 16px;font-size:14px;font-family:inherit;outline:none;border-radius:3px;resize:vertical;min-height:88px;line-height:1.6;"></textarea></div><div class="field"><label>수업 관련 궁금한 점 (선택)</label><textarea id="cf-24" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요." style="width:100%;background:var(--surface);border:1px solid var(--border);color:#ffffff;padding:14px 16px;font-size:14px;font-family:inherit;outline:none;border-radius:3px;resize:vertical;min-height:88px;line-height:1.6;"></textarea></div>
           <div class="field">
             <label>참가 일시 <span class="req">*</span></label>
-            <div class="time-options" style="grid-template-columns:1fr;"><div class="time-option"><input type="radio" name="session" id="session-1" value="6월 11일 (목) 오전 10:00 – 오후 17:00"><label for="session-1"><span class="time-label-title">6월 11일 (목) </span><span class="time-label-sub">10:00 – 17:00</span><span class="slot-avail-badge" id="slot-avail-1"></span></label></div></div>
+            <div class="time-options" style="grid-template-columns:1fr;"><div class="time-option"><input type="radio" name="session" id="session-1" value="6월 11일 (목) 오후 10:00 – 17:00"><label for="session-1"><span class="time-label-title">6월 11일 (목) 오후</span><span class="time-label-sub">10:00 – 17:00</span><span class="slot-avail-badge" id="slot-avail-1"></span></label></div></div>
           </div>
           <div class="field">
             <label>이메일 수신 동의 <span style="color:var(--text3);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:400">(선택)</span></label>
@@ -180,11 +198,21 @@ select option{background:#1c1c1f;}
               <div class="consent-option"><input type="radio" name="email-consent" id="consent-no" value="미동의"><label for="consent-no">아니요</label></div>
             </div>
           </div>
+          <div class="field photo-consent-field">
+            <fieldset class="photo-consent-box">
+              <legend class="photo-consent-heading">사진 및 영상 촬영·활용 동의 <span class="req">*</span></legend>
+              <p class="photo-consent-copy" id="photo-consent-description">본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.</p>
+              <div class="consent-options photo-consent-options">
+                <div class="consent-option"><input type="radio" name="photo-consent" id="photo-consent-yes" value="동의" aria-describedby="photo-consent-description" required><label for="photo-consent-yes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>예, 동의합니다</label></div>
+                <div class="consent-option"><input type="radio" name="photo-consent" id="photo-consent-no" value="미동의" aria-describedby="photo-consent-description" required><label for="photo-consent-no">아니요</label></div>
+              </div>
+            </fieldset>
+          </div>
           <div class="agree">
             <input type="checkbox" id="f-agree">
             <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer"><strong>개인정보 수집 및 이용에 동의합니다.</strong><br>원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. </label>
           </div>
-          <button class="submit-btn" id="submit-btn" type="button">신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="submit-btn" id="submit-btn" type="button" disabled>접수가 마감되었습니다</button>
           <p class="submit-note">수집된 정보는 세미나 운영 목적으로만 사용됩니다</p>
         </div>
       </div>
@@ -214,6 +242,7 @@ select option{background:#1c1c1f;}
           <div class="reservation-card">
             <div class="reservation-card-label">예약 정보</div>
             <div class="reservation-card-name" id="c-res-name"></div>
+            <div class="field" id="c-session-picker" style="display:none;margin-top:16px"><label for="c-session-select">취소할 신청 타임</label><select id="c-session-select" onchange="selectCancelReservation()"></select></div>
             <div class="reservation-card-session">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 6h12M4.5 1v2M9.5 1v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
               <span id="c-res-session-text"></span>
@@ -231,6 +260,54 @@ select option{background:#1c1c1f;}
           </div>
         </div>
       </div>
+
+      <!-- 주소에 ?attendance=1이 있을 때만 표시되는 사전 참석 확인 패널 -->
+      <div class="attendance-panel" id="attendance-panel">
+        <div class="attendance-step show" id="attendance-step1">
+          <div class="form-header">
+            <h2>참석 여부 확정</h2>
+            <p>알림톡으로 참석 확정 안내를 받으신 분은 신청 시 입력한 이름과 전화번호로 참석 여부를 알려주세요. 이름이 다르더라도 전화번호가 일치하면 신청 내역을 확인할 수 있습니다.</p>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>이름 <span class="req">*</span></label><input type="text" id="a-name" placeholder="신청자 이름" autocomplete="name"></div>
+            <div class="field"><label>전화번호 <span class="req">*</span></label><input type="tel" id="a-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
+          </div>
+          <button class="submit-btn" id="attendance-lookup-btn" type="button" onclick="lookupAttendance()">신청 정보 확인하기</button>
+          <p class="c-error" id="attendance-error"></p>
+        </div>
+        <div class="attendance-step" id="attendance-step2">
+          <div class="form-header">
+            <h2>참석 여부를 선택해주세요</h2>
+            <p>선택 내용은 다시 접속해 변경할 수 있습니다.</p>
+          </div>
+          <div class="reservation-card">
+            <div class="reservation-card-label">신청 정보</div>
+            <div class="reservation-card-name" id="a-res-name"></div>
+            <div class="field" id="a-session-picker" style="display:none;margin-top:16px"><label for="a-session-select">참석 여부를 응답할 신청 타임</label><select id="a-session-select" onchange="selectAttendanceReservation()"></select></div>
+            <div class="reservation-card-session"><span id="a-res-session"></span></div>
+            <div class="attendance-current" id="a-current-response"></div>
+            <div class="attendance-name-note" id="a-name-match-note">입력하신 이름과 다르지만 전화번호가 일치하는 신청 내역을 찾았습니다. 위 신청자로 참석 여부를 진행합니다.</div>
+          </div>
+          <div class="attendance-actions">
+            <button class="attendance-choice yes" type="button" onclick="saveAttendance('참석')">참석을 확정합니다</button>
+            <button class="attendance-choice no" type="button" onclick="saveAttendance('불참')">참석하지 않습니다</button>
+          </div>
+          <p class="c-error" id="attendance-save-error"></p>
+          <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:10px;">정보 다시 입력하기</button>
+        </div>
+        <div class="attendance-step" id="attendance-step3">
+          <div class="cancel-success">
+            <div class="cancel-success-icon">✓</div>
+            <h3 id="attendance-result-title">응답이 저장되었습니다</h3>
+            <p>참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.</p>
+            <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:24px;">응답 변경하기</button>
+          </div>
+        </div>
+        <div class="attendance-contact">
+          궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.
+          <br><a href="http://pf.kakao.com/_wuWAn" target="_blank" rel="noopener noreferrer">카카오톡 플러스친구 문의하기 ↗</a>
+        </div>
+      </div>
     </div>
 
     <div class="success" id="msg-success">
@@ -243,18 +320,18 @@ select option{background:#1c1c1f;}
 <script>
 var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec';
 var MAX_PER_SLOT=15;
-var IS_CLOSED=false;
+var REGISTRATION_STATUS='closed';
 var SESSIONS=[{"id":1,"key":"6월 11일 (목) 오후 10:00 – 17:00"}];
 
 function formatPhone(el){var v=el.value.replace(/\D/g,'').slice(0,11);if(v.length<4)el.value=v;else if(v.length<8)el.value=v.slice(0,3)+'-'+v.slice(3);else el.value=v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7);}
 function getRadioValue(name){var c=document.querySelector('input[name="'+name+'"]:checked');return c?c.value:'';}
 
-function applyClosedState(){
+function applyRegistrationState(){
   var applyForm=document.getElementById('apply-form');
-  var closedBox=document.getElementById('closed-box');
+  var unavailableBox=document.getElementById('registration-unavailable-box');
   var tabApply=document.getElementById('tab-apply');
   if(applyForm)applyForm.style.display='none';
-  if(closedBox)closedBox.style.display='block';
+  if(unavailableBox)unavailableBox.style.display='block';
   if(tabApply)tabApply.style.opacity='0.5';
 }
 
@@ -277,7 +354,102 @@ function switchTab(tab){
   }
 }
 
+function isAttendanceMode(){return new URLSearchParams(window.location.search).get('attendance')==='1';}
+function showAttendanceStep(step){
+  ['attendance-step1','attendance-step2','attendance-step3'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('show');});
+  var target=document.getElementById('attendance-step'+step);if(target)target.classList.add('show');
+}
+function openAttendanceMode(){
+  var tabBar=document.querySelector('.tab-bar');if(tabBar)tabBar.style.display='none';
+  var applyPanel=document.getElementById('apply-panel');if(applyPanel)applyPanel.classList.add('hide');
+  var cancelPanel=document.getElementById('cancel-panel');if(cancelPanel)cancelPanel.classList.remove('show');
+  var attendancePanel=document.getElementById('attendance-panel');if(attendancePanel)attendancePanel.classList.add('show');
+  showAttendanceStep(1);
+}
+
+var attendanceName='';
+var attendancePhone='';
+var attendanceRegistrationId='';
+var attendanceReservations=[];
+function selectAttendanceReservation(){
+  var index=Number(document.getElementById('a-session-select').value||0);
+  var item=attendanceReservations[index];if(!item)return;
+  attendanceRegistrationId=item.registrationId||'';
+  document.getElementById('a-res-name').textContent=(item.name||attendanceName)+' 님';
+  document.getElementById('a-res-session').textContent=item.session||'';
+  document.getElementById('a-current-response').textContent='현재 응답: '+(item.attendance||'미응답');
+  document.getElementById('a-name-match-note').style.display=item.nameMatched===false?'block':'none';
+}
+function resetAttendance(){
+  attendanceName='';attendancePhone='';
+  attendanceRegistrationId='';attendanceReservations=[];
+  document.querySelectorAll('.attendance-choice').forEach(function(b){b.disabled=false;});
+  var name=document.getElementById('a-name');if(name)name.value='';
+  var phone=document.getElementById('a-phone');if(phone)phone.value='';
+  var error=document.getElementById('attendance-error');if(error)error.style.display='none';
+  var saveError=document.getElementById('attendance-save-error');if(saveError)saveError.style.display='none';
+  var button=document.getElementById('attendance-lookup-btn');if(button){button.disabled=false;button.textContent='신청 정보 확인하기';}
+  showAttendanceStep(1);
+}
+
+async function lookupAttendance(){
+  var name=document.getElementById('a-name').value.trim();
+  var phone=document.getElementById('a-phone').value.trim();
+  var error=document.getElementById('attendance-error');
+  var button=document.getElementById('attendance-lookup-btn');
+  error.style.display='none';
+  if(!name||!phone){error.textContent='이름과 전화번호를 모두 입력해주세요.';error.style.display='block';return;}
+  button.disabled=true;button.textContent='확인 중...';
+  try{
+    var url=SCRIPT_URL+'?action=getAttendanceEligibility&name='+encodeURIComponent(name)+'&phone='+encodeURIComponent(phone);
+    var linkedId=new URLSearchParams(window.location.search).get('rid');
+    if(linkedId)url+='&registrationId='+encodeURIComponent(linkedId);
+    var response=await fetch(url);
+    var data=await response.json();
+    if(!data.eligible){
+      error.textContent=data.message||'신청 내역을 찾을 수 없습니다. 알림톡을 받은 이름과 전화번호를 확인해주세요.';
+      error.style.display='block';button.disabled=false;button.textContent='신청 정보 확인하기';return;
+    }
+    attendanceName=name;attendancePhone=phone;
+    attendanceReservations=data.reservations||[data];
+    var picker=document.getElementById('a-session-select');picker.textContent='';
+    attendanceReservations.forEach(function(item,i){var o=document.createElement('option');o.value=String(i);o.textContent=item.session;picker.appendChild(o);});
+    document.getElementById('a-session-picker').style.display=attendanceReservations.length>1?'block':'none';
+    selectAttendanceReservation();
+    document.querySelectorAll('.attendance-choice').forEach(function(b){b.disabled=false;});
+    showAttendanceStep(2);
+  }catch(e){
+    error.textContent='확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    error.style.display='block';button.disabled=false;button.textContent='신청 정보 확인하기';
+  }
+}
+
+async function saveAttendance(value){
+  if(!attendanceName||!attendancePhone)return;
+  var buttons=document.querySelectorAll('.attendance-choice');
+  var error=document.getElementById('attendance-save-error');
+  buttons.forEach(function(button){button.disabled=true;});error.style.display='none';
+  try{
+    var response=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'updateAttendance',name:attendanceName,phone:attendancePhone,registrationId:attendanceRegistrationId,attendance:value})});
+    var data=await response.json();
+    if(data.result!=='ok')throw new Error(data.message||'응답을 저장하지 못했습니다.');
+    document.getElementById('attendance-result-title').textContent=value==='참석'?'참석으로 응답했습니다':'불참으로 응답했습니다';
+    showAttendanceStep(3);
+  }catch(e){
+    error.textContent=e.message||'저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    error.style.display='block';buttons.forEach(function(button){button.disabled=false;});
+  }
+}
+
 var foundPhone='';
+var cancelRegistrationId='';
+var cancelReservations=[];
+function selectCancelReservation(){
+  var item=cancelReservations[Number(document.getElementById('c-session-select').value||0)];if(!item)return;
+  cancelRegistrationId=item.registrationId||'';
+  document.getElementById('c-res-name').textContent=item.name+' 님';
+  document.getElementById('c-res-session-text').textContent=item.session;
+}
 function resetCancel(){
   ['cancel-step1','cancel-step2','cancel-step3'].forEach(function(id){document.getElementById(id).classList.remove('show');});
   document.getElementById('cancel-step1').classList.add('show');
@@ -286,6 +458,7 @@ function resetCancel(){
   var lb=document.getElementById('lookup-btn');
   if(lb){lb.disabled=false;lb.innerHTML='예약 조회하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
   foundPhone='';
+  cancelRegistrationId='';cancelReservations=[];
 }
 
 async function lookupReservation(){
@@ -301,8 +474,12 @@ async function lookupReservation(){
     var data=await r.json();
     if(data.found){
       foundPhone=phone;
-      document.getElementById('c-res-name').textContent=data.name+' 님';
-      document.getElementById('c-res-session-text').textContent=data.session;
+      cancelReservations=data.reservations||[data];
+      var picker=document.getElementById('c-session-select');picker.textContent='';
+      cancelReservations.forEach(function(item,i){var o=document.createElement('option');o.value=String(i);o.textContent=item.session;picker.appendChild(o);});
+      document.getElementById('c-session-picker').style.display=cancelReservations.length>1?'block':'none';
+      selectCancelReservation();
+      var cancelButton=document.getElementById('confirm-cancel-btn');cancelButton.disabled=false;cancelButton.textContent='이 예약을 취소합니다';
       document.getElementById('cancel-step1').classList.remove('show');
       document.getElementById('cancel-step2').classList.add('show');
     }else{
@@ -322,13 +499,16 @@ async function lookupReservation(){
 async function confirmCancel(){
   if(!foundPhone)return;
   var cb=document.getElementById('confirm-cancel-btn');
+  if(cb.disabled)return;
   cb.disabled=true;cb.textContent='취소 처리 중...';
   try{
-    await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'cancelReservation',phone:foundPhone})});
+    var response=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'cancelReservation',phone:foundPhone,registrationId:cancelRegistrationId})});
+    var data=await response.json();
+    if(!response.ok||data.result!=='ok'||data.found===false)throw new Error(data.message||'취소하지 못했습니다.');
     document.getElementById('cancel-step2').classList.remove('show');
     document.getElementById('cancel-step3').classList.add('show');
   }catch(e){
-    alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    alert(e.message||'오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     cb.disabled=false;cb.textContent='이 예약을 취소합니다';
   }
 }
@@ -347,6 +527,7 @@ function updateSlotBadges(counts){
     var badge=document.getElementById('slot-avail-'+s.id);
     var inp=document.querySelector('input[value="'+s.key+'"]');
     if(!badge)return;
+    if(inp&&inp.disabled)return;
     var count=counts[s.key]||0;
     var avail=MAX_PER_SLOT-count;
     if(avail<=0){
@@ -357,6 +538,10 @@ function updateSlotBadges(counts){
         var lbl=inp.nextElementSibling;
         if(lbl){lbl.style.opacity='.4';lbl.style.cursor='not-allowed';lbl.style.pointerEvents='none';}
       }
+    }else if(MAX_PER_SLOT>=100){
+      badge.textContent='신청 즉시 확정이 아닙니다. 검토 후 개별 연락드립니다.';
+      badge.className='slot-avail-badge';
+      badge.style.color='var(--text2)';
     }else if(avail<=3){
       badge.textContent=avail+'석 남음';
       badge.className='slot-avail-badge few';
@@ -375,37 +560,46 @@ async function submitForm(){
   var cf_21=document.getElementById('cf-21')?(document.getElementById('cf-21').value||''):'';var cf_22=document.getElementById('cf-22')?(document.getElementById('cf-22').value||''):'';var cf_23=document.getElementById('cf-23')?(document.getElementById('cf-23').value||''):'';var cf_24=document.getElementById('cf-24')?(document.getElementById('cf-24').value||''):'';
   var session=getRadioValue('session');
   var consent=getRadioValue('email-consent')||'미응답';
+  var photoConsent=getRadioValue('photo-consent');
   var agreed=document.getElementById('f-agree').checked;
   if(!name||!phone||!email||!company||!cf_21){shake();return;}
   if(!session){var tf=document.querySelector('.time-options');tf.style.outline='1px solid rgba(240,80,64,0.5)';tf.style.borderRadius='3px';setTimeout(function(){tf.style.outline='';},1500);return;}
+  if(!photoConsent){var pcf=document.querySelector('.photo-consent-box');pcf.style.outline='1px solid rgba(240,80,64,0.6)';setTimeout(function(){pcf.style.outline='';},1500);return;}
   if(!agreed){var ae=document.querySelector('.agree');ae.style.borderColor='rgba(240,80,64,0.5)';setTimeout(function(){ae.style.borderColor='';},1500);return;}
-  var btn=document.getElementById('submit-btn');btn.disabled=true;btn.innerHTML='<span style="opacity:.6">제출 중...</span>';
+  var btn=document.getElementById('submit-btn');
+  if(btn.disabled||btn.getAttribute('data-submitting')==='1'){return;}
+  btn.setAttribute('data-submitting','1');btn.disabled=true;btn.innerHTML='<span style="opacity:.6">제출 중...</span>';
   try{
-    await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'submit',name:name,phone:phone,email:email,company:company,"프리미어 프로 레벨":cf_21,"다빈치 리졸브 레벨":cf_22,"강의 경력 (선택 · 강사 우대)":cf_23,"수업 관련 궁금한 점 (선택)":cf_24,session:session,emailConsent:consent,timestamp:new Date().toLocaleString('ko-KR')})});
+    var response=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'submit',name:name,phone:phone,email:email,company:company,"프리미어 프로 레벨":cf_21,"다빈치 리졸브 레벨":cf_22,"강의 경력 (선택 · 강사 우대)":cf_23,"수업 관련 궁금한 점 (선택)":cf_24,session:session,emailConsent:consent,photoConsent:photoConsent,timestamp:new Date().toLocaleString('ko-KR')})});
+    var result=await response.json();
+    if(!response.ok||result.result==='error'){throw new Error(result.message||'신청을 저장하지 못했습니다.');}
+    if(result.duplicate){
+      var successBox=document.getElementById('msg-success');
+      var successTitle=successBox.querySelector('h3');
+      var successMessage=successBox.querySelector('p');
+      if(successTitle){successTitle.textContent='이미 신청되어 있습니다.';}
+      if(successMessage){successMessage.textContent=result.message||'같은 일정의 기존 신청 한 건을 유지했습니다.';}
+    }
     document.getElementById('form-body').style.display='none';
     document.getElementById('msg-success').classList.add('show');
   }catch(e){
-    alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-    btn.disabled=false;btn.innerHTML='신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    alert(e&&e.message?e.message:'오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    btn.removeAttribute('data-submitting');btn.disabled=false;btn.innerHTML='신청 완료하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
 }
 
 function shake(){var f=document.getElementById('apply-panel');f.style.transition='transform .08s';f.style.transform='translateX(-6px)';setTimeout(function(){f.style.transform='translateX(5px)';},80);setTimeout(function(){f.style.transform='translateX(-4px)';},160);setTimeout(function(){f.style.transform='translateX(0)';},240);}
 
 document.addEventListener('DOMContentLoaded',function(){
-  if(IS_CLOSED){applyClosedState();}
+  if(isAttendanceMode()){openAttendanceMode();return;}
+  if(REGISTRATION_STATUS!=='open'){applyRegistrationState();}
   else{loadSlots();}
   var btn=document.getElementById('submit-btn');
   if(btn&&!btn.disabled){
     btn.addEventListener('click',function(e){e.preventDefault();submitForm();});
-    btn.addEventListener('touchend',function(e){e.preventDefault();submitForm();});
   }
-  var lb=document.getElementById('lookup-btn');
-  if(lb){lb.addEventListener('touchend',function(e){e.preventDefault();lookupReservation();});}
-  var cb=document.getElementById('confirm-cancel-btn');
-  if(cb){cb.addEventListener('touchend',function(e){e.preventDefault();confirmCancel();});}
 });
 </script>
-<!-- EDITOR_DATA:{"scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg","bgOpacity":36,"bgSize":245,"bgPosX":50,"bgPosY":100,"closed":false,"closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":15,"tagColor":"#f39200","subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":21,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 \n초청될 수 있습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 6월 11일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 10:00 — 17:00 (점심시간 1시간)","smalls":["편집 4시간 · 컬러 2시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"수원미디어센터 디지털교육실2 (Mac)","smalls":["경기도 수원시 팔달구 창룡대로 64","🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다."],"accent":false},{"id":21,"label":"장비","type":"text","main":"DaVinci Resolve Speed Editor 8대\nDaVinci Resolve Micro Panel 1대\nDaVinci Resolve Micro Color Panel 7대\n","smalls":[""],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다.","noticeItems":["예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.","편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","점심식사는 별도로 제공되지 않으니 참고 부탁드립니다.","현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다."," 다빈치리졸브 실습 장비는 수량이 제한적이라 모든 분들이 동시에 체험 해볼수는 없다는점 양해 부탁드립니다."],"benefits":[],"sessions":[{"id":1,"label":"6월 11일 (목) 오후","time":"10:00 – 17:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!"} -->
+<!-- EDITOR_DATA:{"publishTarget":"davinci","scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg","bgOpacity":36,"bgSize":245,"bgPosX":50,"bgPosY":100,"registrationStatus":"closed","closed":true,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":15,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":21,"titleColor":"#f5f4f2","titleSize":96,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 \n초청될 수 있습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 9월 30일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 10:00 — 17:00 (점심시간 1시간)","smalls":["편집 4시간 · 컬러 2시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"수원미디어센터 디지털교육실2 (Mac)","smalls":["경기도 수원시 팔달구 창룡대로 64","🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다."],"accent":false},{"id":21,"label":"장비","type":"text","main":"DaVinci Resolve Speed Editor 8대\nDaVinci Resolve Micro Panel 1대\nDaVinci Resolve Micro Color Panel 7대\n","smalls":[""],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다.","noticeItems":["예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.","편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","점심식사는 별도로 제공되지 않으니 참고 부탁드립니다.","현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다."," 다빈치리졸브 실습 장비는 수량이 제한적이라 모든 분들이 동시에 체험 해볼수는 없다는점 양해 부탁드립니다."],"benefits":[],"sessions":[{"id":1,"label":"6월 11일 (목) 오후","time":"10:00 – 17:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!","attendanceTitle":"참석 여부 확정","attendanceText":"알림톡으로 참석 확정 안내를 받으신 분은 신청 시 입력한 이름과 전화번호로 참석 여부를 알려주세요. 이름이 다르더라도 전화번호가 일치하면 신청 내역을 확인할 수 있습니다.","attendanceSuccessText":"참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.","attendanceContactText":"궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.","attendanceContactUrl":"http://pf.kakao.com/_wuWAn","publishPath":"premiere/index.html"} -->
 </body>
 </html>
