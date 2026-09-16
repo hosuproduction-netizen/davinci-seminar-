@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
 <title>세미나 신청 — 하이픽셀플러스</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -117,6 +118,11 @@ select option{background:#1c1c1f;}
 .attendance-step{display:none;}
 .attendance-step.show{display:block;}
 .attendance-current{font-size:13px;color:var(--text2);margin-top:10px;line-height:1.6;}
+.attendance-phone{font-size:16px;letter-spacing:.5px;color:var(--text2);margin:10px 0 14px;}
+.attendance-info-actions{display:grid;gap:12px;margin-top:24px;}
+.attendance-info-actions .cancel-back-btn{width:100%;padding:14px;border:1px solid var(--border);}
+.attendance-steps{font-size:12px;letter-spacing:.5px;color:var(--text2);margin-bottom:18px;}
+.attendance-steps strong{color:var(--accent);}
 .attendance-name-note{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(245,196,81,.25);background:rgba(245,196,81,.07);color:#f5c451;font-size:12px;line-height:1.65;border-radius:3px;}
 .attendance-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
 .attendance-choice{width:100%;padding:16px;border-radius:3px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:opacity .15s,transform .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
@@ -263,19 +269,44 @@ select option{background:#1c1c1f;}
 
       <!-- 주소에 ?attendance=1이 있을 때만 표시되는 사전 참석 확인 패널 -->
       <div class="attendance-panel" id="attendance-panel">
+        <div class="attendance-step" id="attendance-step0">
+          <div class="form-header"><h2>신청 정보 확인</h2><p id="attendance-link-status" role="status" aria-live="polite"></p></div>
+          <button class="cancel-back-btn" id="attendance-link-retry" type="button" onclick="resetAttendance()" style="display:none">다시 확인하기</button>
+        </div>
         <div class="attendance-step show" id="attendance-step1">
           <div class="form-header">
             <h2><span data-se-text="attendanceTitle" style="">참석 여부 확정</span></h2>
-            <p><span data-se-text="attendanceText" style="">알림톡으로 참석 확정 안내를 받으신 분은 신청 시 입력한 이름과 전화번호로 참석 여부를 알려주세요. 이름이 다르더라도 전화번호가 일치하면 신청 내역을 확인할 수 있습니다.</span></p>
+            <p><span data-se-text="attendanceText" style="">알림톡으로 안내를 받으신 분은 이름과 전화번호로 신청 내역을 찾아주세요. 본인 정보가 맞는지 확인한 후 참석 여부를 선택할 수 있습니다.</span></p>
           </div>
           <div class="field-row">
-            <div class="field"><label>이름 <span class="req">*</span></label><input type="text" id="a-name" placeholder="신청자 이름" autocomplete="name"></div>
-            <div class="field"><label>전화번호 <span class="req">*</span></label><input type="tel" id="a-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
+            <div class="field"><label for="a-name">이름 <span class="req">*</span></label><input type="text" id="a-name" placeholder="신청자 이름" autocomplete="name"></div>
+            <div class="field"><label for="a-phone">전화번호 <span class="req">*</span></label><input type="tel" id="a-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
           </div>
           <button class="submit-btn" id="attendance-lookup-btn" type="button" onclick="lookupAttendance()"><span data-se-text="ui.attendanceLookup" style="">신청 정보 확인하기</span></button>
-          <p class="c-error" id="attendance-error"></p>
+          <p class="c-error" id="attendance-error" role="alert"></p>
+        </div>
+        <div class="attendance-step" id="attendance-step4">
+          <div class="attendance-steps"><strong>1. 신청 정보 확인</strong> &nbsp; / &nbsp; 2. 참석 여부 선택</div>
+          <div class="form-header"><h2><span data-se-text="ui.attendanceMatchTitle" style="">신청 정보가 맞나요?</span></h2><p><span data-se-text="ui.attendanceMatchIntro" style="">아래 정보가 본인 신청 내역인지 확인해주세요. 아직 참석 여부는 저장되지 않았습니다.</span></p></div>
+          <div class="reservation-card">
+            <div class="reservation-card-label">신청자</div><div class="reservation-card-name" id="a-match-name"></div>
+            <div class="attendance-phone" id="a-match-phone"></div>
+            <div class="field" id="a-session-picker" style="display:none;margin-top:16px"><label for="a-session-select">참석 여부를 응답할 신청 타임</label><select id="a-session-select" onchange="selectAttendanceReservation()"></select></div>
+            <div class="reservation-card-label">신청 회차</div><div class="reservation-card-session" id="a-match-session"></div>
+            <div class="attendance-current" id="a-match-response"></div>
+            <div class="attendance-name-note" id="a-name-match-note">입력하신 이름과 다르지만 전화번호가 일치하는 신청 내역입니다. 본인 신청이 맞는지 먼저 확인해주세요.</div>
+          </div>
+          <div class="attendance-info-actions">
+            <button class="submit-btn" type="button" onclick="confirmAttendanceInfo()"><span data-se-text="ui.attendanceInfoYes" style="">제 정보가 맞습니다</span></button>
+            <button class="cancel-back-btn" type="button" onclick="rejectAttendanceInfo()"><span data-se-text="ui.attendanceInfoNo" style="">제 정보가 아닙니다</span></button>
+          </div>
+        </div>
+        <div class="attendance-step" id="attendance-step5">
+          <div class="form-header"><h2><span data-se-text="ui.attendanceMismatchTitle" style="">본인 정보가 아닌가요?</span></h2><p><span data-se-text="ui.attendanceMismatchText" style="">참석 여부를 저장하지 않았습니다. 본인에게 전달된 링크인지 확인해주세요. 정보가 다르거나 수정이 필요하면 아래 카카오톡으로 문의해주세요.</span></p></div>
+          <button class="cancel-back-btn" type="button" onclick="resetAttendance()">신청 정보 다시 확인하기</button>
         </div>
         <div class="attendance-step" id="attendance-step2">
+          <div class="attendance-steps">1. 신청 정보 확인 &nbsp; / &nbsp; <strong>2. 참석 여부 선택</strong></div>
           <div class="form-header">
             <h2><span data-se-text="ui.attendanceChooseTitle" style="">참석 여부를 선택해주세요</span></h2>
             <p><span data-se-text="ui.attendanceChooseIntro" style="">선택 내용은 다시 접속해 변경할 수 있습니다.</span></p>
@@ -283,17 +314,17 @@ select option{background:#1c1c1f;}
           <div class="reservation-card">
             <div class="reservation-card-label">신청 정보</div>
             <div class="reservation-card-name" id="a-res-name"></div>
-            <div class="field" id="a-session-picker" style="display:none;margin-top:16px"><label for="a-session-select">참석 여부를 응답할 신청 타임</label><select id="a-session-select" onchange="selectAttendanceReservation()"></select></div>
+            <div class="attendance-phone" id="a-res-phone"></div>
             <div class="reservation-card-session"><span id="a-res-session"></span></div>
             <div class="attendance-current" id="a-current-response"></div>
-            <div class="attendance-name-note" id="a-name-match-note">입력하신 이름과 다르지만 전화번호가 일치하는 신청 내역을 찾았습니다. 위 신청자로 참석 여부를 진행합니다.</div>
           </div>
           <div class="attendance-actions">
             <button class="attendance-choice yes" type="button" onclick="saveAttendance('참석')"><span data-se-text="ui.attendanceYes" style="">참석을 확정합니다</span></button>
             <button class="attendance-choice no" type="button" onclick="saveAttendance('불참')"><span data-se-text="ui.attendanceNo" style="">참석하지 않습니다</span></button>
           </div>
-          <p class="c-error" id="attendance-save-error"></p>
-          <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:10px;">정보 다시 입력하기</button>
+          <p class="attendance-current" id="attendance-saving" role="status" aria-live="polite"></p>
+          <p class="c-error" id="attendance-save-error" role="alert"></p>
+          <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:10px;">신청 정보 다시 확인하기</button>
         </div>
         <div class="attendance-step" id="attendance-step3">
           <div class="cancel-success">
@@ -371,89 +402,138 @@ function switchTab(tab){
 }
 
 function isAttendanceMode(){return new URLSearchParams(window.location.search).get('attendance')==='1';}
+function attendanceLinkedId(){return new URLSearchParams(window.location.search).get('rid')||'';}
 function showAttendanceStep(step){
-  ['attendance-step1','attendance-step2','attendance-step3'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('show');});
-  var target=document.getElementById('attendance-step'+step);if(target)target.classList.add('show');
+  [0,1,2,3,4,5].forEach(function(n){var el=document.getElementById('attendance-step'+n);if(el)el.classList.remove('show');});
+  var target=document.getElementById('attendance-step'+step);
+  if(target){target.classList.add('show');var heading=target.querySelector&&target.querySelector('h2,h3');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}}
 }
 function openAttendanceMode(){
   var tabBar=document.querySelector('.tab-bar');if(tabBar)tabBar.style.display='none';
   var applyPanel=document.getElementById('apply-panel');if(applyPanel)applyPanel.classList.add('hide');
   var cancelPanel=document.getElementById('cancel-panel');if(cancelPanel)cancelPanel.classList.remove('show');
   var attendancePanel=document.getElementById('attendance-panel');if(attendancePanel)attendancePanel.classList.add('show');
-  showAttendanceStep(1);
+  return resetAttendance();
 }
-
-var attendanceName='';
-var attendancePhone='';
-var attendanceRegistrationId='';
-var attendanceReservations=[];
-function selectAttendanceReservation(){
-  var index=Number(document.getElementById('a-session-select').value||0);
-  var item=attendanceReservations[index];if(!item)return;
-  attendanceRegistrationId=item.registrationId||'';
-  document.getElementById('a-res-name').textContent=(item.name||attendanceName)+' 님';
-  document.getElementById('a-res-session').textContent=item.session||'';
-  document.getElementById('a-current-response').textContent='현재 응답: '+(item.attendance||'미응답');
-  document.getElementById('a-name-match-note').style.display=item.nameMatched===false?'block':'none';
-}
-function resetAttendance(){
-  attendanceName='';attendancePhone='';
-  attendanceRegistrationId='';attendanceReservations=[];
-  document.querySelectorAll('.attendance-choice').forEach(function(b){b.disabled=false;});
-  var name=document.getElementById('a-name');if(name)name.value='';
-  var phone=document.getElementById('a-phone');if(phone)phone.value='';
-  var error=document.getElementById('attendance-error');if(error)error.style.display='none';
-  var saveError=document.getElementById('attendance-save-error');if(saveError)saveError.style.display='none';
-  restoreButton('attendance-lookup-btn');
-  showAttendanceStep(1);
-}
-
-async function lookupAttendance(){
-  var name=document.getElementById('a-name').value.trim();
-  var phone=document.getElementById('a-phone').value.trim();
-  var error=document.getElementById('attendance-error');
-  var button=document.getElementById('attendance-lookup-btn');
-  error.style.display='none';
-  if(!name||!phone){error.textContent='이름과 전화번호를 모두 입력해주세요.';error.style.display='block';return;}
-  button.disabled=true;button.textContent='확인 중...';
+var attendanceName='',attendancePhone='',attendanceRegistrationId='',attendanceToken='';
+var attendanceReservations=[],attendanceMode='manual',attendanceInfoConfirmed=false,attendanceSaving=false,attendanceEpoch=0;
+async function attendanceFetchData(action,payload){
+  var timer;
   try{
-    var action='getAttendanceEligibility&name='+encodeURIComponent(name)+'&phone='+encodeURIComponent(phone);
-    var linkedId=new URLSearchParams(window.location.search).get('rid');
-    if(linkedId)action+='&registrationId='+encodeURIComponent(linkedId);
-    var response=await registrationRequest(action);
-    var data=await response.json();
-    if(!data.eligible){
-      error.textContent=data.message||'신청 내역을 찾을 수 없습니다. 알림톡을 받은 이름과 전화번호를 확인해주세요.';
-      error.style.display='block';restoreButton('attendance-lookup-btn');return;
-    }
-    attendanceName=name;attendancePhone=phone;
-    attendanceReservations=data.reservations||[data];
-    var picker=document.getElementById('a-session-select');picker.textContent='';
-    attendanceReservations.forEach(function(item,i){var o=document.createElement('option');o.value=String(i);o.textContent=item.session;picker.appendChild(o);});
-    document.getElementById('a-session-picker').style.display=attendanceReservations.length>1?'block':'none';
-    selectAttendanceReservation();
-    document.querySelectorAll('.attendance-choice').forEach(function(b){b.disabled=false;});
-    showAttendanceStep(2);
+    return await Promise.race([
+      registrationRequest(action,payload).then(function(response){if(response.ok===false)throw new Error('연결을 확인하지 못했습니다. 신청 정보를 다시 확인해주세요.');return response.json();}),
+      new Promise(function(resolve,reject){timer=setTimeout(function(){reject(new Error(payload?'저장 결과를 확인하지 못했습니다. 신청 정보 다시 확인하기로 현재 응답을 확인해주세요.':'신청 정보 조회가 지연되고 있습니다. 잠시 후 다시 확인해주세요.'));},25000);})
+    ]);
+  }finally{if(typeof clearTimeout==='function')clearTimeout(timer);}
+}
+function attendanceMaskPhone(value){var n=String(value||'').replace(/\D/g,'');return n.length>=10?n.slice(0,3)+'-****-'+n.slice(-4):'전화번호 확인 필요';}
+function selectAttendanceReservation(){
+  var index=Number(document.getElementById('a-session-select').value||0),item=attendanceReservations[index];
+  attendanceInfoConfirmed=false;
+  if(!item){attendanceRegistrationId='';return;}
+  attendanceRegistrationId=item.registrationId||'';
+  var name=(item.name||attendanceName)+' 님',phone=item.phoneMasked||attendanceMaskPhone(attendancePhone);
+  ['a-res-name','a-match-name'].forEach(function(id){document.getElementById(id).textContent=name;});
+  ['a-res-phone','a-match-phone'].forEach(function(id){document.getElementById(id).textContent=phone;});
+  ['a-res-session','a-match-session'].forEach(function(id){document.getElementById(id).textContent=item.session||'';});
+  ['a-current-response','a-match-response'].forEach(function(id){document.getElementById(id).textContent='현재 응답: '+(item.attendance||'미응답');});
+  document.getElementById('a-name-match-note').style.display=item.nameMatched===false?'block':'none';
+  document.getElementById('attendance-save-error').style.display='none';
+  showAttendanceStep(4);
+}
+function populateAttendance(items){
+  attendanceReservations=items;
+  var picker=document.getElementById('a-session-select');picker.textContent='';picker.value='';
+  items.forEach(function(item,i){var o=document.createElement('option');o.value=String(i);o.textContent=item.session;picker.appendChild(o);});
+  picker.value='0';
+  document.getElementById('a-session-picker').style.display=items.length>1?'block':'none';
+  selectAttendanceReservation();
+}
+function clearAttendanceRecord(){
+  attendanceName='';attendancePhone='';attendanceRegistrationId='';attendanceToken='';attendanceReservations=[];attendanceInfoConfirmed=false;
+  ['a-res-name','a-match-name','a-res-phone','a-match-phone','a-res-session','a-match-session','a-current-response','a-match-response'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='';});
+  document.getElementById('a-session-select').textContent='';
+}
+async function resetAttendance(){
+  if(attendanceSaving)return;
+  var epoch=++attendanceEpoch;clearAttendanceRecord();
+  document.querySelectorAll('.attendance-choice').forEach(function(b){b.disabled=false;});
+  ['a-name','a-phone'].forEach(function(id){document.getElementById(id).value='';});
+  ['attendance-error','attendance-save-error'].forEach(function(id){document.getElementById(id).style.display='none';});
+  restoreButton('attendance-lookup-btn');
+  var id=attendanceLinkedId();
+  attendanceMode=id?'link':'manual';
+  if(id)return lookupLinkedAttendance(id,epoch);
+  showAttendanceStep(1);
+}
+async function lookupLinkedAttendance(id,epoch){
+  showAttendanceStep(0);
+  var status=document.getElementById('attendance-link-status'),retry=document.getElementById('attendance-link-retry');
+  status.textContent='신청 정보를 불러오는 중입니다. 잠시만 기다려주세요.';retry.style.display='none';
+  try{
+    var data=await attendanceFetchData('getAttendanceLink&registrationId='+encodeURIComponent(id));if(epoch!==attendanceEpoch)return;
+    if(!data.eligible)throw new Error(data.message||'개인 링크 조회를 사용할 수 없습니다. 행사 담당자에게 문의해주세요.');
+    if(data.capability!=='attendance-link-match-v1'||data.registrationId!==id||!data.confirmationToken||!data.phoneMasked)
+      throw new Error('개인 링크 정보를 확인하지 못했습니다. 행사 담당자에게 문의해주세요.');
+    attendanceToken=data.confirmationToken;attendanceName=data.name||'';
+    populateAttendance([data]);
   }catch(e){
-    error.textContent='확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
-    error.style.display='block';restoreButton('attendance-lookup-btn');
+    if(epoch!==attendanceEpoch)return;
+    clearAttendanceRecord();status.textContent=e.message||'확인 중 오류가 발생했습니다. 잠시 후 다시 확인해주세요.';retry.style.display='block';showAttendanceStep(0);
   }
 }
-
-async function saveAttendance(value){
-  if(!attendanceName||!attendancePhone)return;
-  var buttons=document.querySelectorAll('.attendance-choice');
-  var error=document.getElementById('attendance-save-error');
-  buttons.forEach(function(button){button.disabled=true;});error.style.display='none';
+async function lookupAttendance(){
+  if(attendanceSaving)return;
+  var name=document.getElementById('a-name').value.trim(),phone=document.getElementById('a-phone').value.trim();
+  var error=document.getElementById('attendance-error'),button=document.getElementById('attendance-lookup-btn');error.style.display='none';
+  if(!name||!phone){error.textContent='이름과 전화번호를 모두 입력해주세요.';error.style.display='block';return;}
+  var epoch=++attendanceEpoch;clearAttendanceRecord();attendanceMode='manual';button.disabled=true;button.textContent='확인 중...';
   try{
-    var response=await registrationRequest('updateAttendance',{name:attendanceName,phone:attendancePhone,registrationId:attendanceRegistrationId,attendance:value});
-    var data=await response.json();
-    if(data.result!=='ok')throw new Error(data.message||'응답을 저장하지 못했습니다.');
-    document.getElementById('attendance-result-title').textContent=value==='참석'?'참석으로 응답했습니다':'불참으로 응답했습니다';
-    showAttendanceStep(3);
+    var action='getAttendanceEligibility&name='+encodeURIComponent(name)+'&phone='+encodeURIComponent(phone);
+    var linkedId=attendanceLinkedId();if(linkedId)action+='&registrationId='+encodeURIComponent(linkedId);
+    var data=await attendanceFetchData(action);if(epoch!==attendanceEpoch)return;
+    if(!data.eligible)throw new Error(data.message||'참석 확인 대상인 신청 내역을 찾을 수 없습니다.');
+    var items=data.reservations||[data];if(!items.length||items.some(function(item){return !item.registrationId;}))throw new Error('신청 정보를 확인하지 못했습니다. 행사 담당자에게 문의해주세요.');
+    attendanceName=name;attendancePhone=phone;populateAttendance(items);
   }catch(e){
-    error.textContent=e.message||'저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
-    error.style.display='block';buttons.forEach(function(button){button.disabled=false;});
+    if(epoch!==attendanceEpoch)return;
+    error.textContent=e.message||'확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';error.style.display='block';restoreButton('attendance-lookup-btn');
+  }
+}
+function confirmAttendanceInfo(){
+  if(attendanceSaving||!attendanceRegistrationId||!attendanceReservations.length)return;
+  attendanceInfoConfirmed=true;
+  document.querySelectorAll('.attendance-choice').forEach(function(b){b.disabled=false;});
+  document.getElementById('attendance-save-error').style.display='none';showAttendanceStep(2);
+}
+function rejectAttendanceInfo(){
+  if(attendanceSaving)return;
+  ++attendanceEpoch;clearAttendanceRecord();showAttendanceStep(5);
+}
+async function saveAttendance(value){
+  if(attendanceSaving||!attendanceInfoConfirmed||!attendanceRegistrationId||['참석','불참'].indexOf(value)<0)return;
+  if(attendanceMode==='manual'&&(!attendanceName||!attendancePhone))return;
+  if(attendanceMode==='link'&&!attendanceToken)return;
+  var buttons=document.querySelectorAll('.attendance-choice'),error=document.getElementById('attendance-save-error');
+  attendanceSaving=true;buttons.forEach(function(b){b.disabled=true;});error.style.display='none';
+  document.getElementById('attendance-saving').textContent='응답을 저장하는 중입니다...';
+  try{
+    var action=attendanceMode==='link'?'updateAttendanceLink':'updateAttendance';
+    var payload=attendanceMode==='link'?{registrationId:attendanceRegistrationId,confirmationToken:attendanceToken,infoConfirmed:true,attendance:value}:
+      {name:attendanceName,phone:attendancePhone,registrationId:attendanceRegistrationId,attendance:value};
+    var data=await attendanceFetchData(action,payload);
+    if(data.result!=='ok'){
+      if(data.code==='MATCH_RECHECK_REQUIRED'){attendanceInfoConfirmed=false;attendanceToken='';}
+      throw new Error(data.message||'응답을 저장하지 못했습니다.');
+    }
+    attendanceInfoConfirmed=false;attendanceToken='';
+    document.getElementById('attendance-result-title').textContent=value==='참석'?'참석으로 응답했습니다':'불참으로 응답했습니다';showAttendanceStep(3);
+  }catch(e){
+    attendanceInfoConfirmed=false;attendanceToken='';
+    error.textContent=e.message||'저장 결과를 확인하지 못했습니다. 신청 정보를 다시 확인해주세요.';error.style.display='block';
+    buttons.forEach(function(b){b.disabled=!attendanceInfoConfirmed;});
+  }finally{
+    attendanceSaving=false;document.getElementById('attendance-saving').textContent='';
   }
 }
 
@@ -613,6 +693,6 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 });
 </script>
-<!-- EDITOR_DATA:{"publishTarget":"davinci","registrationSheetId":"501786118","registrationSheetName":"테스트시트","scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg","bgOpacity":36,"bgSize":245,"bgPosX":50,"bgPosY":100,"registrationStatus":"open","closed":false,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":1000,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":21,"titleColor":"#f5f4f2","titleSize":96,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 \n초청될 수 있습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 9월 30일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 10:00 — 17:00 (점심시간 1시간)","smalls":["편집 4시간 · 컬러 2시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"수원미디어센터 디지털교육실2 (Mac)","smalls":["경기도 수원시 팔달구 창룡대로 64","🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다."],"accent":false},{"id":21,"label":"장비","type":"text","main":"DaVinci Resolve Speed Editor 8대\nDaVinci Resolve Micro Panel 1대\nDaVinci Resolve Micro Color Panel 7대\n","smalls":[""],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다.","noticeItems":["예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.","편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다."," 다빈치리졸브 실습 장비는 수량이 제한적이라 모든 분들이 동시에 체험 해볼수는 없다는점 양해 부탁드립니다."],"benefits":[],"sessions":[{"id":1,"label":"6월 11일 (목) 오후","time":"10:00 – 17:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!","attendanceTitle":"참석 여부 확정","attendanceText":"알림톡으로 참석 확정 안내를 받으신 분은 신청 시 입력한 이름과 전화번호로 참석 여부를 알려주세요. 이름이 다르더라도 전화번호가 일치하면 신청 내역을 확인할 수 있습니다.","attendanceSuccessText":"참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.","attendanceContactText":"궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.","attendanceContactUrl":"http://pf.kakao.com/_wuWAn","publishPath":"premiere/index.html","elementStyles":{},"plainTextKeys":{}} -->
+<!-- EDITOR_DATA:{"publishTarget":"davinci","registrationSheetId":"501786118","registrationSheetName":"테스트시트","scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg","bgOpacity":36,"bgSize":245,"bgPosX":50,"bgPosY":100,"registrationStatus":"open","closed":false,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":1000,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":21,"titleColor":"#f5f4f2","titleSize":96,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 \n초청될 수 있습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 9월 30일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 10:00 — 17:00 (점심시간 1시간)","smalls":["편집 4시간 · 컬러 2시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"수원미디어센터 디지털교육실2 (Mac)","smalls":["경기도 수원시 팔달구 창룡대로 64","🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다."],"accent":false},{"id":21,"label":"장비","type":"text","main":"DaVinci Resolve Speed Editor 8대\nDaVinci Resolve Micro Panel 1대\nDaVinci Resolve Micro Color Panel 7대\n","smalls":[""],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다.","noticeItems":["예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.","편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다."," 다빈치리졸브 실습 장비는 수량이 제한적이라 모든 분들이 동시에 체험 해볼수는 없다는점 양해 부탁드립니다."],"benefits":[],"sessions":[{"id":1,"label":"6월 11일 (목) 오후","time":"10:00 – 17:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!","attendanceTitle":"참석 여부 확정","attendanceText":"알림톡으로 안내를 받으신 분은 이름과 전화번호로 신청 내역을 찾아주세요. 본인 정보가 맞는지 확인한 후 참석 여부를 선택할 수 있습니다.","attendanceSuccessText":"참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.","attendanceContactText":"궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.","attendanceContactUrl":"http://pf.kakao.com/_wuWAn","publishPath":"premiere/index.html","elementStyles":{},"plainTextKeys":{}} -->
 </body>
 </html>
