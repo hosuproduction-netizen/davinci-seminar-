@@ -463,9 +463,9 @@ async function resetAttendance(){
   ['a-name','a-phone'].forEach(function(id){document.getElementById(id).value='';});
   ['attendance-error','attendance-save-error'].forEach(function(id){document.getElementById(id).style.display='none';});
   restoreButton('attendance-lookup-btn');
-  var id=attendanceLinkedId();
-  attendanceMode=id?'link':'manual';
-  if(id)return lookupLinkedAttendance(id,epoch);
+  // All invitation URLs start with manual lookup, including already-sent rid links.
+  // Only the registration returned by the lookup may be used when saving.
+  attendanceMode='manual';
   showAttendanceStep(1);
 }
 async function lookupLinkedAttendance(id,epoch){
@@ -492,7 +492,6 @@ async function lookupAttendance(){
   var epoch=++attendanceEpoch;clearAttendanceRecord();attendanceMode='manual';button.disabled=true;button.textContent='확인 중...';
   try{
     var action='getAttendanceEligibility&name='+encodeURIComponent(name)+'&phone='+encodeURIComponent(phone);
-    var linkedId=attendanceLinkedId();if(linkedId)action+='&registrationId='+encodeURIComponent(linkedId);
     var data=await attendanceFetchData(action);if(epoch!==attendanceEpoch)return;
     if(!data.eligible)throw new Error(data.message||'참석 확인 대상인 신청 내역을 찾을 수 없습니다.');
     var items=data.reservations||[data];if(!items.length||items.some(function(item){return !item.registrationId;}))throw new Error('신청 정보를 확인하지 못했습니다. 행사 담당자에게 문의해주세요.');
