@@ -14,7 +14,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");}
 .page{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
 .left{background:var(--surface);padding:60px 56px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;}
-.left-bg{position:absolute;inset:0;z-index:0;background-image:url('https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg');background-size:245%;background-repeat:no-repeat;background-position:50% 100%;opacity:0.36;}
+.left-bg{position:absolute;inset:0;z-index:0;background-image:url('https://images.blackmagicdesign.com/images/products/davinciresolve/overview/onesolution/carousel/edit.jpg?_v=1776043037');background-size:180%;background-repeat:no-repeat;background-position:50% 0%;opacity:0.85;}
 .left-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,14,22,0) 0%,rgba(10,14,22,0.5) 50%,rgba(10,14,22,0.95) 80%,rgba(10,14,22,1) 100%);}
 .left>*:not(.left-bg):not(.deco-ring){position:relative;z-index:1;}
 .left-inner{display:flex;flex-direction:column;gap:0;}
@@ -143,7 +143,7 @@ select option{background:#1c1c1f;}
 .slot-avail-badge.few{color:#f5a623;}
 .slot-avail-badge.full{color:rgba(255,255,255,0.25);}
 @keyframes spin{to{transform:rotate(360deg);}}
-@media(max-width:820px){.page{grid-template-columns:1fr;}.left{position:relative;height:auto;padding:40px 24px;overflow:visible;}.left-desc{display:none;}.left-footer{display:none;}.left-title{font-size:13vw;line-height:.88;}.left-title-models{font-size:13vw;}.left-eyebrow{font-size:5vw;}.deco-ring{display:none;}.right{padding:40px 24px;overflow:visible;height:auto;}.field-row{grid-template-columns:1fr;gap:0;}.field-row .field:first-child{margin-bottom:20px;}}
+@media(max-width:820px){.page{grid-template-columns:1fr;}.left{position:relative;height:auto;padding:40px 24px;overflow:visible;}.left-desc{display:block;}.left-footer{display:block;}.left-title{font-size:13vw;line-height:.88;}.left-title-models{font-size:13vw;}.left-eyebrow{font-size:5vw;}.deco-ring{display:none;}.right{padding:40px 24px;overflow:visible;height:auto;}.field-row{grid-template-columns:1fr;gap:0;}.field-row .field:first-child{margin-bottom:20px;}[data-se-text],[data-se-placeholder]{font-size:var(--se-mobile-size,inherit)!important;}}
 @media(max-width:480px){.left{padding:24px 20px;}.right{padding:32px 20px;}.consent-options{grid-template-columns:1fr !important;}}
 </style>
 </head>
@@ -153,22 +153,22 @@ select option{background:#1c1c1f;}
     <div class="left-bg"></div>
     <div class="deco-ring"></div>
     <div class="left-inner">
-      <div class="left-tag"><span data-se-text="tag" style="">프리미어 프로 중급 이상 유저 대상 · 무료 세미나</span></div>
-      <div class="left-eyebrow"><span data-se-text="eyebrow" style="">Blackmagic Design</span></div>
+      <div class="left-tag"><span data-se-text="tag" style="--se-mobile-size:15px;font-size:15px">프리미어 프로 중급 이상 유저 대상<br>무료 세미나</span></div>
+      <div class="left-eyebrow"><span data-se-text="eyebrow" style="--se-mobile-size:19.5px">Blackmagic Design</span></div>
       <h1 class="left-title">
-        <span data-se-text="titleMain" style="">DaVinci<br>Resolve<br>교육</span> <span class="left-title-models"><span data-se-text="titleModels" style=""></span></span>
-        <span class="sub"><span data-se-text="titleSub" style="">편집 & 컬러그레이딩</span></span>
+        <span data-se-text="titleMain" style="--se-mobile-size:50.7px">DaVinci<br>Resolve 21.1<br>편집 교육</span> <span class="left-title-models"><span data-se-text="titleModels" style="--se-mobile-size:50.7px"></span></span>
+        <span class="sub"><span data-se-text="titleSub" style="--se-mobile-size:17px"></span></span>
       </h1>
-      <p class="left-desc"><span data-se-text="desc" style="">프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.<br>단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 <br>초청될 수 있습니다.<br><br>다빈치 리졸브 공인 트레이너가 직접 교육합니다.</span></p>
-      <div class="meta-list"><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.1.label" style="">일시</span></span><span class="meta-row-value"><span data-se-text="meta.1.main" style="">2026년 9월 30일 (목)</span></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.2.label" style="">시간</span></span><span class="meta-row-value"><span data-se-text="meta.2.main" style="">오후 10:00 — 17:00 (점심시간 1시간)</span><small><span data-se-text="meta.2.small.0" style="">편집 4시간 · 컬러 2시간</span></small></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.3.label" style="">장소</span></span><span class="meta-row-value"><span data-se-text="meta.3.main" style="">수원미디어센터 디지털교육실2 (Mac)</span><small><span data-se-text="meta.3.small.0" style="">경기도 수원시 팔달구 창룡대로 64</span></small><small><span data-se-text="meta.3.small.1" style="">🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다.</span></small></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.21.label" style="">장비</span></span><span class="meta-row-value"><span data-se-text="meta.21.main" style="">DaVinci Resolve Speed Editor 8대<br>DaVinci Resolve Micro Panel 1대<br>DaVinci Resolve Micro Color Panel 7대<br></span><small><span data-se-text="meta.21.small.0" style=""></span></small></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.4.label" style="">참가비</span></span><span class="meta-row-value accent"><span data-se-text="meta.4.main" style="">무료</span></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.5.label" style="">정원</span></span><span class="meta-row-value"><span data-se-text="meta.5.main" style="">15명 한정</span></span></div></div>
+      <p class="left-desc"><span data-se-text="desc" style="--se-mobile-size:11px;font-size:14px;font-weight:400;display:block;text-align:left">프리미어프로 를 가르치고 계신 강사님을 위한 다빈치 리졸브 <br>세미나입니다.<br><br>기존 편집 경험을 바탕으로 다빈치 리졸브를 익히고, 향후 강의와 교육 현장에서도 활용하실 수 있도록 돕고자 마련했습니다.<br><br>다빈치 리졸브 공인 트레이너가 직접 교육하며, 프리미어 프로 <br>강의 경력이 있는 분을 우선 선정합니다.<br><br>강의 경험이 없더라도 프리미어 프로를 중급 이상으로 활용하며 <br>다빈치 리졸브 교육에 관심이 있는 분은 신청하실 수 있습니다.<br><br></span></p>
+      <div class="meta-list"><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.1.label" style="--se-mobile-size:14px;color:#f5f4f2;font-size:14px">일시</span></span><span class="meta-row-value"><span data-se-text="meta.1.main" style="--se-mobile-size:15px">2026년 10월 14일 (수)</span></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.2.label" style="--se-mobile-size:14px;color:#f5f4f2;font-size:14px">시간</span></span><span class="meta-row-value"><span data-se-text="meta.2.main" style="--se-mobile-size:15px">오후 13:00 — 16:00</span><small><span data-se-text="meta.2.small.0" style="--se-mobile-size:15px;color:#f5f4f2;font-size:15px">편집 3시간</span></small></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.3.label" style="--se-mobile-size:14px;color:#ffffff;font-size:14px">장소</span></span><span class="meta-row-value"><span data-se-text="meta.3.main" style="--se-mobile-size:15px">하이픽셀플러스 세미나실</span><small><span data-se-text="meta.3.small.0" style="--se-mobile-size:12px;color:#ffffff;font-weight:400">경기도 안양시 동안구 벌말로 126 평촌 오비즈타워 3층 302호</span></small><small><span data-se-text="meta.3.small.1" style="--se-mobile-size:12px;color:#ffffff">🚗 오비즈타워 빌딩 주차 3층 가능</span></small></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.4.label" style="--se-mobile-size:14px;color:#ffffff;font-size:14px">참가비</span></span><span class="meta-row-value accent"><span data-se-text="meta.4.main" style="--se-mobile-size:15px">무료</span></span></div><div class="meta-row"><span class="meta-row-label"><span data-se-text="meta.5.label" style="--se-mobile-size:14px;color:#ffffff;font-size:14px">정원</span></span><span class="meta-row-value"><span data-se-text="meta.5.main" style="--se-mobile-size:15px">15명 한정</span></span></div></div>
     </div>
-    <div class="left-footer"><span data-se-text="ui.footerBrand" style="">Blackmagic Design 공식 총판 · 하이픽셀플러스</span><br>문의: <span data-se-text="footerContact" style="">hipixelplus@naver.com / 031-450-3515</span></div>
+    <div class="left-footer"><span data-se-text="ui.footerBrand" style="--se-mobile-size:12px"><br>Blackmagic Design 공식 총판 · 하이픽셀플러스</span><br>문의: <span data-se-text="footerContact" style="--se-mobile-size:13px">hipixelplus@naver.com / 031-450-3515</span></div>
   </div>
   <div class="right">
     <div id="form-body">
       <div class="tab-bar">
-        <button class="tab-btn active" id="tab-apply" onclick="switchTab('apply')" type="button"><span data-se-text="ui.applyTab" style="">참가 신청</span></button>
-        <button class="tab-btn" id="tab-cancel" onclick="switchTab('cancel')" type="button"><span data-se-text="ui.cancelTab" style="">신청 취소</span></button>
+        <button class="tab-btn active" id="tab-apply" onclick="switchTab('apply')" type="button"><span data-se-text="ui.applyTab" style="--se-mobile-size:14px">참가 신청</span></button>
+        <button class="tab-btn" id="tab-cancel" onclick="switchTab('cancel')" type="button"><span data-se-text="ui.cancelTab" style="--se-mobile-size:14px;color:#38bdf8;font-weight:700">신청 취소</span></button>
       </div>
 
       <!-- ══ 신청 패널 ══ -->
@@ -177,48 +177,50 @@ select option{background:#1c1c1f;}
           <div class="closed-icon">🙏</div>
           <div class="closed-badge">접수 마감</div>
           <h3>신청 접수가 마감되었습니다</h3>
-          <p><span data-se-text="closedMsg" style="">성원에 힘입어 마감되었습니다. 감사합니다! 🙏</span></p>
+          <p><span data-se-text="closedMsg" style="--se-mobile-size:14px">성원에 힘입어 마감되었습니다. 감사합니다! 🙏</span></p>
         </div>
         <div id="apply-form">
           <div class="form-header">
-            <h2><span data-se-text="formTitle" style="">참가 신청</span></h2>
-            <p><span data-se-text="formSubtitle" style="">프리미어 프로 경험자 대상 세미나입니다.</span></p>
+            <h2><span data-se-text="formTitle" style="--se-mobile-size:25px">참가 신청하기</span></h2>
+            <p><span data-se-text="formSubtitle" style="--se-mobile-size:13px;color:#ffffff;font-size:15px;font-weight:400">프리미어 프로 사용 경험이 있는 분들을 위한 세미나입니다.<br>아래 준비물과 사전 설치 안내를 꼭 확인해 주세요.</span></p>
           </div>
-          <div class="notice"><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.0" style="">예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.1" style="">편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.2" style="">당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.3" style="">현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.4" style=""> 다빈치리졸브 실습 장비는 수량이 제한적이라 모든 분들이 동시에 체험 해볼수는 없다는점 양해 부탁드립니다.</span></div></div>
+          <div class="notice"><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.0" style="--se-mobile-size:14px;color:#38bdf8">개인 노트북과 이어폰을 지참해 주세요. <br>실습을 위해 DaVinci Resolve 21.1을 미리 설치해 주세요.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.1" style="--se-mobile-size:14px;color:#38bdf8">다빈치 리졸브 Studio 버전이 없으신 경우, <br>무료 버전을 설치하셔도 참여하실 수 있습니다.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.2" style="--se-mobile-size:14px;color:#38bdf8">당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.</span></div><div class="notice-item"><div class="notice-dot"></div><span data-se-text="notice.3" style="--se-mobile-size:14px;color:#38bdf8;font-weight:400">예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.</span></div></div>
           
           <div class="field-row">
-            <div class="field"><label><span data-se-text="fixed.name.label" style="">이름</span> <span class="req">*</span></label><input type="text" id="f-name" data-se-placeholder="fixed.name.placeholder" style="" placeholder="홍길동" autocomplete="name"></div>
-            <div class="field"><label><span data-se-text="fixed.phone.label" style="">전화번호</span> <span class="req">*</span></label><input type="tel" id="f-phone" data-se-placeholder="fixed.phone.placeholder" style="" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
+            <div class="field"><label><span data-se-text="fixed.name.label" style="--se-mobile-size:14px">이름</span> <span class="req">*</span></label><input type="text" id="f-name" data-se-placeholder="fixed.name.placeholder" style="--se-mobile-size:14px" placeholder="홍길동" autocomplete="name"></div>
+            <div class="field"><label><span data-se-text="fixed.phone.label" style="--se-mobile-size:14px">전화번호</span> <span class="req">*</span></label><input type="tel" id="f-phone" data-se-placeholder="fixed.phone.placeholder" style="--se-mobile-size:14px" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
           </div>
-          <div class="field"><label><span data-se-text="fixed.email.label" style="">이메일</span> <span class="req">*</span></label><input type="email" id="f-email" data-se-placeholder="fixed.email.placeholder" style="" placeholder="이메일 주소" autocomplete="email"></div>
-          <div class="field"><label><span data-se-text="fixed.company.label" style="">직장 또는 소속</span> <span class="req">*</span></label><input type="text" id="f-company" data-se-placeholder="fixed.company.placeholder" style="" placeholder="직장 또는 소속"></div>
-          <div class="field"><label><span data-se-text="custom.21.label" style="">프리미어 프로 레벨</span> <span class="req">*</span></label><select data-se-placeholder="custom.21.placeholder" style="" id="cf-21"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="중급 (다양한 기능 활용 가능)">중급 (다양한 기능 활용 가능)</option><option value="고급 (심화 기능 및 강의 가능)">고급 (심화 기능 및 강의 가능)</option></select></div><div class="field"><label><span data-se-text="custom.22.label" style="">다빈치 리졸브 레벨</span></label><select data-se-placeholder="custom.22.placeholder" style="" id="cf-22"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="전혀 없음">전혀 없음</option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select></div><div class="field"><label><span data-se-text="custom.23.label" style="">강의 경력 (선택 · 강사 우대)</span></label><textarea data-se-placeholder="custom.23.placeholder" style="min-height:88px;resize:vertical;line-height:1.6;" id="cf-23" placeholder="예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요."></textarea></div><div class="field"><label><span data-se-text="custom.24.label" style="">수업 관련 궁금한 점 (선택)</span></label><textarea data-se-placeholder="custom.24.placeholder" style="min-height:88px;resize:vertical;line-height:1.6;" id="cf-24" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요."></textarea></div>
+          <div class="field"><label><span data-se-text="fixed.email.label" style="--se-mobile-size:14px">이메일</span> <span class="req">*</span></label><input type="email" id="f-email" data-se-placeholder="fixed.email.placeholder" style="--se-mobile-size:14px" placeholder="이메일 주소" autocomplete="email"></div>
+          <div class="field"><label><span data-se-text="fixed.company.label" style="--se-mobile-size:14px">직장 또는 소속</span> <span class="req">*</span></label><input type="text" id="f-company" data-se-placeholder="fixed.company.placeholder" style="--se-mobile-size:14px" placeholder="직장 또는 소속"></div>
+          <div class="field"><label><span data-se-text="custom.21.label" style="--se-mobile-size:14px">프리미어 프로 레벨</span> <span class="req">*</span></label><select data-se-placeholder="custom.21.placeholder" style="--se-mobile-size:14px" id="cf-21"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="중급 (다양한 기능 활용 가능)">중급 (다양한 기능 활용 가능)</option><option value="고급 (심화 기능 및 강의 가능)">고급 (심화 기능 및 강의 가능)</option></select></div><div class="field"><label><span data-se-text="custom.22.label" style="--se-mobile-size:14px">다빈치 리졸브 레벨</span></label><select data-se-placeholder="custom.22.placeholder" style="--se-mobile-size:14px" id="cf-22"><option value="" disabled selected>해당되는 숙련도 수준을 선택해주세요.</option><option value="전혀 없음">전혀 없음</option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select></div><div class="field"><label><span data-se-text="custom.23.label" style="--se-mobile-size:14px">강의 경력 (선택 · 강사 우대)</span></label><textarea data-se-placeholder="custom.23.placeholder" style="min-height:88px;resize:vertical;line-height:1.6;--se-mobile-size:13px" id="cf-23" placeholder="예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요."></textarea></div><div class="field"><label><span data-se-text="custom.24.label" style="--se-mobile-size:14px">수업 관련 궁금한 점 (선택)</span></label><textarea data-se-placeholder="custom.24.placeholder" style="min-height:88px;resize:vertical;line-height:1.6;--se-mobile-size:13px" id="cf-24" placeholder="사전에 궁금하신 점이 있으시면 자유롭게 적어주세요."></textarea></div>
           <div class="field">
-            <label><span data-se-text="ui.sessionHeading" style="">참가 일시</span> <span class="req">*</span></label>
-            <div class="time-options" style="grid-template-columns:1fr;"><div class="time-option"><input type="radio" name="session" id="session-1" value="6월 11일 (목) 오후 10:00 – 17:00"><label for="session-1"><span class="time-label-title"><span data-se-text="session.1.label" style="">6월 11일 (목) 오후</span></span><span class="time-label-sub"><span data-se-text="session.1.time" style="">10:00 – 17:00</span></span><span class="slot-avail-badge" id="slot-avail-1"></span></label></div></div>
+            <label><span data-se-text="ui.sessionHeading" style="--se-mobile-size:14px">참가 일시</span> <span class="req">*</span></label>
+            <div class="time-options" style="grid-template-columns:1fr;"><div class="time-option"><input type="radio" name="session" id="session-1" value="10월 14일 (수)  오후 13:00 – 16:00 
+※ 좌석이 한정되어 있어 신청만으로 참석이 확정되지는 않습니다. 
+선정되신 분께 개별 안내드립니다. "><label for="session-1"><span class="time-label-title"><span data-se-text="session.1.label" style="--se-mobile-size:14px">10월 14일 (수) </span></span><span class="time-label-sub"><span data-se-text="session.1.time" style="--se-mobile-size:11px;color:#ffffff;font-size:15px">오후 13:00 – 16:00 <br>※ 좌석이 한정되어 있어 신청만으로 참석이 확정되지는 않습니다. <br>선정되신 분께 개별 안내드립니다. </span></span><span class="slot-avail-badge" id="slot-avail-1"></span></label></div></div>
           </div>
           <div class="field">
-            <label><span data-se-text="ui.emailHeading" style="">이메일 수신 동의</span> <span style="color:var(--text3);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:400">(선택)</span></label>
+            <label><span data-se-text="ui.emailHeading" style="--se-mobile-size:14px">이메일 수신 동의</span> <span style="color:var(--text3);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:400">(선택)</span></label>
             <div class="consent-options">
-              <div class="consent-option"><input type="radio" name="email-consent" id="consent-yes" value="동의"><label for="consent-yes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-se-text="ui.emailYes" style="">예, 동의합니다</span></label></div>
-              <div class="consent-option"><input type="radio" name="email-consent" id="consent-no" value="미동의"><label for="consent-no"><span data-se-text="ui.emailNo" style="">아니요</span></label></div>
+              <div class="consent-option"><input type="radio" name="email-consent" id="consent-yes" value="동의"><label for="consent-yes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-se-text="ui.emailYes" style="--se-mobile-size:13px">예, 동의합니다</span></label></div>
+              <div class="consent-option"><input type="radio" name="email-consent" id="consent-no" value="미동의"><label for="consent-no"><span data-se-text="ui.emailNo" style="--se-mobile-size:13px">아니요</span></label></div>
             </div>
           </div>
           <div class="field photo-consent-field">
             <fieldset class="photo-consent-box">
-              <legend class="photo-consent-heading"><span data-se-text="photoConsentTitle" style="">사진 및 영상 촬영·활용 동의</span> <span class="req">*</span></legend>
-              <p class="photo-consent-copy" id="photo-consent-description"><span data-se-text="photoConsentText" style="">본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.</span></p>
+              <legend class="photo-consent-heading"><span data-se-text="photoConsentTitle" style="--se-mobile-size:14px">사진 및 영상 촬영·활용 동의</span> <span class="req">*</span></legend>
+              <p class="photo-consent-copy" id="photo-consent-description"><span data-se-text="photoConsentText" style="--se-mobile-size:13px">본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.</span></p>
               <div class="consent-options photo-consent-options">
-                <div class="consent-option"><input type="radio" name="photo-consent" id="photo-consent-yes" value="동의" aria-describedby="photo-consent-description" required><label for="photo-consent-yes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-se-text="ui.photoYes" style="">예, 동의합니다</span></label></div>
-                <div class="consent-option"><input type="radio" name="photo-consent" id="photo-consent-no" value="미동의" aria-describedby="photo-consent-description" required><label for="photo-consent-no"><span data-se-text="ui.photoNo" style="">아니요</span></label></div>
+                <div class="consent-option"><input type="radio" name="photo-consent" id="photo-consent-yes" value="동의" aria-describedby="photo-consent-description" required><label for="photo-consent-yes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-se-text="ui.photoYes" style="--se-mobile-size:13px">예, 동의합니다</span></label></div>
+                <div class="consent-option"><input type="radio" name="photo-consent" id="photo-consent-no" value="미동의" aria-describedby="photo-consent-description" required><label for="photo-consent-no"><span data-se-text="ui.photoNo" style="--se-mobile-size:13px">아니요</span></label></div>
               </div>
             </fieldset>
           </div>
           <div class="agree">
             <input type="checkbox" id="f-agree">
-            <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer"><strong><span data-se-text="ui.privacyHeading" style="">개인정보 수집 및 이용에 동의합니다.</span></strong><br><span data-se-text="agreeText" style="">원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. </span></label>
+            <label for="f-agree" class="agree-text" style="margin:0;cursor:pointer"><strong><span data-se-text="ui.privacyHeading" style="--se-mobile-size:13px;font-size:14px">개인정보 수집 및 이용에 동의합니다.</span></strong><br><span data-se-text="agreeText" style="--se-mobile-size:12px;font-size:14px">원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. </span></label>
           </div>
-          <button class="submit-btn" id="submit-btn" type="button"><span data-se-text="ui.submitLabel" style="">신청 완료하기</span> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="submit-btn" id="submit-btn" type="button"><span data-se-text="ui.submitLabel" style="--se-mobile-size:15px">신청 완료하기</span> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <p class="submit-note">수집된 정보는 세미나 운영 목적으로만 사용됩니다</p>
         </div>
       </div>
@@ -227,23 +229,23 @@ select option{background:#1c1c1f;}
       <div class="cancel-panel" id="cancel-panel">
         <div class="cancel-step show" id="cancel-step1">
           <div class="form-header">
-            <h2><span data-se-text="ui.cancelTitle" style="">예약 취소</span></h2>
-            <p><span data-se-text="ui.cancelIntro" style="">신청 시 입력하신 전화번호로 예약을 조회합니다.</span></p>
+            <h2><span data-se-text="ui.cancelTitle" style="--se-mobile-size:25px">예약 취소</span></h2>
+            <p><span data-se-text="ui.cancelIntro" style="--se-mobile-size:14px">신청 시 입력하신 전화번호로 예약을 조회합니다.</span></p>
           </div>
           <div class="field">
             <label>전화번호 <span class="req">*</span></label>
             <input type="tel" id="c-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13">
           </div>
           <button class="submit-btn" id="lookup-btn" type="button" onclick="lookupReservation()">
-            <span data-se-text="ui.cancelLookup" style="">예약 조회하기</span>
+            <span data-se-text="ui.cancelLookup" style="--se-mobile-size:15px">예약 조회하기</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <p class="c-error" id="c-lookup-error"></p>
         </div>
         <div class="cancel-step" id="cancel-step2">
           <div class="form-header">
-            <h2><span data-se-text="ui.cancelConfirmTitle" style="">예약 확인</span></h2>
-            <p><span data-se-text="ui.cancelConfirmIntro" style="">아래 예약 정보를 확인 후 취소해 주세요.</span></p>
+            <h2><span data-se-text="ui.cancelConfirmTitle" style="--se-mobile-size:25px">예약 확인</span></h2>
+            <p><span data-se-text="ui.cancelConfirmIntro" style="--se-mobile-size:14px">아래 예약 정보를 확인 후 취소해 주세요.</span></p>
           </div>
           <div class="reservation-card">
             <div class="reservation-card-label">예약 정보</div>
@@ -254,14 +256,14 @@ select option{background:#1c1c1f;}
               <span id="c-res-session-text"></span>
             </div>
           </div>
-          <button class="cancel-btn" id="confirm-cancel-btn" type="button" onclick="confirmCancel()"><span data-se-text="ui.cancelAction" style="">이 예약을 취소합니다</span></button>
+          <button class="cancel-btn" id="confirm-cancel-btn" type="button" onclick="confirmCancel()"><span data-se-text="ui.cancelAction" style="--se-mobile-size:15px">이 예약을 취소합니다</span></button>
           <button class="cancel-back-btn" type="button" onclick="resetCancel()">돌아가기</button>
         </div>
         <div class="cancel-step" id="cancel-step3">
           <div class="cancel-success">
             <div class="cancel-success-icon">✓</div>
-            <h3><span data-se-text="ui.cancelDoneTitle" style="">취소가 완료되었습니다</span></h3>
-            <p><span data-se-text="ui.cancelDoneText" style="">예약이 정상적으로 취소되었습니다.<br>다시 신청하시려면 신청 탭으로 이동해 주세요.</span></p>
+            <h3><span data-se-text="ui.cancelDoneTitle" style="--se-mobile-size:25px">취소가 완료되었습니다</span></h3>
+            <p><span data-se-text="ui.cancelDoneText" style="--se-mobile-size:14px">예약이 정상적으로 취소되었습니다.<br>다시 신청하시려면 신청 탭으로 이동해 주세요.</span></p>
             <button class="submit-btn" type="button" onclick="switchTab('apply')" style="margin-top:28px;">다시 신청하기 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
@@ -275,19 +277,19 @@ select option{background:#1c1c1f;}
         </div>
         <div class="attendance-step show" id="attendance-step1">
           <div class="form-header">
-            <h2><span data-se-text="attendanceTitle" style="">참석 여부 확정</span></h2>
-            <p><span data-se-text="attendanceText" style="">알림톡으로 안내를 받으신 분은 이름과 전화번호로 신청 내역을 찾아주세요. 본인 정보가 맞는지 확인한 후 참석 여부를 선택할 수 있습니다.</span></p>
+            <h2><span data-se-text="attendanceTitle" style="--se-mobile-size:25px">참석 여부 확정</span></h2>
+            <p><span data-se-text="attendanceText" style="--se-mobile-size:14px">알림톡으로 안내를 받으신 분은 이름과 전화번호로 신청 내역을 찾아주세요. 본인 정보가 맞는지 확인한 후 참석 여부를 선택할 수 있습니다.</span></p>
           </div>
           <div class="field-row">
             <div class="field"><label for="a-name">이름 <span class="req">*</span></label><input type="text" id="a-name" placeholder="신청자 이름" autocomplete="name"></div>
             <div class="field"><label for="a-phone">전화번호 <span class="req">*</span></label><input type="tel" id="a-phone" placeholder="010-0000-0000" autocomplete="tel" oninput="formatPhone(this)" maxlength="13"></div>
           </div>
-          <button class="submit-btn" id="attendance-lookup-btn" type="button" onclick="lookupAttendance()"><span data-se-text="ui.attendanceLookup" style="">신청 정보 확인하기</span></button>
+          <button class="submit-btn" id="attendance-lookup-btn" type="button" onclick="lookupAttendance()"><span data-se-text="ui.attendanceLookup" style="--se-mobile-size:15px">신청 정보 확인하기</span></button>
           <p class="c-error" id="attendance-error" role="alert"></p>
         </div>
         <div class="attendance-step" id="attendance-step4">
           <div class="attendance-steps"><strong>1. 신청 정보 확인</strong> &nbsp; / &nbsp; 2. 참석 여부 선택</div>
-          <div class="form-header"><h2><span data-se-text="ui.attendanceMatchTitle" style="">신청 정보가 맞나요?</span></h2><p><span data-se-text="ui.attendanceMatchIntro" style="">아래 정보가 본인 신청 내역인지 확인해주세요. 아직 참석 여부는 저장되지 않았습니다.</span></p></div>
+          <div class="form-header"><h2><span data-se-text="ui.attendanceMatchTitle" style="--se-mobile-size:25px">신청 정보가 맞나요?</span></h2><p><span data-se-text="ui.attendanceMatchIntro" style="--se-mobile-size:14px">아래 정보가 본인 신청 내역인지 확인해주세요. 아직 참석 여부는 저장되지 않았습니다.</span></p></div>
           <div class="reservation-card">
             <div class="reservation-card-label">신청자</div><div class="reservation-card-name" id="a-match-name"></div>
             <div class="attendance-phone" id="a-match-phone"></div>
@@ -297,19 +299,19 @@ select option{background:#1c1c1f;}
             <div class="attendance-name-note" id="a-name-match-note">입력하신 이름과 다르지만 전화번호가 일치하는 신청 내역입니다. 본인 신청이 맞는지 먼저 확인해주세요.</div>
           </div>
           <div class="attendance-info-actions">
-            <button class="submit-btn" type="button" onclick="confirmAttendanceInfo()"><span data-se-text="ui.attendanceInfoYes" style="">제 정보가 맞습니다</span></button>
-            <button class="cancel-back-btn" type="button" onclick="rejectAttendanceInfo()"><span data-se-text="ui.attendanceInfoNo" style="">제 정보가 아닙니다</span></button>
+            <button class="submit-btn" type="button" onclick="confirmAttendanceInfo()"><span data-se-text="ui.attendanceInfoYes" style="--se-mobile-size:15px">제 정보가 맞습니다</span></button>
+            <button class="cancel-back-btn" type="button" onclick="rejectAttendanceInfo()"><span data-se-text="ui.attendanceInfoNo" style="--se-mobile-size:14px">제 정보가 아닙니다</span></button>
           </div>
         </div>
         <div class="attendance-step" id="attendance-step5">
-          <div class="form-header"><h2><span data-se-text="ui.attendanceMismatchTitle" style="">본인 정보가 아닌가요?</span></h2><p><span data-se-text="ui.attendanceMismatchText" style="">참석 여부를 저장하지 않았습니다. 본인에게 전달된 링크인지 확인해주세요. 정보가 다르거나 수정이 필요하면 아래 카카오톡으로 문의해주세요.</span></p></div>
+          <div class="form-header"><h2><span data-se-text="ui.attendanceMismatchTitle" style="--se-mobile-size:25px">본인 정보가 아닌가요?</span></h2><p><span data-se-text="ui.attendanceMismatchText" style="--se-mobile-size:14px">참석 여부를 저장하지 않았습니다. 본인에게 전달된 링크인지 확인해주세요. 정보가 다르거나 수정이 필요하면 아래 카카오톡으로 문의해주세요.</span></p></div>
           <button class="cancel-back-btn" type="button" onclick="resetAttendance()">신청 정보 다시 확인하기</button>
         </div>
         <div class="attendance-step" id="attendance-step2">
           <div class="attendance-steps">1. 신청 정보 확인 &nbsp; / &nbsp; <strong>2. 참석 여부 선택</strong></div>
           <div class="form-header">
-            <h2><span data-se-text="ui.attendanceChooseTitle" style="">참석 여부를 선택해주세요</span></h2>
-            <p><span data-se-text="ui.attendanceChooseIntro" style="">선택 내용은 다시 접속해 변경할 수 있습니다.</span></p>
+            <h2><span data-se-text="ui.attendanceChooseTitle" style="--se-mobile-size:25px">참석 여부를 선택해주세요</span></h2>
+            <p><span data-se-text="ui.attendanceChooseIntro" style="--se-mobile-size:14px">선택 내용은 다시 접속해 변경할 수 있습니다.</span></p>
           </div>
           <div class="reservation-card">
             <div class="reservation-card-label">신청 정보</div>
@@ -319,8 +321,8 @@ select option{background:#1c1c1f;}
             <div class="attendance-current" id="a-current-response"></div>
           </div>
           <div class="attendance-actions">
-            <button class="attendance-choice yes" type="button" onclick="saveAttendance('참석')"><span data-se-text="ui.attendanceYes" style="">참석을 확정합니다</span></button>
-            <button class="attendance-choice no" type="button" onclick="saveAttendance('불참')"><span data-se-text="ui.attendanceNo" style="">참석하지 않습니다</span></button>
+            <button class="attendance-choice yes" type="button" onclick="saveAttendance('참석')"><span data-se-text="ui.attendanceYes" style="--se-mobile-size:15px">참석을 확정합니다</span></button>
+            <button class="attendance-choice no" type="button" onclick="saveAttendance('불참')"><span data-se-text="ui.attendanceNo" style="--se-mobile-size:15px">참석하지 않습니다</span></button>
           </div>
           <p class="attendance-current" id="attendance-saving" role="status" aria-live="polite"></p>
           <p class="c-error" id="attendance-save-error" role="alert"></p>
@@ -330,21 +332,21 @@ select option{background:#1c1c1f;}
           <div class="cancel-success">
             <div class="cancel-success-icon">✓</div>
             <h3 id="attendance-result-title">응답이 저장되었습니다</h3>
-            <p><span data-se-text="attendanceSuccessText" style="">참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.</span></p>
+            <p><span data-se-text="attendanceSuccessText" style="--se-mobile-size:14px">참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.</span></p>
             <button class="cancel-back-btn" type="button" onclick="resetAttendance()" style="margin-top:24px;">응답 변경하기</button>
           </div>
         </div>
         <div class="attendance-contact">
-          <span data-se-text="attendanceContactText" style="">궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.</span>
-          <br><a href="http://pf.kakao.com/_wuWAn" target="_blank" rel="noopener noreferrer"><span data-se-text="ui.contactLink" style="">카카오톡 플러스친구 문의하기 ↗</span></a>
+          <span data-se-text="attendanceContactText" style="--se-mobile-size:14px">궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.</span>
+          <br><a href="http://pf.kakao.com/_wuWAn" target="_blank" rel="noopener noreferrer"><span data-se-text="ui.contactLink" style="--se-mobile-size:13px">카카오톡 플러스친구 문의하기 ↗</span></a>
         </div>
       </div>
     </div>
 
     <div class="success" id="msg-success">
       <div class="success-icon">✓</div>
-      <h3><span data-se-text="successTitle" style="">신청이 완료되었습니다</span></h3>
-      <p><span data-se-text="successMsg" style="">입력하신 연락처로 확인 메시지를 드릴 예정입니다.<br>교육 당일 뵙겠습니다!</span></p>
+      <h3><span data-se-text="successTitle" style="--se-mobile-size:25px">신청이 완료되었습니다</span></h3>
+      <p><span data-se-text="successMsg" style="--se-mobile-size:14px">입력하신 연락처로 확인 메시지를 드릴 예정입니다.<br>교육 당일 뵙겠습니다!</span></p>
     </div>
   </div>
 </div>
@@ -365,7 +367,7 @@ async function registrationRequest(action,payload){
 }
 var MAX_PER_SLOT=1000;
 var REGISTRATION_STATUS='open';
-var SESSIONS=[{"id":1,"key":"6월 11일 (목) 오후 10:00 – 17:00"}];
+var SESSIONS=[{"id":1,"key":"10월 14일 (수)  오후 13:00 – 16:00 \n※ 좌석이 한정되어 있어 신청만으로 참석이 확정되지는 않습니다. \n선정되신 분께 개별 안내드립니다. "}];
 var BUTTON_HTML={};
 ['submit-btn','lookup-btn','confirm-cancel-btn','attendance-lookup-btn'].forEach(function(id){var button=document.getElementById(id);if(button)BUTTON_HTML[id]=button.innerHTML;});
 function restoreButton(id){var button=document.getElementById(id);if(button){button.disabled=false;button.innerHTML=BUTTON_HTML[id]||'';}}
@@ -693,6 +695,6 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 });
 </script>
-<!-- EDITOR_DATA:{"publishTarget":"davinci","registrationSheetId":"501786118","registrationSheetName":"테스트시트","scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://ecimg.cafe24img.com/pg821b55468729089/hipplus/file_data/8f35f0edd5f3ccd936c5241eb31afcd5.jpg","bgOpacity":36,"bgSize":245,"bgPosX":50,"bgPosY":100,"registrationStatus":"open","closed":false,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":1000,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":21,"titleColor":"#f5f4f2","titleSize":96,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"프리미어 프로 중급 이상 유저 대상 · 무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve\n교육","titleModels":"","titleSub":"편집 & 컬러그레이딩","desc":"프리미어 프로를 중급 이상으로 쓰시는 분이라면 누구나 참여하실 수 있습니다.\n단, 프리미어 프로 강의 경력이 있으신 분은 우선적으로 \n초청될 수 있습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육합니다.","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 9월 30일 (목)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 10:00 — 17:00 (점심시간 1시간)","smalls":["편집 4시간 · 컬러 2시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"수원미디어센터 디지털교육실2 (Mac)","smalls":["경기도 수원시 팔달구 창룡대로 64","🚗 전용 주차장이 없습니다. 근처 공영주차장에 주차하셔야 합니다."],"accent":false},{"id":21,"label":"장비","type":"text","main":"DaVinci Resolve Speed Editor 8대\nDaVinci Resolve Micro Panel 1대\nDaVinci Resolve Micro Color Panel 7대\n","smalls":[""],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청","formSubtitle":"프리미어 프로 경험자 대상 세미나입니다.","noticeItems":["예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요.","편집 실습이 포함되어 있으니 개인 이어폰을 지참해주세요.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","현장에 아이맥(iMac)이 준비되어 있지만, 편하신 경우 개인 노트북을 가져오셔도 좋습니다."," 다빈치리졸브 실습 장비는 수량이 제한적이라 모든 분들이 동시에 체험 해볼수는 없다는점 양해 부탁드립니다."],"benefits":[],"sessions":[{"id":1,"label":"6월 11일 (목) 오후","time":"10:00 – 17:00"}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!","attendanceTitle":"참석 여부 확정","attendanceText":"알림톡으로 안내를 받으신 분은 이름과 전화번호로 신청 내역을 찾아주세요. 본인 정보가 맞는지 확인한 후 참석 여부를 선택할 수 있습니다.","attendanceSuccessText":"참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.","attendanceContactText":"궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.","attendanceContactUrl":"http://pf.kakao.com/_wuWAn","publishPath":"premiere/index.html","elementStyles":{},"plainTextKeys":{}} -->
+<!-- EDITOR_DATA:{"publishTarget":"davinci","registrationSheetId":"501786118","registrationSheetName":"테스트시트","scriptUrl":"https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec","bgImage":"https://images.blackmagicdesign.com/images/products/davinciresolve/overview/onesolution/carousel/edit.jpg?_v=1776043037","bgOpacity":85,"bgSize":180,"bgPosX":50,"bgPosY":0,"registrationStatus":"open","closed":false,"scheduledMsg":"신청 접수 시작 전입니다. 오픈까지 잠시만 기다려주세요.","closedMsg":"성원에 힘입어 마감되었습니다. 감사합니다! 🙏","maxPerSlot":1000,"tagColor":"#f39200","tagSize":13,"subColor":"#f39200","eyebrowColor":"#ff9b0f","eyebrowSize":21,"titleColor":"#f5f4f2","titleSize":96,"titleModelsColor":"#ffffff","titleModelsSize":96,"titleSubSize":17,"metaLabelColor":"rgba(255,255,255,0.45)","metaLabelSize":12,"metaValueColor":"#ffffff","metaValueSize":15,"metaSmallColor":"rgba(255,255,255,0.4)","metaSmallSize":12,"descColor":"#ffffff","descSize":16,"footerColor":"rgba(255,255,255,0.4)","footerSize":15,"formTitleSize":25,"formTitleColor":"#ffffff","formSubtitleSize":14,"formSubtitleColor":"#ffffff","fieldLabelSize":14,"fieldLabelColor":"#ffffff","fieldInputSize":14,"fieldInputColor":"#ffffff","noticeSize":14,"noticeColor":"rgba(255,255,255,0.7)","agreeLabelSize":15,"agreeLabelColor":"#c9c9c9","benefitTitleSize":12,"benefitTitleColor":"#f39200","benefitNameSize":15,"benefitNameColor":"#f5f4f2","benefitSubSize":13,"benefitSubColor":"#888785","sessionTitleSize":15,"sessionTitleColor":"#f5f4f2","sessionSubSize":12,"sessionSubColor":"#888785","tabTextSize":14,"tabTextColor":"#f5f4f2","consentTextSize":14,"consentTextColor":"#888785","photoConsentDescSize":13,"photoConsentDescColor":"#b8b7b4","buttonTextSize":15,"buttonTextColor":"#0c0c0d","submitNoteSize":14,"submitNoteColor":"#444342","tag":"프리미어 프로 중급 이상 유저 대상\n무료 세미나","eyebrow":"Blackmagic Design","titleMain":"DaVinci\nResolve 21.1\n편집 교육","titleModels":"","titleSub":"","desc":"프리미어프로 를 가르치고 계신 강사님을 위한 다빈치 리졸브 \n세미나입니다.\n\n기존 편집 경험을 바탕으로 다빈치 리졸브를 익히고, 향후 강의와 교육 현장에서도 활용하실 수 있도록 돕고자 마련했습니다.\n\n다빈치 리졸브 공인 트레이너가 직접 교육하며, 프리미어 프로 \n강의 경력이 있는 분을 우선 선정합니다.\n\n강의 경험이 없더라도 프리미어 프로를 중급 이상으로 활용하며 \n다빈치 리졸브 교육에 관심이 있는 분은 신청하실 수 있습니다.\n\n","metaRows":[{"id":1,"label":"일시","type":"text","main":"2026년 10월 14일 (수)","smalls":[],"accent":false},{"id":2,"label":"시간","type":"text","main":"오후 13:00 — 16:00","smalls":["편집 3시간"],"accent":false},{"id":3,"label":"장소","type":"text","main":"하이픽셀플러스 세미나실","smalls":["경기도 안양시 동안구 벌말로 126 평촌 오비즈타워 3층 302호","🚗 오비즈타워 빌딩 주차 3층 가능"],"accent":false},{"id":4,"label":"참가비","type":"text","main":"무료","smalls":[],"accent":true},{"id":5,"label":"정원","type":"text","main":"15명 한정","smalls":[],"accent":false}],"footerContact":"hipixelplus@naver.com / 031-450-3515","formTitle":"참가 신청하기","formSubtitle":"프리미어 프로 사용 경험이 있는 분들을 위한 세미나입니다.\n아래 준비물과 사전 설치 안내를 꼭 확인해 주세요.","noticeItems":["개인 노트북과 이어폰을 지참해 주세요. \n실습을 위해 DaVinci Resolve 21.1을 미리 설치해 주세요.","다빈치 리졸브 Studio 버전이 없으신 경우, \n무료 버전을 설치하셔도 참여하실 수 있습니다.","당일 취소·노쇼 시 향후 세미나 참여에 제한이 있을 수 있습니다.","예약 취소가 필요하신 경우, '예약 취소' 버튼을 눌러 간편하게 진행해 주세요."],"benefits":[],"sessions":[{"id":1,"label":"10월 14일 (수) ","time":"오후 13:00 – 16:00 \n※ 좌석이 한정되어 있어 신청만으로 참석이 확정되지는 않습니다. \n선정되신 분께 개별 안내드립니다. "}],"fixedFields":[{"id":"name","label":"이름","placeholder":"홍길동"},{"id":"phone","label":"전화번호","placeholder":"010-0000-0000"},{"id":"email","label":"이메일","placeholder":"이메일 주소"},{"id":"company","label":"직장 또는 소속","placeholder":"직장 또는 소속"}],"customFields":[{"id":21,"type":"select","label":"프리미어 프로 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":true,"options":["중급 (다양한 기능 활용 가능)","고급 (심화 기능 및 강의 가능)"]},{"id":22,"type":"select","label":"다빈치 리졸브 레벨","placeholder":"해당되는 숙련도 수준을 선택해주세요.","required":false,"options":["전혀 없음","초급","중급","고급"]},{"id":23,"type":"textarea","label":"강의 경력 (선택 · 강사 우대)","placeholder":"예) 클래스101 프리미어 프로 강의 2년, 학원 출강 경험 등 간단히 적어주세요.","required":false,"options":[]},{"id":24,"type":"textarea","label":"수업 관련 궁금한 점 (선택)","placeholder":"사전에 궁금하신 점이 있으시면 자유롭게 적어주세요.","required":false,"options":[]}],"photoConsentTitle":"사진 및 영상 촬영·활용 동의","photoConsentText":"본 행사는 사진 및 영상 촬영이 진행되며, 촬영된 자료는 Blackmagic Design의 행사 홍보 및 마케팅 목적으로 공식 홈페이지, SNS(Instagram, Facebook 등) 및 기타 홍보자료에 활용될 수 있습니다.","agreeText":"원활한 운영을 위해 당일 취소 또는 노쇼의 경우, 향후 세미나 및 교육프로그램 참여에 제한이 있을 수 있습니다. ","successTitle":"신청이 완료되었습니다","successMsg":"입력하신 연락처로 확인 메시지를 드릴 예정입니다.\n교육 당일 뵙겠습니다!","attendanceTitle":"참석 여부 확정","attendanceText":"알림톡으로 안내를 받으신 분은 이름과 전화번호로 신청 내역을 찾아주세요. 본인 정보가 맞는지 확인한 후 참석 여부를 선택할 수 있습니다.","attendanceSuccessText":"참석 여부가 정상적으로 저장되었습니다. 응답해 주셔서 감사합니다.","attendanceContactText":"궁금한 점이 있으시면 카카오톡 플러스친구로 문의해주세요.","attendanceContactUrl":"http://pf.kakao.com/_wuWAn","publishPath":"premiere/index.html","elementStyles":{"meta.3.small.0":{"color":"#ffffff","fontWeight":"400"},"meta.3.small.1":{"color":"#ffffff"},"session.1.time":{"color":"#ffffff","fontSize":15,"mobileFontSize":11},"meta.2.small.0":{"fontSize":15,"color":"#f5f4f2"},"notice.0":{"color":"#38bdf8"},"notice.1":{"color":"#38bdf8"},"notice.2":{"color":"#38bdf8"},"notice.3":{"color":"#38bdf8","fontWeight":"400"},"agreeText":{"fontSize":14,"mobileFontSize":12},"ui.privacyHeading":{"fontSize":14,"mobileFontSize":13},"formSubtitle":{"color":"#ffffff","fontWeight":"400","fontSize":15,"mobileFontSize":13},"desc":{"fontWeight":"400","textAlign":"left","fontSize":14,"mobileFontSize":11},"tag":{"fontSize":15},"meta.1.label":{"fontSize":14,"color":"#f5f4f2"},"meta.2.label":{"fontSize":14,"color":"#f5f4f2"},"meta.3.label":{"fontSize":14,"color":"#ffffff"},"meta.21.label":{"fontSize":14,"color":"#ffffff"},"meta.4.label":{"fontSize":14,"color":"#ffffff"},"meta.5.label":{"fontSize":14,"color":"#ffffff"},"ui.footerBrand":{"mobileFontSize":12},"footerContact":{"mobileFontSize":13},"session.1.label":{"mobileFontSize":14},"ui.emailYes":{"mobileFontSize":13},"ui.emailNo":{"mobileFontSize":13},"ui.photoYes":{"mobileFontSize":13},"ui.photoNo":{"mobileFontSize":13},"custom.23.placeholder":{"mobileFontSize":13},"custom.24.placeholder":{"mobileFontSize":13},"ui.cancelTab":{"color":"#38bdf8","fontWeight":"700"}},"plainTextKeys":{"meta.1.main":true,"meta.2.main":true,"meta.2.small.0":true,"meta.3.main":true,"meta.3.small.0":true,"meta.3.small.1":true,"meta.21.main":true,"session.1.label":true,"session.1.time":true,"notice.0":true,"notice.1":true,"formSubtitle":true,"formTitle":true,"titleSub":true,"titleModels":true,"titleMain":true,"tag":true,"desc":true,"ui.footerBrand":true},"uiText":{"footerBrand":"\nBlackmagic Design 공식 총판 · 하이픽셀플러스"}} -->
 </body>
 </html>
