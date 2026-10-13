@@ -372,9 +372,10 @@ function prepareRegistration(){
   }).catch(function(error){registrationReady=null;throw error;});
   return registrationReady;
 }
-async function registrationRequest(action,payload){
+// skipPrepare: 응답 형식으로 직접 검증하는 조회(개인 링크)는 탭 검증을 기다리지 않습니다. 저장(payload)은 항상 검증 후 보냅니다.
+async function registrationRequest(action,payload,skipPrepare){
   var suffix=REGISTRATION_SHEET_ID?'&sheetId='+encodeURIComponent(REGISTRATION_SHEET_ID):'';
-  await prepareRegistration();
+  if(payload||!skipPrepare)await prepareRegistration();
   if(payload)return fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({},payload,{action:action,sheetId:REGISTRATION_SHEET_ID}))});
   return fetch(SCRIPT_URL+'?action='+action+suffix);
 }
@@ -434,11 +435,11 @@ function openAttendanceMode(){
 }
 var attendanceName='',attendancePhone='',attendanceRegistrationId='',attendanceToken='';
 var attendanceReservations=[],attendanceMode='manual',attendanceInfoConfirmed=false,attendanceSaving=false,attendanceEpoch=0;
-async function attendanceFetchData(action,payload){
+async function attendanceFetchData(action,payload,skipPrepare){
   var timer;
   try{
     return await Promise.race([
-      registrationRequest(action,payload).then(function(response){if(response.ok===false)throw new Error('연결을 확인하지 못했습니다. 신청 정보를 다시 확인해주세요.');return response.json();}),
+      registrationRequest(action,payload,skipPrepare).then(function(response){if(response.ok===false)throw new Error('연결을 확인하지 못했습니다. 신청 정보를 다시 확인해주세요.');return response.json();}),
       new Promise(function(resolve,reject){timer=setTimeout(function(){reject(new Error(payload?'저장 결과를 확인하지 못했습니다. 신청 정보 다시 확인하기로 현재 응답을 확인해주세요.':'신청 정보 조회가 지연되고 있습니다. 잠시 후 다시 확인해주세요.'));},25000);})
     ]);
   }finally{if(typeof clearTimeout==='function')clearTimeout(timer);}
@@ -488,7 +489,7 @@ async function lookupLinkedAttendance(id,epoch){
   var status=document.getElementById('attendance-link-status'),retry=document.getElementById('attendance-link-retry');
   status.textContent='신청 정보를 불러오는 중입니다. 잠시만 기다려주세요.';retry.style.display='none';
   try{
-    var data=await attendanceFetchData('getAttendanceLink&registrationId='+encodeURIComponent(id));if(epoch!==attendanceEpoch)return;
+    var data=await attendanceFetchData('getAttendanceLink&registrationId='+encodeURIComponent(id),null,true);if(epoch!==attendanceEpoch)return;
     if(!data.eligible)throw new Error(data.message||'개인 링크 조회를 사용할 수 없습니다. 행사 담당자에게 문의해주세요.');
     if(data.capability!=='attendance-link-match-v1'||data.registrationId!==id||!data.confirmationToken||!data.phoneMasked)
       throw new Error('개인 링크 정보를 확인하지 못했습니다. 행사 담당자에게 문의해주세요.');
