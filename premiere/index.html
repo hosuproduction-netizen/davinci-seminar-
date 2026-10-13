@@ -364,14 +364,17 @@ select option{background:#1c1c1f;}
 var SCRIPT_URL="https://script.google.com/macros/s/AKfycbxUFVzIzNOsfFOM6wbZ2LeJgg7g87XltvKshyX7Iu6jBzcuJe5kZfJLRvoLkSXAQIuN/exec";
 var REGISTRATION_SHEET_ID="501786118";
 var registrationReady=null;
+// 접수 탭 검증을 한 번만 실행하고 결과를 재사용합니다. 참석 조회 화면은 페이지가 열릴 때 미리 호출합니다.
+function prepareRegistration(){
+  if(!REGISTRATION_SHEET_ID)return Promise.resolve();
+  if(!registrationReady)registrationReady=fetch(SCRIPT_URL+'?action=getSheetInfo&sheetId='+encodeURIComponent(REGISTRATION_SHEET_ID)).then(function(r){return r.json();}).then(function(info){
+    if(!info.ok||!(info.capabilities||[]).includes('registration-tabs-v1')||String(info.sheetId)!==REGISTRATION_SHEET_ID)throw new Error('접수 탭 연결을 확인하지 못했습니다. 행사 담당자에게 문의해주세요.');
+  }).catch(function(error){registrationReady=null;throw error;});
+  return registrationReady;
+}
 async function registrationRequest(action,payload){
   var suffix=REGISTRATION_SHEET_ID?'&sheetId='+encodeURIComponent(REGISTRATION_SHEET_ID):'';
-  if(REGISTRATION_SHEET_ID){
-    if(!registrationReady)registrationReady=fetch(SCRIPT_URL+'?action=getSheetInfo'+suffix).then(function(r){return r.json();}).then(function(info){
-      if(!info.ok||!(info.capabilities||[]).includes('registration-tabs-v1')||String(info.sheetId)!==REGISTRATION_SHEET_ID)throw new Error('접수 탭 연결을 확인하지 못했습니다. 행사 담당자에게 문의해주세요.');
-    }).catch(function(error){registrationReady=null;throw error;});
-    await registrationReady;
-  }
+  await prepareRegistration();
   if(payload)return fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({},payload,{action:action,sheetId:REGISTRATION_SHEET_ID}))});
   return fetch(SCRIPT_URL+'?action='+action+suffix);
 }
@@ -425,6 +428,8 @@ function openAttendanceMode(){
   var applyPanel=document.getElementById('apply-panel');if(applyPanel)applyPanel.classList.add('hide');
   var cancelPanel=document.getElementById('cancel-panel');if(cancelPanel)cancelPanel.classList.remove('show');
   var attendancePanel=document.getElementById('attendance-panel');if(attendancePanel)attendancePanel.classList.add('show');
+  // 이름·전화번호를 입력하는 동안 탭 검증을 끝내 둡니다. 실패하면 조회 버튼을 누를 때 다시 시도합니다.
+  prepareRegistration().catch(function(){});
   return resetAttendance();
 }
 var attendanceName='',attendancePhone='',attendanceRegistrationId='',attendanceToken='';
